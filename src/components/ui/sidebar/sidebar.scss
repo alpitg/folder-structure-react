@@ -1,0 +1,29 @@
+.sidebar-app {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+
+  li {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  li.active {
+    background-color: #04aa6d;
+    color: white;
+  }
+
+  li:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+}

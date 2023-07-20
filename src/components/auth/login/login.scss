@@ -1,0 +1,34 @@
+.login-app {
+    margin-top: 20px;
+
+    input {
+        width: 100%;
+        // border-bottom: 1px solid #ced4da !important;
+    }
+    .p-card {
+        border-radius: 0 0 0 0;
+        box-shadow: -5px 0 10px 2px rgba(0, 0, 0, 0.2);
+    }
+    .image-bg {
+        .image-bg-content {
+            padding: 60px;
+            font-weight: 400;
+            font-size: 44px;
+            color: #ffffff;
+            line-height: 1.2;
+            margin: 0 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        display: flex;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-position: center center;
+        background-repeat: no-repeat;
+        opacity: 0.6;
+        // background: rgba(76, 175, 80, 0.3);
+        background: url("/assets/img/login/pexels-tiger-lily-4483608.jpg") no-repeat center;
+    }
+}

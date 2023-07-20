@@ -1,0 +1,20 @@
+.base-layout-app {
+    .main-content {
+        margin-left: 250px;
+    }
+
+    // NOTE: Hide sidebar media
+    @media screen and (max-width: $sidebarBreakpoint) {
+        .toggle-sidebar {
+            display: none;
+        }
+        .main-content {
+            margin-left: 0;
+        }
+    }
+    @media screen and (min-width: $sidebarBreakpoint) {
+        .toggle-sidebar-overlay {
+            display: none;
+        }
+    }
+}
