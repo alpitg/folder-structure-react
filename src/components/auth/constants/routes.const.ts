@@ -1,6 +1,6 @@
 export enum ROUTE_URL {
     HOME = "",
-    DASHBOARD = "",
+    DASHBOARD = "/",
     LOGIN = "login",
     REGISTER = "register",
     ABOUT = "about",

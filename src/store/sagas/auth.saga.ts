@@ -1,9 +1,9 @@
-import { all, call, put } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 import { IAxiosResponse } from "../../interfaces/generic.model";
 import AuthService from "../../services/auth.service";
-import { authenticateFailed, authenticateSuccess, AUTHENTICATE_USER_REQUEST, IAuthenticationRequest } from "../actions/auth.action";
+import { authenticateFailed, authenticateSuccess, AUTHENTICATE_USER_REQUEST, IAuthenticationRequestAction } from "../actions/auth.action";
 
-function* authenticateUser(action: IAuthenticationRequest) {
+function* authenticateUser(action: IAuthenticationRequestAction) {
     try {
         const response: IAxiosResponse<any> = yield call(AuthService.authenticateUser, action.payload);
 
@@ -19,5 +19,5 @@ function* authenticateUser(action: IAuthenticationRequest) {
 }
 
 export default function* authenticateUserSaga() {
-    yield all([AUTHENTICATE_USER_REQUEST, authenticateUser]);
+    yield all([takeLatest(AUTHENTICATE_USER_REQUEST, authenticateUser)]);
 }

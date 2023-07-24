@@ -4,14 +4,23 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { useNavigate } from 'react-router';
 
-import "./login.scss";
+import { useDispatch } from 'react-redux';
 import { ROUTE_URL } from '../constants/routes.const';
+import { authenticateRequest } from '../../../store/actions/auth.action';
+import { IAuthenticationRequestModel } from '../../../interfaces/auth.model';
+
+import "./login.scss";
 
 const LoginApp = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [useLoginDetail, setUseLoginDetail] = useState<IAuthenticationRequestModel>({ userId: "", password: "" });
 
     const onLogin = () => {
-        navigate(ROUTE_URL.DASHBOARD);
+
+        // navigate(ROUTE_URL.DASHBOARD);
+        dispatch(authenticateRequest(useLoginDetail));
+
     }
 
     const Header = () => (
@@ -32,10 +41,9 @@ const LoginApp = () => {
         </div>
     );
 
+
     return (
-
         <div className="login-app container">
-
             <div className="row">
                 <div className="col-sm-6">
                     <div className="image-bg">
@@ -49,17 +57,16 @@ const LoginApp = () => {
                         <div>
                             <form>
                                 <br />
-
                                 <div className="row">
                                     <div className="col-sm-12">
                                         <span className="p-float-label">
-                                            <InputText id="username" value={""} />
+                                            <InputText id="username" value={useLoginDetail?.userId} onChange={(event) => setUseLoginDetail(prev => ({ ...prev, userId: event.target.value }))} />
                                             <label htmlFor="username">Email Address</label>
                                         </span>
                                     </div>
                                     <div className="col-sm-12 pt-4">
                                         <span className="p-float-label">
-                                            <InputText id="password" value={""} />
+                                            <InputText id="password" value={useLoginDetail?.password} onChange={(event) => setUseLoginDetail(prev => ({ ...prev, password: event.target.value }))} />
                                             <label htmlFor="password">Password</label>
                                         </span>
                                     </div>
@@ -76,11 +83,9 @@ const LoginApp = () => {
                             </figure>
                         </div>
                         <Footer />
-
                     </Card>
                 </div>
             </div>
-
         </div>
     );
 }

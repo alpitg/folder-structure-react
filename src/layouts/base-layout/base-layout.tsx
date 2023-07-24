@@ -5,8 +5,8 @@ import { Button } from 'primereact/button';
 import { Outlet } from 'react-router';
 import SidebarApp from '../../components/ui/sidebar/sidebar';
 import NavbarApp from '../../components/ui/navbar/navbar';
-import RoutesApp from '../../components/auth/routes';
 import AuthApp from '../../components/auth/auth';
+import { Suspense } from 'react';
 
 const BaseLayoutApp = () => {
     const [isOpenSideBar, setIsOpenSidebar] = useState<boolean>(false);
@@ -27,7 +27,9 @@ const BaseLayoutApp = () => {
                     <Button className="toggle-sidebar-overlay" icon="pi pi-arrow-right" onClick={() => setIsOpenSidebar(true)} />
                     <NavbarApp />
                     <div>
-                        <Outlet />
+
+                        <Suspense fallback={<div>Loading...</div>}><Outlet />
+                        </Suspense>
                     </div>
 
                 </div>

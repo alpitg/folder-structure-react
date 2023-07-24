@@ -1,6 +1,6 @@
 import RoutesApp from '../auth/routes';
-
 import './app.scss';
+
 const App = () => {
 
   return (

@@ -16,37 +16,37 @@ export const AUTHENTICATE_USER_SUCCESS = "AUTHENTICATE_USER_SUCCESS";
 export const AUTHENTICATE_USER_FAILED = "AUTHENTICATE_USER_FAILED";
 
 //#region - Action interfaces
-export interface IAuthenticationRequest {
+export interface IAuthenticationRequestAction {
     type: typeof AUTHENTICATE_USER_REQUEST;
     payload: IAuthenticationRequestModel;
 }
 
-export interface IAuthenticationSuccess {
+export interface IAuthenticationSuccessAction {
     type: typeof AUTHENTICATE_USER_SUCCESS;
     payload: IAppStore<IAuthenticationModel>;
 }
 
-export interface IAuthenticationFailure {
+export interface IAuthenticationFailureAction {
     type: typeof AUTHENTICATE_USER_FAILED;
     payload: IAppStore<IAuthenticationModel>;
 }
 //#endregion
 
 //#region - Action functions
-export const authenticate = (payload: any): IAuthenticationRequest => ({
+export const authenticateRequest = (payload: any): IAuthenticationRequestAction => ({
     type: AUTHENTICATE_USER_REQUEST,
     payload
 });
 
-export const authenticateSuccess = (payload: IAppStore<IAuthenticationModel>): IAuthenticationSuccess => ({
+export const authenticateSuccess = (payload: IAppStore<IAuthenticationModel>): IAuthenticationSuccessAction => ({
     type: AUTHENTICATE_USER_SUCCESS,
     payload
 });
 
-export const authenticateFailed = (payload: IAppStore<IAuthenticationModel>): IAuthenticationFailure => ({
+export const authenticateFailed = (payload: IAppStore<IAuthenticationModel>): IAuthenticationFailureAction => ({
     type: AUTHENTICATE_USER_FAILED,
     payload
 });
 //#endregion
 
-export type AuthenticateActions = IAuthenticationRequest | IAuthenticationSuccess | IAuthenticationFailure;
+export type AuthenticateActions = IAuthenticationRequestAction | IAuthenticationSuccessAction | IAuthenticationFailureAction;

@@ -22,7 +22,12 @@ const SidebarApp = () => {
         },
         {
             label: "Contact",
-            path:  ROUTE_URL.CONTACT,
+            path: ROUTE_URL.CONTACT,
+            icon: "pi pi-fw pi-pencil"
+        },
+        {
+            label: "Login",
+            path: ROUTE_URL.LOGIN,
             icon: "pi pi-fw pi-pencil"
         },
     ];
