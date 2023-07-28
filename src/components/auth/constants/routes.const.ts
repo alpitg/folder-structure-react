@@ -7,6 +7,7 @@ export enum ROUTE_URL {
     CONTACT = "contact",
     UI = "ui",
     ADMIN = "admin",
+    ORGANIZATION_UNITS = "organization-units",
     Roles = "roles",
     Users = "users"
 }

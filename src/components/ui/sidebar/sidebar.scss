@@ -1,34 +1,36 @@
-$sidebar-bg-color: rgb(5, 68, 104);
-$color-white: #fff;
+@import "../../../assets/scss/_variables.scss";
 
 .sidebar-app {
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
-  width: 250px;
+  width: $sidebar-width;
   user-select: none;
   padding-top: 5px;
   background: $sidebar-bg-color;
-  font-size: 18px;
+  font-size: 13px;
+  font-weight: 400;
 
-  * {
-    list-style: none;
-    text-decoration: none;
-    padding: 0;
-    box-sizing: border-box;
+  .logo-section {
+    height: 70px;
+    border-bottom: 1px dashed #393945;
+    .icon {
+      color: $white-color;
+      width: 70px;
+    }
   }
 
   ul {
-    .accordion-item button {
-      color: $color-white;
-      padding: 15px;
-    }
-    .accordion-button:hover::after {
-      color: $sidebar-bg-color;
+    padding: 10px;
+
+    .accordion-button {
+      color: $default-font-color;
+      padding: 0.65rem 1rem;
+      margin-bottom: 2px;
     }
     .accordion-button::after {
-      color: $color-white;
+      color: $default-font-color;
       content: "\276F";
     }
     .accordion-button.collapsed::after {
@@ -44,35 +46,37 @@ $color-white: #fff;
       align-items: center;
       transform: rotate(90deg);
     }
-
-    li a {
-      display: block;
-      padding: 15px;
-      color: $color-white;
+    .accordion-collapse > a {
+      margin-left: 1rem;
+      margin-right: 1rem;
     }
 
-    .li .icon {
-      color: #dee4ec;
-      width: 30px;
-      display: inline-block;
-    }
+    li {
+      .icon {
+        width: 30px;
+        display: inline-block;
+        padding-right: 5px;
+      }
 
-    .accordion-item button:hover,
-    .accordion-item button:active,
-    li a:hover,
-    li a.active {
-      color: #0c7db1;
-      background: white;
-    }
-
-    li a:hover .icon,
-    li a.active .icon {
-      color: #0c7db1;
-    }
-
-    li a:hover:before,
-    li a.active:before {
-      display: block;
+      a {
+        display: block;
+        padding: 0.65rem 1rem;
+        color: $default-font-color;
+        text-decoration: none;
+      }
+      a:hover {
+        color: $white-color;
+      }
+      // .accordion-collapse[a:matches(.active)] {
+      a.active {
+        color: $white-color;
+        background: $sidebar-active-color;
+        border-radius: 0.475rem;
+      }
+      a:hover:before,
+      a.active:before {
+        display: block;
+      }
     }
   }
 
@@ -84,7 +88,7 @@ $color-white: #fff;
     background-color: transparent;
     box-shadow: none;
     border: none;
-    font-size: large;
+    font-size: 13px;
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
     border-top-right-radius: 0 !important;

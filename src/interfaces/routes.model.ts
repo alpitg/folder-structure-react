@@ -1,6 +1,6 @@
 export interface IRoutes {
     label: string;
     path: string;
-    icon: JSX.Element | string;
-    route?: IRoutes[]
+    icon: string;
+    route?: IRoutes[];
 }

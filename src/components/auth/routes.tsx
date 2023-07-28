@@ -8,6 +8,7 @@ const Contact = lazy(() => import("../../pages/contact/contact"));
 const About = lazy(() => import("../../pages/about/about"));
 const Login = lazy(() => import("../../components/auth/login/login"));
 const Register = lazy(() => import("../../components/auth/register/register"));
+const OrganizationUnits = lazy(() => import("../administration/organization-units/organization-units"));
 const Roles = lazy(() => import("../../components/administration/roles/roles"));
 const Users = lazy(() => import("../../components/administration/users/users"));
 const UI = lazy(() => import("../../pages/ui/ui"));
@@ -19,6 +20,7 @@ const RoutesApp = () => {
                 <Routes>
                     <Route path={ROUTE_URL.HOME} element={<BaseLayoutApp />}>
                         <Route path={ROUTE_URL.DASHBOARD} element={<Dashboard />} />
+                        <Route path={ROUTE_URL.ORGANIZATION_UNITS} element={<OrganizationUnits />} />
                         <Route path={ROUTE_URL.Roles} element={<Roles />} />
                         <Route path={ROUTE_URL.Users} element={<Users />} />
                         <Route path={ROUTE_URL.ABOUT} element={<About />} />
