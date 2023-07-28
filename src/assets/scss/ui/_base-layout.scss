@@ -4,7 +4,7 @@
     }
 
     // NOTE: Hide sidebar media
-    @media screen and (max-width: $sidebarBreakpoint) {
+    @media screen and (max-width: $sidebar-media-screen-width) {
         .toggle-sidebar {
             display: none;
         }
@@ -12,7 +12,7 @@
             margin-left: 0;
         }
     }
-    @media screen and (min-width: $sidebarBreakpoint) {
+    @media screen and (min-width: $sidebar-media-screen-width) {
         .toggle-sidebar-overlay {
             display: none;
         }
