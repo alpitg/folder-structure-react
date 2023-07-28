@@ -13,7 +13,24 @@ const SidebarApp = () => {
         {
             label: "Dashboard",
             path: ROUTE_URL.DASHBOARD,
-            icon: "pi pi-fw pi-file"
+            icon: "pi pi-fw pi-file",
+        },
+        {
+            label: "Administration",
+            path: ROUTE_URL.ADMIN,
+            icon: "pi pi-fw pi-file",
+            route: [
+                {
+                    label: "Roles",
+                    path: ROUTE_URL.Roles,
+                    icon: "pi pi-fw pi-file",
+                },
+                {
+                    label: "Users",
+                    path: ROUTE_URL.Users,
+                    icon: "pi pi-fw pi-file",
+                }
+            ]
         },
         {
             label: "About",
@@ -41,17 +58,34 @@ const SidebarApp = () => {
             <ul>
                 {
                     routes.map((route: IRoutes) => {
-                        return (
+                        return (route.route ?
                             <li key={route.label}>
-                                {/* <Link to={route.path}> {route.label} </Link> */}
-                                <NavLink to={route.path} className={({ isActive }) =>
-                                    (isActive ? 'active' : 'inactive')}>{route.label}</NavLink>
+                                <div className="accordion" id={route.label}>
+                                    <div className="accordion-item">
+                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#" + route.label + "collapse"} aria-expanded="false" aria-controls={route.label + "collapse"} >
+                                            {route.label}
+                                        </button>
+                                        <div id={route.label + "collapse"} className="accordion-collapse collapse" aria-labelledby={route.label} data-bs-parent={"#" + route.label}>
+                                            {
+                                                route.route.map(child => {
+                                                    return <li key={child.label} >
+                                                        <NavLink to={child.path} className={({ isActive }) => (isActive ? 'active' : 'inactive')}>{child.label}</NavLink>
+                                                    </li>
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
-                        );
+                            :
+                            <li key={route.label} >
+                                <NavLink to={route.path} className={({ isActive }) => (isActive ? 'active' : 'inactive')}>{route.label}</NavLink>
+                            </li>
+                        )
                     })
                 }
             </ul>
-        </div>
+        </div >
     );
 }
 

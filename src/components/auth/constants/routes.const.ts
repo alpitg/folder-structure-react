@@ -4,5 +4,9 @@ export enum ROUTE_URL {
     LOGIN = "login",
     REGISTER = "register",
     ABOUT = "about",
-    CONTACT = "contact"
+    CONTACT = "contact",
+    UI = "ui",
+    ADMIN = "admin",
+    Roles = "roles",
+    Users = "users"
 }

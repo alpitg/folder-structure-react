@@ -4,7 +4,9 @@ import App from './components/app/app';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store/configure-store';
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import './index.scss';
+        
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

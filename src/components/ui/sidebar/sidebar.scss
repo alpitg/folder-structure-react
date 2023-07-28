@@ -1,3 +1,6 @@
+$sidebar-bg-color: rgb(5, 68, 104);
+$color-white: #fff;
+
 .sidebar-app {
   position: fixed;
   left: 0;
@@ -5,25 +8,86 @@
   height: 100%;
   width: 250px;
   user-select: none;
-  transition: transform 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
+  padding-top: 5px;
+  background: $sidebar-bg-color;
+  font-size: 18px;
 
-  li {
-    display: block;
-    color: black;
-    padding: 16px;
+  * {
+    list-style: none;
     text-decoration: none;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  li.active {
-    background-color: #04aa6d;
-    color: white;
+  ul {
+    .accordion-item button {
+      color: $color-white;
+      padding: 15px;
+    }
+    .accordion-button:hover::after {
+      color: $sidebar-bg-color;
+    }
+    .accordion-button::after {
+      color: $color-white;
+      content: "\276F";
+    }
+    .accordion-button.collapsed::after {
+      background-image: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .accordion-button:not(.collapsed)::after {
+      background-image: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(90deg);
+    }
+
+    li a {
+      display: block;
+      padding: 15px;
+      color: $color-white;
+    }
+
+    .li .icon {
+      color: #dee4ec;
+      width: 30px;
+      display: inline-block;
+    }
+
+    .accordion-item button:hover,
+    .accordion-item button:active,
+    li a:hover,
+    li a.active {
+      color: #0c7db1;
+      background: white;
+    }
+
+    li a:hover .icon,
+    li a.active .icon {
+      color: #0c7db1;
+    }
+
+    li a:hover:before,
+    li a.active:before {
+      display: block;
+    }
   }
 
-  li:hover:not(.active) {
-    background-color: #555;
-    color: white;
+  // override accordion css
+  .accordion-button,
+  .accordion-item,
+  .accordion-button:focus,
+  .accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    font-size: large;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
   }
 }
