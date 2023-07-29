@@ -27,12 +27,12 @@ const SidebarApp = () => {
                 },
                 {
                     label: "Roles",
-                    path: ROUTE_URL.Roles,
+                    path: ROUTE_URL.ROLES,
                     icon: "pi pi-fw pi-briefcase",
                 },
                 {
                     label: "Users",
-                    path: ROUTE_URL.Users,
+                    path: ROUTE_URL.USERS,
                     icon: "pi pi-fw pi-users",
                 }
             ]

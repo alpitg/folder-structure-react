@@ -1,22 +1,36 @@
-import UserDetailApp from "./detail/user-detail";
-import UserFilterApp from "./filter/user-filter";
+import { Outlet } from "react-router";
 import UserListApp from "./list/user-list";
-import UserOperationsApp from "./operations/user-operations";
+import { Suspense, useEffect } from "react";
+import { fetchUsersRequest } from "../../../store/actions/users.action";
+import { IFetchUsersRequestModel } from "../../../interfaces/user.model";
+import { useDispatch } from "react-redux";
 import "./users.scss";
 
 const UsersApp = () => {
+  const dispatch = useDispatch();
 
-    return (
-        <>
-            Hi From UI UsersApp
-            <UserDetailApp />
+  useEffect(() => {
+    const filter: IFetchUsersRequestModel = {
+      id: "",
+      mailId: "",
+      name: "",
+    };
+    dispatch(fetchUsersRequest(filter));
+  });
+
+  return (
+    <>
+      {/* <UserDetailApp />
             <UserOperationsApp />
-            <UserFilterApp />
-            <UserListApp />
-            <UserFilterApp />
+            <UserFilterApp /> */}
+      <UserListApp />
+      {/* <UserFilterApp /> */}
 
-        </>
-    );
-}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
+    </>
+  );
+};
 
 export default UsersApp;

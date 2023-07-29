@@ -11,6 +11,7 @@ const Register = lazy(() => import("../../components/auth/register/register"));
 const OrganizationUnits = lazy(() => import("../administration/organization-units/organization-units"));
 const Roles = lazy(() => import("../../components/administration/roles/roles"));
 const Users = lazy(() => import("../../components/administration/users/users"));
+const UserDetail = lazy(() => import("../../components/administration/users/detail/user-detail"));
 const UI = lazy(() => import("../../pages/ui/ui"));
 
 const RoutesApp = () => {
@@ -21,8 +22,10 @@ const RoutesApp = () => {
                     <Route path={ROUTE_URL.HOME} element={<BaseLayoutApp />}>
                         <Route path={ROUTE_URL.DASHBOARD} element={<Dashboard />} />
                         <Route path={ROUTE_URL.ORGANIZATION_UNITS} element={<OrganizationUnits />} />
-                        <Route path={ROUTE_URL.Roles} element={<Roles />} />
-                        <Route path={ROUTE_URL.Users} element={<Users />} />
+                        <Route path={ROUTE_URL.ROLES} element={<Roles />} />
+                        <Route path={ROUTE_URL.USERS} element={<Users />} >
+                            <Route path={ROUTE_URL.USER_DETAIL} element={<UserDetail />} />
+                        </Route>
                         <Route path={ROUTE_URL.ABOUT} element={<About />} />
                         <Route path={ROUTE_URL.CONTACT} element={<Contact />} />
                     </Route>
