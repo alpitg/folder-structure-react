@@ -1,21 +1,25 @@
 .base-layout-app {
-    .main-content {
-        margin-left: $sidebar-width;
-        padding: 20px;
-    }
+  .main-content {
+    margin-left: $sidebar-width;
+    padding: 20px;
+  }
 
-    // NOTE: Hide sidebar media
-    @media screen and (max-width: $sidebar-media-screen-width) {
-        .toggle-sidebar {
-            display: none;
-        }
-        .main-content {
-            margin-left: 0;
-        }
+  // NOTE: Hide sidebar media
+  @media screen and (max-width: $sidebar-media-screen-width) {
+    .toggle-sidebar {
+      display: none;
     }
-    @media screen and (min-width: $sidebar-media-screen-width) {
-        .toggle-sidebar-overlay {
-            display: none;
-        }
+    .main-content {
+      margin-left: 0;
     }
+  }
+  @media screen and (min-width: $sidebar-media-screen-width) {
+    .toggle-sidebar-overlay {
+      display: none;
+    }
+  }
+}
+// NOTE: Global level
+.p-sidebar {
+  background: $sidebar-bg-color;
 }

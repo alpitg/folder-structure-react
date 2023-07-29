@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import { IUserModel } from "../../../../interfaces/user.model";
+import { deleteUserRequest } from "../../../../store/actions/users.action";
 import "./user-list.scss";
 
 const UserListApp = () => {
   const users = useSelector((x: AppState) => x.users);
+  const dispatch = useDispatch();
+
+  const deleteUser = (id: string) => {
+    dispatch(deleteUserRequest(id));
+  };
 
   return (
     <div className="user-list-app">
@@ -23,7 +29,11 @@ const UserListApp = () => {
                           <i className="pi pi-fw pi-pencil"></i>
                         </span>
                       </Link>
-                      <span className="icon" title="Delete">
+                      <span
+                        className="icon"
+                        title="Delete"
+                        onClick={() => deleteUser(user.id)}
+                      >
                         <i className="pi pi-fw pi-times"></i>
                       </span>
                     </div>

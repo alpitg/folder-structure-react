@@ -3,6 +3,8 @@ export const ENDPOINT = {
   USERS: {
     API: {
       FETCH_USERS: "/mock-data/users.json",
+      UPDATE_USER: "/users",
+      DELETE_USER: "/users",
     },
   },
 };
