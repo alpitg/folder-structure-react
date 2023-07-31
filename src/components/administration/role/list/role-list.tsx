@@ -24,12 +24,12 @@ const RoleListApp = () => {
                   <div className="d-flex">
                     {role.name}
                     <div className="float-right">
-                      <Link to={`${ROUTE_URL.USERS}/${role.id}`}>
+                      <Link to={`${ROUTE_URL.ROLES}/${role.id}`}>
                         <span className="icon" title="View">
                           <i className="pi pi-fw pi-eye"></i>
                         </span>
                       </Link>
-                      <Link to={`${ROUTE_URL.USERS}/edit/${role.id}`}>
+                      <Link to={`${ROUTE_URL.ROLES}/edit/${role.id}`}>
                         <span className="icon" title="Edit">
                           <i className="pi pi-fw pi-pencil"></i>
                         </span>
