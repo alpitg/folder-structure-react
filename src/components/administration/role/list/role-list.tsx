@@ -4,6 +4,7 @@ import { AppState } from "../../../../store/reducers/root.reducer";
 import { IRoleModel } from "../../../../interfaces/role.model";
 import RoleItemApp from "./item/role-item";
 import "./role-list.scss";
+import NoRecordApp from "../../../ui/no-record/no-record";
 
 const RoleListApp = () => {
   const roles = useSelector((x: AppState) => x.administration.roles);
@@ -16,12 +17,13 @@ const RoleListApp = () => {
             <ul className="list-unstyled team-members m-0">
               {roles?.result?.map((role: IRoleModel) => {
                 return (
-                  <li>
+                  <li key={role.id}>
                     <RoleItemApp role={role} />
                   </li>
                 );
               })}
             </ul>
+            {roles?.result?.length === 0 && <NoRecordApp />}
           </Card>
         </div>
       </>
