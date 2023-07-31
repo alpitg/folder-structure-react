@@ -11,4 +11,5 @@ export enum ROUTE_URL {
     ROLES = "/roles",
     USERS = "/users",
     USER_DETAIL = "/users/:id",
+    USER_DETAIL_EDIT = "/users/edit/:id",
 }

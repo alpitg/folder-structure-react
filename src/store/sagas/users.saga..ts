@@ -6,10 +6,13 @@ import {
   FETCH_USERS_REQUEST,
   IDeleteUserRequestAction,
   IFetchUsersRequestAction,
+  UPDATE_USERS_REQUEST,
   deleteUserFailed,
   deleteUserSuccess,
   fetchUsersFailed,
   fetchUsersSuccess,
+  updateUsersFailed,
+  updateUsersSuccess,
 } from "../actions/users.action";
 
 function* fetchUsers(action: IFetchUsersRequestAction) {
@@ -25,6 +28,22 @@ function* fetchUsers(action: IFetchUsersRequestAction) {
   } catch (error) {
     yield put(
       fetchUsersFailed({ result: null, error: "error", pending: false })
+    );
+  }
+}
+
+function* updateUsers(action: IFetchUsersRequestAction) {
+  const id = action.payload;
+  try {
+    const response: IAxiosResponse<any> = yield call(
+      UsersService.updateUser,
+      action.payload
+    );
+
+    yield put(updateUsersSuccess({ result: id, error: "", pending: false }));
+  } catch (error) {
+    yield put(
+      updateUsersFailed({ result: id, error: "error", pending: false })
     );
   }
 }
@@ -58,6 +77,7 @@ function* deleteUser(action: IDeleteUserRequestAction) {
 export default function* fetchUsersSaga() {
   yield all([
     takeLatest(FETCH_USERS_REQUEST, fetchUsers),
+    takeLatest(UPDATE_USERS_REQUEST, updateUsers),
     takeLatest(DELETE_USER_REQUEST, deleteUser),
   ]);
 }

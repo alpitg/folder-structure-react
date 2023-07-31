@@ -14,11 +14,17 @@ export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 export const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
 
+export const UPDATE_USERS_REQUEST = "UPDATE_USERS_REQUEST";
+export const UPDATE_USERS_SUCCESS = "UPDATE_USERS_SUCCESS";
+export const UPDATE_USERS_FAILED = "UPDATE_USERS_FAILED";
+
 export const DELETE_USER_REQUEST = "DELETE_USER_REQUEST";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILED = "DELETE_USER_FAILED";
 
 //#region - Action interfaces
+
+// FETCH
 export interface IFetchUsersRequestAction {
   type: typeof FETCH_USERS_REQUEST;
   payload: IUsersRequestModel;
@@ -34,6 +40,23 @@ export interface IFetchUsersFailureAction {
   payload: IAppStore<IUserModel[]>;
 }
 
+// UPDATE
+export interface IUpdateUsersRequestAction {
+  type: typeof UPDATE_USERS_REQUEST;
+  payload: IUsersRequestModel;
+}
+
+export interface IUpdateUsersSuccessAction {
+  type: typeof UPDATE_USERS_SUCCESS;
+  payload: IAppStore<IUserModel>;
+}
+
+export interface IUpdateUsersFailureAction {
+  type: typeof UPDATE_USERS_FAILED;
+  payload: IAppStore<IUserModel>;
+}
+
+// DELETE
 export interface IDeleteUserRequestAction {
   type: typeof DELETE_USER_REQUEST;
   payload: string;
@@ -73,6 +96,27 @@ export const fetchUsersFailed = (
   payload,
 });
 
+export const updateUsersRequest = (
+  payload: IUsersRequestModel
+): IUpdateUsersRequestAction => ({
+  type: UPDATE_USERS_REQUEST,
+  payload,
+});
+
+export const updateUsersSuccess = (
+  payload: IAppStore<IUserModel>
+): IUpdateUsersSuccessAction => ({
+  type: UPDATE_USERS_SUCCESS,
+  payload,
+});
+
+export const updateUsersFailed = (
+  payload: IAppStore<IUserModel>
+): IUpdateUsersFailureAction => ({
+  type: UPDATE_USERS_FAILED,
+  payload,
+});
+
 export const deleteUserRequest = (
   payload: string
 ): IDeleteUserRequestAction => ({
@@ -99,6 +143,9 @@ export type UsersActions =
   | IFetchUsersRequestAction
   | IFetchUsersSuccessAction
   | IFetchUsersFailureAction
+  | IUpdateUsersRequestAction
+  | IUpdateUsersSuccessAction
+  | IUpdateUsersFailureAction
   | IDeleteUserRequestAction
   | IDeleteUserSuccessAction
   | IDeleteUserFailedAction;
