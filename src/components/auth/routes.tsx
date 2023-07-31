@@ -12,9 +12,9 @@ const OrganizationUnits = lazy(
   () => import("../administration/organization-units/organization-units")
 );
 const Role = lazy(() => import("../administration/role/role"));
-const UserDetail = lazy(() => import("../../components/administration/role/detail/role-detail"));
-const UserDetailEdit = lazy(() => import("../../components/administration/role/edit/role-edit"));
-const User = lazy(() => import("../administration/users/user"));
+const RoleDetail = lazy(() => import("../../components/administration/role/detail/user-detail"));
+const RoleDetailEdit = lazy(() => import("../../components/administration/role/edit/role-edit"));
+const User = lazy(() => import("../administration/user/user"));
 const UserDetail = lazy(() => import("../../components/administration/user/detail/user-detail"));
 const UserDetailEdit = lazy(() => import("../../components/administration/user/edit/user-edit"));
 const UI = lazy(() => import("../../pages/ui/ui"));
