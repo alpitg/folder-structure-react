@@ -5,6 +5,7 @@ import { IRolesRequestModel } from "../../../interfaces/role.model";
 import { useDispatch } from "react-redux";
 import { fetchRolesRequest } from "../store/actions/roles.action";
 import "./role.scss";
+import RoleItemApp from "./list/role-item/role-item";
 
 const RolesApp = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ const RolesApp = () => {
             <RoleFilterApp /> */}
       {/* <RoleFilterApp /> */}
       <RoleListApp />
+
+      <br />
 
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />

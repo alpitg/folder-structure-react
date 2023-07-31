@@ -6,9 +6,14 @@
 @import "./assets/scss/base.scss";
 
 body {
-    margin: 0;
+  margin: 0;
 
-    .row {
-        --bs-gutter-x: 0;
-    }
+  .row {
+    --bs-gutter-x: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
