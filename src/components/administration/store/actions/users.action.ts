@@ -7,8 +7,11 @@
  * 4. Type of actions variable
  */
 
-import { IAppStore } from "../../interfaces/generic.model";
-import { IUsersRequestModel, IUserModel } from "../../interfaces/user.model";
+import { IAppStore } from "../../../../interfaces/generic.model";
+import {
+  IUserModel,
+  IUsersRequestModel,
+} from "../../../../interfaces/user.model";
 
 export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";

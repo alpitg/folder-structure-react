@@ -5,7 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import { IUserModel } from "../../../../interfaces/user.model";
 import { Button } from "primereact/button";
-import { updateUsersRequest } from "../../../../store/actions/users.action";
+import { updateUsersRequest } from "../../store/actions/users.action";
 
 // import React, { useState } from "react";
 // import { InputText } from "primereact/inputtext";
@@ -13,7 +13,7 @@ import { updateUsersRequest } from "../../../../store/actions/users.action";
 const UserEditApp = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const users = useSelector((x: AppState) => x.users);
+  const users = useSelector((x: AppState) => x.administration.users);
   const [userDetail, setUserDetail] = useState<IUserModel>({
     id: "",
     name: "",

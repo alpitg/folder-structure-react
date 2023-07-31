@@ -1,5 +1,5 @@
-import { IAppStore, AppStore } from "../../interfaces/generic.model";
-import { IUserModel } from "../../interfaces/user.model";
+import { AppStore, IAppStore } from "../../../../interfaces/generic.model";
+import { IUserModel } from "../../../../interfaces/user.model";
 import {
   DELETE_USER_FAILED,
   DELETE_USER_REQUEST,
@@ -55,7 +55,7 @@ const usersReducer = (state = initialState, action: UsersActions) => {
         ...state,
         result: state.result?.map((x) => {
           if (x.id === action.payload.result?.id) {
-            return {...x, name: action.payload.result.name };
+            return { ...x, name: action.payload.result.name };
           }
           return x;
         }),

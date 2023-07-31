@@ -1,6 +1,4 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { IAxiosResponse } from "../../interfaces/generic.model";
-import UsersService from "../../services/users.service";
 import {
   DELETE_USER_REQUEST,
   FETCH_USERS_REQUEST,
@@ -14,6 +12,8 @@ import {
   updateUsersFailed,
   updateUsersSuccess,
 } from "../actions/users.action";
+import { IAxiosResponse } from "../../../../interfaces/generic.model";
+import UsersService from "../../../../services/users.service";
 
 function* fetchUsers(action: IFetchUsersRequestAction) {
   try {

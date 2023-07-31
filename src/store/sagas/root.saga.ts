@@ -1,12 +1,9 @@
-import authenticateUserSaga from "./auth.saga";
 import { all, fork } from "redux-saga/effects";
-import fetchUsersSaga from "./users.saga.";
+import administrationRootSaga from "../../components/administration/store/sagas/administration-root.saga";
+import authenticateUserSaga from "./auth.saga";
 
 function* rootSaga() {
-    yield all([
-        fork(authenticateUserSaga),
-        fork(fetchUsersSaga)
-    ]);
+  yield all([fork(authenticateUserSaga), fork(administrationRootSaga)]);
 }
 
 export default rootSaga;

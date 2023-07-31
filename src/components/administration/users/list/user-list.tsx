@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import { IUserModel } from "../../../../interfaces/user.model";
-import { deleteUserRequest } from "../../../../store/actions/users.action";
+import { deleteUserRequest } from "../../store/actions/users.action";
 import "./user-list.scss";
 
 const UserListApp = () => {
-  const users = useSelector((x: AppState) => x.users);
+  const users = useSelector((x: AppState) => x.administration.users);
   const dispatch = useDispatch();
 
   const deleteUser = (id: string) => {

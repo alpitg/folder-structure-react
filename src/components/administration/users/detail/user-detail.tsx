@@ -6,7 +6,7 @@ import { IUserModel } from "../../../../interfaces/user.model";
 
 const UserDetailApp = () => {
   const { id } = useParams();
-  const users = useSelector((x: AppState) => x.users);
+  const users = useSelector((x: AppState) => x.administration.users);
   const [userDetail, setUserDetaiil] = useState<IUserModel>();
 
   useEffect(() => {
