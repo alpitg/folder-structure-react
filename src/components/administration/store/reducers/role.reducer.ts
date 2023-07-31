@@ -1,56 +1,56 @@
 import { AppStore, IAppStore } from "../../../../interfaces/generic.model";
-import { IUserModel } from "../../../../interfaces/user.model";
+import { IRoleModel } from "../../../../interfaces/role.model";
 import {
-  DELETE_USER_FAILED,
-  DELETE_USER_REQUEST,
-  DELETE_USER_SUCCESS,
-  FETCH_USERS_FAILED,
-  FETCH_USERS_REQUEST,
-  FETCH_USERS_SUCCESS,
-  UPDATE_USERS_FAILED,
-  UPDATE_USERS_REQUEST,
-  UPDATE_USERS_SUCCESS,
-  UsersActions,
-} from "../actions/users.action";
+  DELETE_ROLE_FAILED,
+  DELETE_ROLE_REQUEST,
+  DELETE_ROLE_SUCCESS,
+  FETCH_ROLES_FAILED,
+  FETCH_ROLES_REQUEST,
+  FETCH_ROLES_SUCCESS,
+  UPDATE_ROLES_FAILED,
+  UPDATE_ROLE_REQUEST,
+  UPDATE_ROLES_SUCCESS,
+  RolesActions,
+} from "../actions/roles.action";
 
-const initialState: IAppStore<IUserModel[]> = new AppStore<IUserModel[]>();
+const initialState: IAppStore<IRoleModel[]> = new AppStore<IRoleModel[]>();
 
-const usersReducer = (state = initialState, action: UsersActions) => {
+const roleReducer = (state = initialState, action: RolesActions) => {
   switch (action.type) {
-    case FETCH_USERS_REQUEST:
+    case FETCH_ROLES_REQUEST:
       return {
         ...state,
         pending: true,
       } as typeof initialState;
-    case FETCH_USERS_SUCCESS:
+    case FETCH_ROLES_SUCCESS:
       return {
         ...state,
         result: action.payload.result,
         pending: false,
       } as typeof initialState;
-    case FETCH_USERS_FAILED:
+    case FETCH_ROLES_FAILED:
       return {
         ...state,
         pending: false,
         error: action.payload.error,
       } as typeof initialState;
-    case UPDATE_USERS_REQUEST:
+    case UPDATE_ROLE_REQUEST:
       return {
         ...state,
         pending: true,
       } as typeof initialState;
-    case UPDATE_USERS_SUCCESS:
+    case UPDATE_ROLES_SUCCESS:
       return {
         ...state,
         result: state.result?.map((x) => {
           if (x.id === action.payload.result?.id) {
             return { ...x, name: action.payload.result.name };
           }
-          return state;
+          return x;
         }),
         pending: false,
       } as typeof initialState;
-    case UPDATE_USERS_FAILED:
+    case UPDATE_ROLES_FAILED:
       return {
         ...state,
         result: state.result?.map((x) => {
@@ -67,12 +67,12 @@ const usersReducer = (state = initialState, action: UsersActions) => {
     //   error: action.payload.error,
     // } as typeof initialState;
 
-    case DELETE_USER_REQUEST:
+    case DELETE_ROLE_REQUEST:
       return {
         ...state,
         pending: true,
       } as typeof initialState;
-    case DELETE_USER_SUCCESS:
+    case DELETE_ROLE_SUCCESS:
       return {
         ...state,
         result: state.result?.filter(
@@ -80,7 +80,7 @@ const usersReducer = (state = initialState, action: UsersActions) => {
         ),
         pending: false,
       } as typeof initialState;
-    case DELETE_USER_FAILED:
+    case DELETE_ROLE_FAILED:
       // TODO: Update this once Actual API is implemented
       return {
         ...state,
@@ -99,4 +99,4 @@ const usersReducer = (state = initialState, action: UsersActions) => {
   }
 };
 
-export default usersReducer;
+export default roleReducer;

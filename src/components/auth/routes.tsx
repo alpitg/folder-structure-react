@@ -11,14 +11,12 @@ const Register = lazy(() => import("../../components/auth/register/register"));
 const OrganizationUnits = lazy(
   () => import("../administration/organization-units/organization-units")
 );
-const Roles = lazy(() => import("../../components/administration/roles/roles"));
-const Users = lazy(() => import("../../components/administration/users/users"));
-const UserDetail = lazy(
-  () => import("../../components/administration/users/detail/user-detail")
-);
-const UserDetailEdit = lazy(
-  () => import("../../components/administration/users/edit/user-edit")
-);
+const Role = lazy(() => import("../administration/role/role"));
+const UserDetail = lazy(() => import("../../components/administration/role/detail/role-detail"));
+const UserDetailEdit = lazy(() => import("../../components/administration/role/edit/role-edit"));
+const User = lazy(() => import("../administration/users/user"));
+const UserDetail = lazy(() => import("../../components/administration/user/detail/user-detail"));
+const UserDetailEdit = lazy(() => import("../../components/administration/user/edit/user-edit"));
 const UI = lazy(() => import("../../pages/ui/ui"));
 
 const RoutesApp = () => {
@@ -29,8 +27,11 @@ const RoutesApp = () => {
           <Route path={ROUTE_URL.HOME} element={<BaseLayoutApp />}>
             <Route path={ROUTE_URL.DASHBOARD} element={<Dashboard />} />
             <Route path={ROUTE_URL.ORGANIZATION_UNITS} element={<OrganizationUnits />} />
-            <Route path={ROUTE_URL.ROLES} element={<Roles />} />
-            <Route path={ROUTE_URL.USERS} element={<Users />}>
+            <Route path={ROUTE_URL.ROLES} element={<Role />}>
+              <Route path={ROUTE_URL.ROLE_DETAIL} element={<RoleDetail />} />
+              <Route path={ROUTE_URL.ROLE_DETAIL_EDIT} element={<RoleDetailEdit />} />
+            </Route>
+            <Route path={ROUTE_URL.USERS} element={<User />}>
               <Route path={ROUTE_URL.USER_DETAIL} element={<UserDetail />} />
               <Route path={ROUTE_URL.USER_DETAIL_EDIT} element={<UserDetailEdit />} />
             </Route>

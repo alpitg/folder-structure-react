@@ -4,7 +4,7 @@ import {
   FETCH_USERS_REQUEST,
   IDeleteUserRequestAction,
   IFetchUsersRequestAction,
-  UPDATE_USERS_REQUEST,
+  UPDATE_USER_REQUEST,
   deleteUserFailed,
   deleteUserSuccess,
   fetchUsersFailed,
@@ -13,12 +13,12 @@ import {
   updateUsersSuccess,
 } from "../actions/users.action";
 import { IAxiosResponse } from "../../../../interfaces/generic.model";
-import UsersService from "../../../../services/users.service";
+import UserService from "../../services/user.service";
 
 function* fetchUsers(action: IFetchUsersRequestAction) {
   try {
     const response: IAxiosResponse<any> = yield call(
-      UsersService.fetchUsers,
+      UserService.fetchUsers,
       action.payload
     );
 
@@ -36,7 +36,7 @@ function* updateUsers(action: IFetchUsersRequestAction) {
   const id = action.payload;
   try {
     const response: IAxiosResponse<any> = yield call(
-      UsersService.updateUser,
+      UserService.updateUser,
       action.payload
     );
 
@@ -52,7 +52,7 @@ function* deleteUser(action: IDeleteUserRequestAction) {
   const id = action.payload;
   try {
     const response: IAxiosResponse<any> = yield call(
-      UsersService.deleteUser,
+      UserService.deleteUser,
       action.payload
     );
 
@@ -74,10 +74,10 @@ function* deleteUser(action: IDeleteUserRequestAction) {
   }
 }
 
-export default function* fetchUsersSaga() {
+export default function* fetchUserSaga() {
   yield all([
     takeLatest(FETCH_USERS_REQUEST, fetchUsers),
-    takeLatest(UPDATE_USERS_REQUEST, updateUsers),
+    takeLatest(UPDATE_USER_REQUEST, updateUsers),
     takeLatest(DELETE_USER_REQUEST, deleteUser),
   ]);
 }

@@ -9,13 +9,13 @@
 
 import { IAppStore } from "../../../../interfaces/generic.model";
 import { IRolesRequestModel } from "../../../../interfaces/role.model";
-import { IUserModel } from "../../../../interfaces/user.model";
+import { IRoleModel } from "../../../../interfaces/role.model";
 
 export const FETCH_ROLES_REQUEST = "FETCH_ROLES_REQUEST";
 export const FETCH_ROLES_SUCCESS = "FETCH_ROLES_SUCCESS";
 export const FETCH_ROLES_FAILED = "FETCH_ROLES_FAILED";
 
-export const UPDATE_ROLES_REQUEST = "UPDATE_ROLES_REQUEST";
+export const UPDATE_ROLE_REQUEST = "UPDATE_ROLE_REQUEST";
 export const UPDATE_ROLES_SUCCESS = "UPDATE_ROLES_SUCCESS";
 export const UPDATE_ROLES_FAILED = "UPDATE_ROLES_FAILED";
 
@@ -33,42 +33,42 @@ export interface IFetchRolesRequestAction {
 
 export interface IFetchRolesSuccessAction {
   type: typeof FETCH_ROLES_SUCCESS;
-  payload: IAppStore<IUserModel[]>;
+  payload: IAppStore<IRoleModel[]>;
 }
 
 export interface IFetchRolesFailureAction {
   type: typeof FETCH_ROLES_FAILED;
-  payload: IAppStore<IUserModel[]>;
+  payload: IAppStore<IRoleModel[]>;
 }
 
 // UPDATE
 export interface IUpdateRolesRequestAction {
-  type: typeof UPDATE_ROLES_REQUEST;
+  type: typeof UPDATE_ROLE_REQUEST;
   payload: IRolesRequestModel;
 }
 
 export interface IUpdateRolesSuccessAction {
   type: typeof UPDATE_ROLES_SUCCESS;
-  payload: IAppStore<IUserModel>;
+  payload: IAppStore<IRoleModel>;
 }
 
 export interface IUpdateRolesFailureAction {
   type: typeof UPDATE_ROLES_FAILED;
-  payload: IAppStore<IUserModel>;
+  payload: IAppStore<IRoleModel>;
 }
 
 // DELETE
-export interface IDeleteUserRequestAction {
+export interface IDeleteRoleRequestAction {
   type: typeof DELETE_ROLE_REQUEST;
   payload: string;
 }
 
-export interface IDeleteUserSuccessAction {
+export interface IDeleteRoleSuccessAction {
   type: typeof DELETE_ROLE_SUCCESS;
   payload: IAppStore<string>;
 }
 
-export interface IDeleteUserFailedAction {
+export interface IDeleteRoleFailedAction {
   type: typeof DELETE_ROLE_FAILED;
   payload: IAppStore<string>;
 }
@@ -84,14 +84,14 @@ export const fetchRolesRequest = (
 });
 
 export const fetchRolesSuccess = (
-  payload: IAppStore<IUserModel[]>
+  payload: IAppStore<IRoleModel[]>
 ): IFetchRolesSuccessAction => ({
   type: FETCH_ROLES_SUCCESS,
   payload,
 });
 
 export const fetchRolesFailed = (
-  payload: IAppStore<IUserModel[]>
+  payload: IAppStore<IRoleModel[]>
 ): IFetchRolesFailureAction => ({
   type: FETCH_ROLES_FAILED,
   payload,
@@ -100,41 +100,41 @@ export const fetchRolesFailed = (
 export const updateRolesRequest = (
   payload: IRolesRequestModel
 ): IUpdateRolesRequestAction => ({
-  type: UPDATE_ROLES_REQUEST,
+  type: UPDATE_ROLE_REQUEST,
   payload,
 });
 
 export const updateRolesSuccess = (
-  payload: IAppStore<IUserModel>
+  payload: IAppStore<IRoleModel>
 ): IUpdateRolesSuccessAction => ({
   type: UPDATE_ROLES_SUCCESS,
   payload,
 });
 
 export const updateRolesFailed = (
-  payload: IAppStore<IUserModel>
+  payload: IAppStore<IRoleModel>
 ): IUpdateRolesFailureAction => ({
   type: UPDATE_ROLES_FAILED,
   payload,
 });
 
-export const deleteUserRequest = (
+export const deleteRoleRequest = (
   payload: string
-): IDeleteUserRequestAction => ({
+): IDeleteRoleRequestAction => ({
   type: DELETE_ROLE_REQUEST,
   payload,
 });
 
-export const deleteUserSuccess = (
+export const deleteRoleSuccess = (
   payload: IAppStore<string>
-): IDeleteUserSuccessAction => ({
+): IDeleteRoleSuccessAction => ({
   type: DELETE_ROLE_SUCCESS,
   payload,
 });
 
-export const deleteUserFailed = (
+export const deleteRoleFailed = (
   payload: IAppStore<string>
-): IDeleteUserFailedAction => ({
+): IDeleteRoleFailedAction => ({
   type: DELETE_ROLE_FAILED,
   payload,
 });
@@ -147,6 +147,6 @@ export type RolesActions =
   | IUpdateRolesRequestAction
   | IUpdateRolesSuccessAction
   | IUpdateRolesFailureAction
-  | IDeleteUserRequestAction
-  | IDeleteUserSuccessAction
-  | IDeleteUserFailedAction;
+  | IDeleteRoleRequestAction
+  | IDeleteRoleSuccessAction
+  | IDeleteRoleFailedAction;

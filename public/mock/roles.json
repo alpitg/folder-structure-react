@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "name": "Admin",
+    "createdDate": "20-02-2023"
+  },
+  {
+    "id": "2",
+    "name": "User",
+    "createdDate": "20-02-2023"
+  },
+  {
+    "id": "3",
+    "name": "Custom",
+    "createdDate": "20-02-2023"
+  }
+]

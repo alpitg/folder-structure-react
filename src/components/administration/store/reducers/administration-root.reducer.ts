@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import usersReducer from "./users.reducer";
+import userReducer from "./user.reducer";
+import roleReducer from "./role.reducer";
 
 const administrationRootReducer = combineReducers({
-  users: usersReducer,
+  users: userReducer,
+  roles: roleReducer,
 });
 
 export type AppState = ReturnType<typeof administrationRootReducer>;

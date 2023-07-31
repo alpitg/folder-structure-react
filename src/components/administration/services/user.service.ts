@@ -1,8 +1,8 @@
-import { ENDPOINT } from "../constants/global-contants/endpoint.const";
-import { IUsersRequestModel, IUserModel } from "../interfaces/user.model";
-import { axiosInstance } from "../utils/axios.util";
+import { ENDPOINT } from "../../../constants/global-contants/endpoint.const";
+import { IUserModel, IUsersRequestModel } from "../../../interfaces/user.model";
+import { axiosInstance } from "../../../utils/axios.util";
 
-export default class UsersService {
+export default class UserService {
   static fetchUsers = (params: IUsersRequestModel) => {
     return axiosInstance.get(
       ENDPOINT.BASE_URL + ENDPOINT.USERS.API.FETCH_USERS

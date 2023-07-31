@@ -17,7 +17,7 @@ export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 export const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
 
-export const UPDATE_USERS_REQUEST = "UPDATE_USERS_REQUEST";
+export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
 export const UPDATE_USERS_SUCCESS = "UPDATE_USERS_SUCCESS";
 export const UPDATE_USERS_FAILED = "UPDATE_USERS_FAILED";
 
@@ -45,7 +45,7 @@ export interface IFetchUsersFailureAction {
 
 // UPDATE
 export interface IUpdateUsersRequestAction {
-  type: typeof UPDATE_USERS_REQUEST;
+  type: typeof UPDATE_USER_REQUEST;
   payload: IUsersRequestModel;
 }
 
@@ -102,7 +102,7 @@ export const fetchUsersFailed = (
 export const updateUsersRequest = (
   payload: IUsersRequestModel
 ): IUpdateUsersRequestAction => ({
-  type: UPDATE_USERS_REQUEST,
+  type: UPDATE_USER_REQUEST,
   payload,
 });
 
