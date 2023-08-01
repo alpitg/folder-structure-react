@@ -33,7 +33,7 @@ const UserEditApp = () => {
 
   return (
     <>
-      <div className="card flex justify-content-center">
+      <div className="justify-content-center">
         <span className="p-float-label">
           <InputText
             id="username"
