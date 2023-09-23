@@ -1,5 +1,10 @@
 import { AppStore, IAppStore } from "../../../../interfaces/generic.model";
-import { IUserModel } from "../../../../interfaces/user.model";
+import {
+  IUserAppStore,
+  IUserModel,
+  IUserResponseModel,
+  UserAppStore,
+} from "../../../../interfaces/user.model";
 import {
   DELETE_USER_FAILED,
   DELETE_USER_REQUEST,
@@ -11,9 +16,9 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USERS_SUCCESS,
   UsersActions,
-} from "../actions/users.action";
+} from "../actions/user.action";
 
-const initialState: IAppStore<IUserModel[]> = new AppStore<IUserModel[]>();
+const initialState: IUserAppStore = new UserAppStore();
 
 const userReducer = (state = initialState, action: UsersActions) => {
   switch (action.type) {
@@ -25,14 +30,18 @@ const userReducer = (state = initialState, action: UsersActions) => {
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        result: action.payload.result,
-        pending: false,
+        list: {
+          result: action.payload.result,
+          pending: false,
+        },
       } as typeof initialState;
     case FETCH_USERS_FAILED:
       return {
         ...state,
-        pending: false,
-        error: action.payload.error,
+        list: {
+          pending: false,
+          error: action.payload.error,
+        },
       } as typeof initialState;
     case UPDATE_USER_REQUEST:
       return {
@@ -42,7 +51,7 @@ const userReducer = (state = initialState, action: UsersActions) => {
     case UPDATE_USERS_SUCCESS:
       return {
         ...state,
-        result: state.result?.map((x) => {
+        result: state.list.result?.items?.map((x) => {
           if (x.id === action.payload.result?.id) {
             return { ...x, name: action.payload.result.name };
           }
@@ -53,7 +62,7 @@ const userReducer = (state = initialState, action: UsersActions) => {
     case UPDATE_USERS_FAILED:
       return {
         ...state,
-        result: state.result?.map((x) => {
+        result: state.list?.result?.items?.map((x) => {
           if (x.id === action.payload.result?.id) {
             return { ...x, name: action.payload.result.name };
           }
@@ -75,19 +84,33 @@ const userReducer = (state = initialState, action: UsersActions) => {
     case DELETE_USER_SUCCESS:
       return {
         ...state,
-        result: state.result?.filter(
-          (item) => item.id !== action.payload.result
-        ),
-        pending: false,
+        delete: {
+          result: action.payload.result,
+          pending: false,
+        },
+        list: {
+          result: {
+            items: state.list.result?.items?.filter(
+              (item) => item.id !== action.payload.result
+            ),
+          },
+        },
       } as typeof initialState;
     case DELETE_USER_FAILED:
       // TODO: Update this once Actual API is implemented
       return {
         ...state,
-        result: state.result?.filter(
-          (item) => item.id !== action.payload.result
-        ),
-        pending: false,
+        delete: {
+          result: action.payload.result,
+          pending: false,
+        },
+        list: {
+          result: {
+            items: state.list.result?.items?.filter(
+              (item) => item.id !== action.payload.result
+            ),
+          },
+        },
       } as typeof initialState;
     // return {
     //   ...state,

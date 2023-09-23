@@ -4,6 +4,7 @@ import {
   FETCH_USERS_REQUEST,
   IDeleteUserRequestAction,
   IFetchUsersRequestAction,
+  IUpdateUsersRequestAction,
   UPDATE_USER_REQUEST,
   deleteUserFailed,
   deleteUserSuccess,
@@ -11,7 +12,7 @@ import {
   fetchUsersSuccess,
   updateUsersFailed,
   updateUsersSuccess,
-} from "../actions/users.action";
+} from "../actions/user.action";
 import { IAxiosResponse } from "../../../../interfaces/generic.model";
 import UserService from "../../services/user.service";
 
@@ -32,18 +33,18 @@ function* fetchUsers(action: IFetchUsersRequestAction) {
   }
 }
 
-function* updateUsers(action: IFetchUsersRequestAction) {
-  const id = action.payload;
+function* updateUsers(action: IUpdateUsersRequestAction) {
+  const data = action.payload;
   try {
     const response: IAxiosResponse<any> = yield call(
       UserService.updateUser,
       action.payload
     );
 
-    yield put(updateUsersSuccess({ result: id, error: "", pending: false }));
+    yield put(updateUsersSuccess({ result: data, error: "", pending: false }));
   } catch (error) {
     yield put(
-      updateUsersFailed({ result: id, error: "error", pending: false })
+      updateUsersFailed({ result: data, error: "error", pending: false })
     );
   }
 }

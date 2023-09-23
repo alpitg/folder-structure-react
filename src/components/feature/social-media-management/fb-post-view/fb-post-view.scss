@@ -1,0 +1,133 @@
+@import "../../../../assets/scss/insta-theme.scss";
+
+.fb-post-view-app {
+  .p-card-content,
+  .p-card-body {
+    padding: 0;
+  }
+  .posts {
+    img {
+      object-fit: cover;
+    }
+    .xs__media__pic {
+      width: 20px;
+      height: 20px;
+    }
+    .sm__media__pic {
+      width: 32px;
+      height: 32px;
+    }
+    .media__pic__round {
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--insta-img-border);
+      border-radius: 50%;
+    }
+    .align__right {
+      margin-left: auto;
+    }
+
+    .post__media {
+      width: 100%;
+      flex: none;
+      object-fit: cover;
+      vertical-align: initial;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .post__header {
+      background-color: var(--insta-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 4px 14px 16px;
+
+      .post__date-time {
+        font-size: 10px;
+        font-weight: 400;
+        color: var(--insta-text-light);
+        text-transform: uppercase;
+      }
+
+      .post__profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .post__username {
+          flex-direction: column;
+          span {
+            padding-right: 5px;
+          }
+        }
+
+        .post__user {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--insta-text-dark);
+          text-decoration: none;
+          text-transform: lowercase;
+        }
+      }
+    }
+
+    .post__description {
+      padding: 20px 20px 20px 20px;
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--insta-text-dark);
+        text-decoration: none;
+      }
+    }
+
+    .post__content {
+      display: flex;
+      position: relative;
+
+      .post__medias {
+        display: flex;
+        overflow-y: hidden;
+        overflow-x: auto;
+
+        width: 100%;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+      }
+
+      .post__medias::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .post__options {
+      padding-top: 10px;
+      border-top: 1px solid lightgray;
+      display: flex;
+      justify-content: space-evenly;
+      font-size: medium;
+      color: gray;
+      cursor: pointer;
+      padding: 15px;
+
+      .post__option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        flex: 1;
+        span {
+          margin-left: 10px;
+        }
+      }
+
+      .post__option:hover {
+        background-color: #eff2f5;
+        border-radius: 10px;
+      }
+    }
+  }
+}

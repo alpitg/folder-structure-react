@@ -1,5 +1,4 @@
-import { AppStore, IAppStore } from "../../../../interfaces/generic.model";
-import { IRoleModel } from "../../../../interfaces/role.model";
+import { IRoleAppStore, RoleAppStore } from "../../../../interfaces/role.model";
 import {
   DELETE_ROLE_FAILED,
   DELETE_ROLE_REQUEST,
@@ -10,90 +9,143 @@ import {
   UPDATE_ROLES_FAILED,
   UPDATE_ROLE_REQUEST,
   UPDATE_ROLES_SUCCESS,
+  RESET_UPDATE_ROLE,
+  RESET_DELETE_ROLE,
+  RESET_FETCH_ROLE,
   RolesActions,
-} from "../actions/roles.action";
+} from "../actions/role.action";
 
-const initialState: IAppStore<IRoleModel[]> = new AppStore<IRoleModel[]>();
+const initialState: IRoleAppStore = new RoleAppStore();
 
 const roleReducer = (state = initialState, action: RolesActions) => {
   switch (action.type) {
+    //#region FETCH
     case FETCH_ROLES_REQUEST:
       return {
         ...state,
-        pending: true,
+        list: {
+          pending: true,
+        },
       } as typeof initialState;
     case FETCH_ROLES_SUCCESS:
       return {
         ...state,
-        result: action.payload.result,
-        pending: false,
+        list: {
+          result: action.payload.result,
+          pending: false,
+        },
       } as typeof initialState;
     case FETCH_ROLES_FAILED:
       return {
         ...state,
-        pending: false,
-        error: action.payload.error,
+        list: {
+          pending: false,
+          error: action.payload.error,
+        },
       } as typeof initialState;
+    case RESET_FETCH_ROLE:
+      return {
+        ...state,
+        list: {
+          error: "",
+          pending: false,
+          result: null,
+        },
+      } as typeof initialState;
+    //#endregion
+
+    //#region UPDATE
     case UPDATE_ROLE_REQUEST:
       return {
         ...state,
-        pending: true,
+        update: {
+          pending: true,
+        },
       } as typeof initialState;
     case UPDATE_ROLES_SUCCESS:
       return {
         ...state,
-        result: state.result?.map((x) => {
-          if (x.id === action.payload.result?.id) {
-            return { ...x, name: action.payload.result.name };
-          }
-          return x;
-        }),
-        pending: false,
+        update: {
+          result: state.list.result?.map((x) => {
+            if (x.id === action.payload.result?.id) {
+              return { ...x, name: action.payload.result.name };
+            }
+            return x;
+          }),
+          pending: false,
+        },
       } as typeof initialState;
     case UPDATE_ROLES_FAILED:
+      // TODO: Update this once Actual API is implemented
       return {
         ...state,
-        result: state.result?.map((x) => {
-          if (x.id === action.payload.result?.id) {
-            return { ...x, name: action.payload.result.name };
-          }
-          return x;
-        }),
-        pending: false,
+        update: {
+          result: state.list.result?.map((x) => {
+            if (x.id === action.payload.result?.id) {
+              return { ...x, name: action.payload.result.name };
+            }
+            return x;
+          }),
+          error: action.payload.error,
+          pending: false,
+        },
       } as typeof initialState;
-    // return {
-    //   ...state,
-    //   pending: false,
-    //   error: action.payload.error,
-    // } as typeof initialState;
+    case RESET_UPDATE_ROLE:
+      return {
+        ...state,
+        update: {
+          error: "",
+          pending: false,
+          result: null,
+        },
+      } as typeof initialState;
+    //#endregion
 
+    //#region DELETE
     case DELETE_ROLE_REQUEST:
       return {
         ...state,
-        pending: true,
+        delete: {
+          pending: true,
+        },
       } as typeof initialState;
     case DELETE_ROLE_SUCCESS:
       return {
         ...state,
-        result: state.result?.filter(
-          (item) => item.id !== action.payload.result
-        ),
-        pending: false,
+        delete: {
+          result: action.payload.result,
+          pending: false,
+        },
+        list: {
+          result: state.list.result?.filter(
+            (item) => item.id !== action.payload.result
+          ),
+        },
       } as typeof initialState;
     case DELETE_ROLE_FAILED:
       // TODO: Update this once Actual API is implemented
       return {
         ...state,
-        result: state.result?.filter(
-          (item) => item.id !== action.payload.result
-        ),
-        pending: false,
+        delete: {
+          result: action.payload.result,
+          pending: false,
+        },
+        list: {
+          result: state.list.result?.filter(
+            (item) => item.id !== action.payload.result
+          ),
+        },
       } as typeof initialState;
-    // return {
-    //   ...state,
-    //   pending: false,
-    //   error: action.payload.error,
-    // } as typeof initialState;
+    case RESET_DELETE_ROLE:
+      return {
+        ...state,
+        delete: {
+          error: "",
+          pending: false,
+          result: null,
+        },
+      } as typeof initialState;
+    //#endregion
     default:
       return state;
   }

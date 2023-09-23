@@ -1,11 +1,9 @@
 import { Outlet } from "react-router";
-import RoleListApp from "./list/role-list";
 import { Suspense, useEffect } from "react";
 import { IRolesRequestModel } from "../../../interfaces/role.model";
 import { useDispatch } from "react-redux";
-import { fetchRolesRequest } from "../store/actions/roles.action";
+import { fetchRolesRequest } from "../store/actions/role.action";
 import "./role.scss";
-import RoleItemApp from "./list/item/role-item";
 
 const RolesApp = () => {
   const dispatch = useDispatch();
@@ -15,20 +13,13 @@ const RolesApp = () => {
       id: "",
       name: "",
       createdDate: "",
+      isDefault: false,
     };
     dispatch(fetchRolesRequest(filter));
   });
 
   return (
     <>
-      {/* <RoleDetailApp />
-            <RoleOperationsApp />
-            <RoleFilterApp /> */}
-      {/* <RoleFilterApp /> */}
-      <RoleListApp />
-
-      <br />
-
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>

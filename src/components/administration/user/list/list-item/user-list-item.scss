@@ -1,0 +1,15 @@
+.user-list-item-app {
+  td {
+    vertical-align: middle;
+  }
+
+  .user-list-job-starred svg {
+    width: 20px;
+    height: 20px;
+    color: #fd8b2c;
+  }
+
+  .user-list-job-starred svg.starred {
+    fill: #fd8b2c;
+  }
+}

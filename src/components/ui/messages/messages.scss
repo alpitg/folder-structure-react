@@ -1,0 +1,18 @@
+.messages-app {
+  .alert {
+    padding: 8px 15px 8px 15px;
+    margin-bottom: 30px;
+    font-size: small;
+  }
+  .alert:before {
+    content: "";
+    position: absolute;
+    border-left: 1px solid;
+    border-right: 2px solid;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    left: 0;
+    top: 20%;
+    height: 20px;
+  }
+}

@@ -1,22 +1,202 @@
-[
-  {
-    "id": "1",
-    "name": "Alpit G",
-    "mailId": "alpit@gmail.com"
-  },
-  {
-    "id": "2",
-    "name": "Samual",
-    "mailId": "samual@gmail.com"
-  },
-  {
-    "id": "3",
-    "name": "Max J",
-    "mailId": "max@gmail.com"
-  },
-  {
-    "id": "4",
-    "name": "Tyrian L",
-    "mailId": "tyrian@gmail.com"
-  }
-]
+{
+  "totalCount": 15,
+  "items": [
+    {
+      "name": "admin",
+      "surname": "admin",
+      "userName": "admin",
+      "emailAddress": "googlig1995@gmail.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": false,
+      "roles": [
+        {
+          "roleId": 324253,
+          "roleName": "Admin"
+        },
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:15.0541333",
+      "id": 3045571
+    },
+    {
+      "name": "Agatha",
+      "surname": "Christie",
+      "userName": "agatha.christie",
+      "emailAddress": "agatha.christie@gmail.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:22.2286674",
+      "id": 3045573
+    },
+    {
+      "name": "Andrew",
+      "surname": "Andrewus",
+      "userName": "andrew.andrewus",
+      "emailAddress": "andrew.andrewus@aspnetzero.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:22.7511964",
+      "id": 3045576
+    },
+    {
+      "name": "Arda",
+      "surname": "Turan",
+      "userName": "arda.turan",
+      "emailAddress": "arda.turan@yandex.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:22.5971757",
+      "id": 3045575
+    },
+    {
+      "name": "Christopher",
+      "surname": "Lloyd",
+      "userName": "christopher.lloyd",
+      "emailAddress": "christopher.lloyd@yandex.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": false,
+      "creationTime": "2023-07-28T16:47:23.813601",
+      "id": 3045584
+    },
+    {
+      "name": "Clarice",
+      "surname": "Starling",
+      "userName": "clarice.starling",
+      "emailAddress": "clarice.starling@live.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": false,
+      "creationTime": "2023-07-28T16:47:23.419344",
+      "id": 3045581
+    },
+    {
+      "name": "Daniel",
+      "surname": "Radcliffe",
+      "userName": "daniel.radcliffe",
+      "emailAddress": "daniel.radcliffe@yandex.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:23.945823",
+      "id": 3045585
+    },
+    {
+      "name": "Emmett",
+      "surname": "Brown",
+      "userName": "emmett.brown",
+      "emailAddress": "emmett.brown@gmail.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:23.0245882",
+      "id": 3045578
+    },
+    {
+      "name": "Forrest",
+      "surname": "Gump",
+      "userName": "forrest.gump",
+      "emailAddress": "forrest.gump@hotmail.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:23.2880709",
+      "id": 3045580
+    },
+    {
+      "name": "Gabriel",
+      "surname": "Marquez",
+      "userName": "gabriel.marquez",
+      "emailAddress": "gabriel.marquez@hotmail.com",
+      "lockoutEndDateUtc": null,
+      "phoneNumber": null,
+      "profilePictureId": null,
+      "isEmailConfirmed": true,
+      "roles": [
+        {
+          "roleId": 324254,
+          "roleName": "User"
+        }
+      ],
+      "isActive": true,
+      "creationTime": "2023-07-28T16:47:23.5509968",
+      "id": 3045582
+    }
+  ],
+  "success": true,
+  "error": null,
+  "unAuthorizedRequest": false
+}

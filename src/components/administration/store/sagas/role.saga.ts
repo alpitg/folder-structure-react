@@ -4,6 +4,7 @@ import {
   FETCH_ROLES_REQUEST,
   IDeleteRoleRequestAction,
   IFetchRolesRequestAction,
+  IUpdateRolesRequestAction,
   UPDATE_ROLE_REQUEST,
   deleteRoleFailed,
   deleteRoleSuccess,
@@ -11,7 +12,7 @@ import {
   fetchRolesSuccess,
   updateRolesFailed,
   updateRolesSuccess,
-} from "../actions/roles.action";
+} from "../actions/role.action";
 import { IAxiosResponse } from "../../../../interfaces/generic.model";
 import RoleService from "../../services/role.service";
 
@@ -32,18 +33,18 @@ function* fetchRoles(action: IFetchRolesRequestAction) {
   }
 }
 
-function* updateRoles(action: IFetchRolesRequestAction) {
-  const id = action.payload;
+function* updateRoles(action: IUpdateRolesRequestAction) {
+  const data = action.payload;
   try {
     const response: IAxiosResponse<any> = yield call(
       RoleService.updateRole,
       action.payload
     );
 
-    yield put(updateRolesSuccess({ result: id, error: "", pending: false }));
+    yield put(updateRolesSuccess({ result: data, error: "", pending: false }));
   } catch (error) {
     yield put(
-      updateRolesFailed({ result: id, error: "error", pending: false })
+      updateRolesFailed({ result: data, error: "error", pending: false })
     );
   }
 }

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { Card } from "primereact/card";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import { IUserModel } from "../../../../interfaces/user.model";
+import { ROUTE_URL } from "../../../auth/constants/routes.const";
 
 const UserDetailApp = () => {
   const { id } = useParams();
@@ -10,11 +13,28 @@ const UserDetailApp = () => {
   const [userDetail, setUserDetaiil] = useState<IUserModel>();
 
   useEffect(() => {
-    const temp = users.result?.find((x) => x.id === id);
+    const temp = users.list?.result?.items?.find((x) => x.id === id);
     setUserDetaiil(temp);
   }, [id]);
 
-  return <>Hi From UserDetailApp {userDetail?.name}</>;
+  return (
+    <>
+      <Card
+        title={
+          <>
+            <Link to={`${ROUTE_URL.ADMIN.USER.BASE}`}>
+              <span className="icon" title="Navigate Back">
+                <i className="pi pi-fw pi-arrow-left"></i>
+              </span>
+            </Link>
+            <span className="p-2">Edit User</span>
+          </>
+        }
+      >
+        Hi From UserDetailApp {userDetail?.name}
+      </Card>
+    </>
+  );
 };
 
 export default UserDetailApp;

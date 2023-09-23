@@ -1,0 +1,47 @@
+{
+  "totalCount": 10,
+  "permissions": [
+    {
+      "label": "Pages",
+      "value": "pages",
+      "children": [
+        {
+          "label": "Administration",
+          "value": "administration",
+          "children": [
+            {
+              "label": "Organization Units",
+              "value": "organization-units",
+              "children": [
+                {
+                  "label": "Managing members",
+                  "value": "managing-members"
+                },
+                {
+                  "label": "Managing organization tree",
+                  "value": "managing-organization-tree"
+                },
+                {
+                  "label": "Managing roles",
+                  "value": "managing-roles"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Dashboard",
+          "value": "dashboard"
+        },
+        {
+          "label": "Demo UI Components",
+          "value": "demo-ui-components"
+        }
+      ]
+    }
+  ],
+  "grantedPermissionNames": [],
+  "success": true,
+  "error": null,
+  "unAuthorizedRequest": false
+}

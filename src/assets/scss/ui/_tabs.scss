@@ -1,0 +1,18 @@
+.p-tabview {
+  .p-tabview-nav-content {
+    .p-tabview-title {
+      font-weight: normal;
+      padding: 0 5px 0 0px;
+    }
+    ul,
+    li > a {
+      height: 50px;
+    }
+    li .p-tabview-nav-link {
+      padding: 0.5rem;
+    }
+    li .p-tabview-nav-link:not(.p-disabled):focus {
+      box-shadow: none;
+    }
+  }
+}

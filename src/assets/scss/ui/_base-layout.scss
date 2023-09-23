@@ -1,25 +1,34 @@
 .base-layout-app {
-  .main-content {
-    margin-left: $sidebar-width;
-    padding: 20px;
+  .toggle-button {
+    position: fixed;
+    top: 20px;
+    padding: 2px;
+    border-radius: 22%;
+    background: var(--app-bg-color);
+    z-index: 99999;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  .toggle-button-location-0 {
+    left: calc(var(--sidebar-width) - 15px);
+  }
+  .toggle-button-location-180 {
+    left: 15px;
+  }
+  .rotate-180 {
+    transform: rotate(180deg);
   }
 
-  // NOTE: Hide sidebar media
-  @media screen and (max-width: $sidebar-media-screen-width) {
-    .toggle-sidebar {
-      display: none;
-    }
-    .main-content {
-      margin-left: 0;
+  .base-layout-main-body {
+    .base-layout-content {
+      padding: 20px;
     }
   }
-  @media screen and (min-width: $sidebar-media-screen-width) {
-    .toggle-sidebar-overlay {
-      display: none;
-    }
+  .navbar-margin-space {
+    margin-top: var(--app-header-height);
   }
-}
-// NOTE: Global level
-.p-sidebar {
-  background: $sidebar-bg-color;
+  .sidebar-margin-space {
+    margin-left: var(--sidebar-width);
+  }
 }

@@ -1,0 +1,23 @@
+/* Vars */
+:root {
+  --insta-primary: hsl(0, 0%, 100%);
+  --insta-secondary: hsl(0, 0%, 98%);
+  --insta-border: hsl(0, 0%, 86%);
+
+  --insta-story-border: hsl(0, 0%, 78%);
+  --insta-img-border: hsla(0, 0%, 0%, 0.1);
+
+  --insta-text-dark: hsl(0, 0%, 15%);
+  --insta-text-light: hsl(0, 0%, 60%);
+}
+:root.darkTheme {
+  --insta-primary: hsl(0, 0%, 0%);
+  --insta-secondary: hsl(0, 0%, 2%);
+  --insta-border: hsl(0, 0%, 15%);
+
+  --insta-story-border: hsl(0, 0%, 44%);
+  --insta-img-border: hsla(0, 0%, 100%, 0.1);
+
+  --insta-text-dark: hsl(0, 0%, 98%);
+  --insta-text-light: hsl(0, 0%, 60%);
+}

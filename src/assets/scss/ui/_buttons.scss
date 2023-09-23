@@ -1,0 +1,11 @@
+
+.p-button.p-button-secondary:enabled:focus,
+.p-button:focus {
+  box-shadow: none;
+}
+
+.p-button {
+  .p-button-label {
+    font-weight: normal;
+  }
+}

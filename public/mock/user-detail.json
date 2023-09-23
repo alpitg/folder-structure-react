@@ -1,0 +1,50 @@
+{
+  "profilePictureId": null,
+  "user": {
+    "id": 3045571,
+    "name": "admin",
+    "surname": "admin s",
+    "userName": "admin",
+    "emailAddress": "googlig1995@gmail.com",
+    "phoneNumber": null,
+    "password": null,
+    "isActive": true,
+    "shouldChangePasswordOnNextLogin": false,
+    "isTwoFactorEnabled": true,
+    "isLockoutEnabled": true
+  },
+  "roles": [
+    {
+      "roleId": 324253,
+      "roleName": "Admin",
+      "roleDisplayName": "Admin",
+      "isAssigned": true,
+      "inheritedFromOrganizationUnit": false
+    },
+    {
+      "roleId": 326184,
+      "roleName": "7d7a93ad958f487ebeac68665bfc7e03",
+      "roleDisplayName": "dfd",
+      "isAssigned": false,
+      "inheritedFromOrganizationUnit": false
+    },
+    {
+      "roleId": 324846,
+      "roleName": "71ef9b94f7744e4589d6fffb6d461c1f",
+      "roleDisplayName": "Test 1",
+      "isAssigned": false,
+      "inheritedFromOrganizationUnit": false
+    },
+    {
+      "roleId": 324254,
+      "roleName": "User",
+      "roleDisplayName": "User",
+      "isAssigned": true,
+      "inheritedFromOrganizationUnit": false
+    }
+  ],
+  "allowedUserNameCharacters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+",
+  "success": true,
+  "error": null,
+  "unAuthorizedRequest": false
+}

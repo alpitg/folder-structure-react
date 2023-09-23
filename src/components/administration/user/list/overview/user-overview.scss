@@ -1,0 +1,80 @@
+.user-overview-app {
+  .flex-center {
+    display: flex;
+    align-items: center;
+  }
+  .search-body {
+    margin-bottom: 1.5rem;
+  }
+
+  .search-body .search-filters .filter-list {
+    margin-bottom: 1.3rem;
+  }
+
+  .search-body .search-filters .filter-list .title {
+    color: #3c4142;
+    margin-bottom: 1rem;
+  }
+
+  .search-body .search-filters .filter-list .filter-text {
+    color: #727686;
+  }
+
+  .search-body .search-result .result-header {
+    margin-bottom: 2rem;
+  }
+
+  .search-body .search-result .result-header .records {
+    color: #3c4142;
+  }
+
+  .search-body .search-result .result-header .result-actions {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .search-body .search-result .result-header .result-actions .result-sorting {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-body
+    .search-result
+    .result-header
+    .result-actions
+    .result-sorting
+    span {
+    flex-shrink: 0;
+    font-size: 0.8125rem;
+  }
+
+  .search-body
+    .search-result
+    .result-header
+    .result-actions
+    .result-sorting
+    select {
+    color: #68cbd7;
+  }
+
+  .search-body
+    .search-result
+    .result-header
+    .result-actions
+    .result-sorting
+    select
+    option {
+    color: #3c4142;
+  }
+
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .search-body .search-filters {
+      display: flex;
+    }
+    .search-body .search-filters .filter-list {
+      margin-right: 1rem;
+    }
+  }
+}

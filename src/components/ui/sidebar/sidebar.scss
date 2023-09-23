@@ -1,37 +1,55 @@
-@import "../../../assets/scss/_variables.scss";
-
 .sidebar-app {
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
   height: 100%;
-  width: $sidebar-width;
+  width: var(--sidebar-width);
   user-select: none;
   padding-top: 5px;
-  background: $sidebar-bg-color;
+  background: var(--sidebar-bg-color);
   font-size: 13px;
   font-weight: 400;
 
   .logo-section {
+    background: var(--sidebar-bg-color);
     height: 70px;
-    border-bottom: 1px dashed #393945;
-    .icon {
-      color: $white-color;
-      width: 70px;
+    min-width: var(--sidebar-width);
+    text-align: center;
+    .company-icon > img {
+      padding: 10px;
+      width: 60%;
     }
+  }
+
+  .toggle-button {
+    position: absolute;
+    top: 20px;
+    left: calc(var(--sidebar-width) - 15px);
+    padding: 2px;
+    border-radius: 22%;
+    background: var(--app-bg-color);
+    color: #009ef7;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  .rotate-180 {
+    transform: rotate(180deg);
   }
 
   ul {
     padding: 10px;
+    max-height: 86vh;
+    overflow-y: auto;
 
     .accordion-button {
-      color: $default-font-color;
+      color: var(--default-font-color);
       padding: 0.65rem 1rem;
       margin-bottom: 2px;
     }
     .accordion-button::after {
-      color: $default-font-color;
+      color: var(--default-font-color);
       content: "\276F";
     }
     .accordion-button.collapsed::after {
@@ -62,16 +80,16 @@
       a {
         display: block;
         padding: 0.65rem 1rem;
-        color: $default-font-color;
+        color: var(--default-font-color);
         text-decoration: none;
       }
       a:hover {
-        color: $white-color;
+        color: var(--white-color);
       }
-      // .accordion-collapse[a:matches(.active)] {
+      .accordion-button.active,
       a.active {
-        color: $white-color;
-        background: $sidebar-active-color;
+        color: var(--white-color);
+        background: var(--sidebar-active-color);
         border-radius: 0.475rem;
       }
       a:hover:before,
@@ -94,5 +112,15 @@
     border-bottom-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
     border-top-left-radius: 0 !important;
+  }
+
+  .sidebar-bottom {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+    p {
+      color: var(--default-font-color);
+    }
   }
 }

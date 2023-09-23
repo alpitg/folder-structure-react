@@ -2,16 +2,24 @@
   {
     "id": "1",
     "name": "Admin",
-    "createdDate": "20-02-2023"
+    "createdDate": "20-02-2023",
+    "isDefault": false,
+    "grantedPermissionNames": [
+      "managing-members",
+      "managing-organization-tree",
+      "managing-roles"
+    ]
   },
   {
     "id": "2",
     "name": "User",
-    "createdDate": "20-02-2023"
+    "createdDate": "20-02-2023",
+    "isDefault": true
   },
   {
     "id": "3",
     "name": "Custom",
-    "createdDate": "20-02-2023"
+    "createdDate": "20-02-2023",
+    "isDefault": false
   }
 ]

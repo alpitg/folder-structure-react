@@ -1,0 +1,5 @@
+.header-inline-text-app {
+  .inline-sub-title::before {
+    content: "— ";
+  }
+}

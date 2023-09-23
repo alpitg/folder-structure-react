@@ -1,22 +1,18 @@
-//theme
+/**NOTE - DO NOT CHANGE THE SEQUENCE 
+**/
 @import "primereact/resources/themes/lara-light-indigo/theme.css";
 @import "primereact/resources/primereact.min.css";
 @import "primeicons/primeicons.css";
+@import "bootstrap/scss/bootstrap-utilities";
+@import "./utils/bootstrap-extend.util.scss";
 @import "bootstrap/scss/bootstrap";
+@import "react-checkbox-tree/lib/react-checkbox-tree.css";
 @import "./assets/scss/base.scss";
 
 body {
   margin: 0;
-
+  background-color: var(--app-bg-color);
   .row {
     --bs-gutter-x: 0;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .cursor-pointer {
-    cursor: pointer;
   }
 }
