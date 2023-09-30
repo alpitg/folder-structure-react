@@ -1,97 +1,191 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Card } from "primereact/card";
+import { TabView, TabPanel } from "primereact/tabview";
 import { InputText } from "primereact/inputtext";
-import { Badge } from "primereact/badge";
+import { Checkbox } from "primereact/checkbox";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import {
-  ITenantFormModel,
+  TenantFormModel,
   ITenantModel,
 } from "../../../../interfaces/tenant.model";
+import {
+  fetchTenantRequest,
+  resetDeleteTenant,
+  resetUpdateTenant,
+  updateTenantsRequest,
+} from "../../store/actions/tenant.action";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
-import { TabPanel, TabView } from "primereact/tabview";
-import MessagesApp from "../../../ui/messages/messages";
-import { Checkbox } from "primereact/checkbox";
 import SaveLoaderButtonApp from "../../../ui/save-loader-button/save-loader-button";
-import { updateTenantRequest } from "../../store/actions/tenant.action";
+import MessagesApp from "../../../ui/messages/messages";
+import PermissionsApp from "../../permissions/permissions";
+import { Badge } from "primereact/badge";
+import { LOADING } from "../../../../constants/global-contants/global-key.const";
 
 const TenantEditApp = () => {
+  //#region variables
   const { id } = useParams();
   const dispatch = useDispatch();
-  const tenants = useSelector((x: AppState) => x.administration.tenants);
+  const navigate = useNavigate();
 
-  const [tenantDetail, setTenantDetail] = useState<ITenantFormModel>({
-    id: "",
-    name: "",
-    displayName: "",
-    isActive: true,
-    isError: {
-      id: "",
-      name: "",
-      displayName: "",
-    },
-    fieldName: {
-      id: "id",
-      name: "name",
-      displayName: "displayName",
-      isActive: "isActive",
-    },
-  });
+  const tenantUpdate = useSelector(
+    (x: AppState) => x.administration.tenants.update
+  );
+  const pages = useSelector((x: AppState) => x.pages.result);
+  const pageActions = useSelector((x: AppState) => x.actions.result);
+
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [permissionList, setPermissionList] = useState<any[]>([]);
+  const [selectedPermissionList, setSelectedPermissionList] = useState<any[]>(
+    []
+  );
+
+  const [tenantDetail, setTenantDetail] = useState<TenantFormModel>(
+    new TenantFormModel()
+  );
   const { isError, fieldName } = tenantDetail;
-  const [saveError, setSaveError] = useState<string>();
+
+  //#endregion
+
+  //#region Methods
 
   useEffect(() => {
     if (id) {
-      fetchTenantDetail(id);
+      dispatch(fetchTenantRequest(id));
+    }
+    dispatch(resetUpdateTenant());
+    setPermissionList(preparePermissionData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // NOTE: Use this only for Navigation once form submitted
+  useEffect(() => {
+    if (!tenantUpdate?.pending && !tenantUpdate?.error?.length && isSubmitted) {
+      navigate(ROUTE_URL.ADMIN.TENANT.BASE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [tenantUpdate?.pending]);
 
   useEffect(() => {
-    setSaveError(tenants.update.error);
-  }, [tenants.update.error]);
+    setTenantDetail(new TenantFormModel());
+    if (tenantUpdate?.result) {
+      setTenantDetail((prev) => ({
+        ...prev,
+        ...tenantUpdate?.result,
+      }));
 
-  const fetchTenantDetail = (id: any) => {
-    fetch("/mock/tenants.json", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBdmFuaSIsImV4cCI6MTY5MDM4OTA2OCwiaWF0IjoxNjkwMzUzMDY4fQ.uPxNE6IanMeAVziXYCFzBmydcw2EXUvIEgLJha4GVIU",
-      },
-    })
-      .then((res) => res.json())
-      .then((json: any) => {
-        const tenant = json?.items?.find((x: any) => x.id === +id);
-        console.log(tenant);
-        setTenantDetail((prev) => ({
-          ...prev,
-          ...tenant
-        }));
+      // setSelectedPermissionList(
+      //   tenantUpdate?.result?.tenantClaims?.map((x) => x.actionId)
+      // );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tenantUpdate?.result]);
+
+  /**
+   * NOTE: Prepate data for permissions
+   * @returns permission tree
+   */
+  const preparePermissionData = () => {
+    const permissions: any[] = [];
+    if (pages?.length) {
+      pages.forEach((page) => {
+        permissions.push({
+          ...page,
+          label: page.name,
+          value: page.id,
+          children: pageActions
+            ?.filter((x) => x.pageId === page.id)
+            ?.map((pageAction) => {
+              return {
+                ...pageAction,
+                label: pageAction.name,
+                value: pageAction.id,
+                children: null,
+              };
+            }),
+        });
       });
+    }
+    return permissions;
   };
 
-  const updateTenantDetail = () => {
-    const tenant: ITenantModel = tenantDetail;
-    dispatch(updateTenantRequest(tenant));
+  // NOTE: Handle Add/Update both
+  const postUpdateTenantDetail = () => {
+    let tenantDetailPostData: ITenantModel;
+    if (id) {
+      // NOTE: Update model
+      tenantDetailPostData = {
+        id: tenantDetail.id,
+        name: tenantDetail.name,
+        displayName: tenantDetail.displayName,
+        isActive: tenantDetail.isActive,
+      };
+    } else {
+      // NOTE: Add model
+      tenantDetailPostData = {
+        name: tenantDetail.name,
+        displayName: tenantDetail.displayName,
+        isActive: tenantDetail.isActive,
+      };
+      // tenantDetailPostData = {
+      //   name: tenantDetail.name,
+      //   tenantClaims: tenantDetail.tenantClaims.map((x) => {
+      //     return {
+      //       actionId: x.actionId,
+      //       claimType: x.claimType,
+      //       claimValue: x.claimValue,
+      //     } as ITenantClaimsModel;
+      //   }),
+      //   userTenants: [],
+      // };
+    }
+    dispatch(updateTenantsRequest(tenantDetailPostData));
   };
 
   const closeError = () => {
-    // dispatch(resetDeleteTenant());
+    dispatch(resetDeleteTenant());
+  };
+
+  const onSelectionChange = (selectedNodes: any[]) => {
+    setSelectedPermissionList(selectedNodes);
+
+    // NOTE: Prepare POST data
+    setTenantDetail((prev) => ({
+      ...prev,
+      tenantClaims: selectedNodes.map((x) => {
+        return {
+          actionId: pageActions?.find((action) => action.id === x)?.id,
+          claimType: pageActions?.find((action) => action.id === x)?.code,
+          claimValue: "",
+          tenantId: tenantDetail?.id,
+        } as any;
+      }),
+    }));
   };
 
   //#region Form operation
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (formValid()) {
-      console.log(tenantDetail);
-      updateTenantDetail();
+      postUpdateTenantDetail();
+    }
+    setIsSubmitted(true);
+  };
+
+  //#region - Validion rules
+  /**
+   * NOTE: Tenant name validation
+   */
+  const tenantNameIsValid = (tenantName: string) => {
+    if (tenantName.length < 3 || tenantName.length === 0) {
+      return { isValid: false, errorMsg: "Atleast 3 characaters required" };
     } else {
-      console.log("Form is invalid!");
+      return { isValid: true, errorMsg: "" };
     }
   };
+  //#endregion
 
   const formValid = () => {
     let isValid = false;
@@ -104,7 +198,7 @@ const TenantEditApp = () => {
     });
 
     // NOTE: Add further validations here as AND condition
-    if (nameIsValid(tenantDetail.name).isValid) {
+    if (tenantNameIsValid(tenantDetail.name).isValid) {
       isValid = true;
     } else {
       isValid = false;
@@ -113,14 +207,28 @@ const TenantEditApp = () => {
     return isValid;
   };
 
-  /**
-   * NOTE: Name validation
-   */
-  const nameIsValid = (tenantName: string) => {
-    if (tenantName.length < 3 || tenantName.length === 0) {
-      return { isValid: false, errorMsg: "Atleast 3 characaters required" };
-    } else {
-      return { isValid: true, errorMsg: "" };
+  const formValChange = (field: string, value: any) => {
+    let errorMsg = "";
+    switch (field) {
+      case fieldName?.name:
+        errorMsg = tenantNameIsValid(value).errorMsg;
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.name]: value,
+          isError: {
+            ...prev.isError,
+            name: errorMsg,
+          },
+        }));
+        break;
+      case fieldName?.isActive:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.isActive]: value,
+        }));
+        break;
+      default:
+        break;
     }
   };
 
@@ -131,53 +239,21 @@ const TenantEditApp = () => {
       field = e?.target?.name;
       value = e?.target?.checked;
     } else {
-      field = e?.currentTarget?.id;
-      value = e?.currentTarget?.value;
+      field = e?.target?.id;
+      value = e?.target?.value;
     }
-
-    const formValChange = (field: string, value: any) => {
-      let errorMsg = "";
-      switch (field) {
-        case fieldName.name:
-          errorMsg = nameIsValid(value).errorMsg;
-          setTenantDetail((prev: ITenantFormModel) => ({
-            ...prev,
-            name: value,
-            isError: {
-              ...prev.isError,
-              name: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.displayName:
-          // errorMsg = tenantNameIsValid(value).errorMsg;
-          setTenantDetail((prev: ITenantFormModel) => ({
-            ...prev,
-            displayName: value,
-            isError: {
-              ...prev.isError,
-              surname: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.isActive:
-          setTenantDetail((prev: ITenantFormModel) => ({
-            ...prev,
-            isActive: value,
-          }));
-          break;
-        default:
-          break;
-      }
-    };
-
     formValChange(field, value);
   };
+
+  //#endregion
+
   //#endregion
 
   return (
-    <>
-      <div className="tenant-list-app">
+    <div className="tenant-list-app">
+      {tenantUpdate.pending && !isSubmitted ? (
+        LOADING
+      ) : (
         <Card
           title={
             <>
@@ -197,33 +273,37 @@ const TenantEditApp = () => {
           <>
             <form onSubmit={onSubmit} noValidate>
               <TabView>
-                <TabPanel
-                  leftIcon="pi pi-fw pi-briefcase me-2"
-                  header="Tenant Information"
-                >
-                  {tenants.update.error && (
-                    <MessagesApp
-                      type="alert-danger"
-                      message={tenants.update.error}
-                      close={closeError}
-                    />
-                  )}
+                <TabPanel header="Tenant" leftIcon="pi pi-fw pi-briefcase me-2">
+                  {tenantUpdate?.error &&
+                    tenantUpdate?.error?.map((error: string) => (
+                      <MessagesApp
+                        type="alert-danger"
+                        message={error}
+                        close={closeError}
+                        key={error}
+                      />
+                    ))}
+
                   <div className="m-0 mt-3">
                     <div className="row">
                       <div className="col-sm-12">
-                        <div className="d-flex flex-column gap-2">
+                        <div
+                          className={
+                            "d-flex flex-column gap-2 " + fieldName?.name
+                          }
+                        >
                           <label
-                            htmlFor={fieldName.name}
+                            htmlFor={fieldName?.name}
                             className={
                               isError.name.length > 0
                                 ? "is-invalid p-error"
                                 : ""
                             }
                           >
-                            Name *
+                            Tenant name *
                           </label>
                           <InputText
-                            id={fieldName.name}
+                            id={fieldName?.name}
                             value={tenantDetail?.name ?? ""}
                             onChange={onFormValChange}
                             className={
@@ -234,75 +314,42 @@ const TenantEditApp = () => {
                           <small className="p-error">{isError.name}</small>
                         </div>
                       </div>
-                      <div className="col-sm-12 pt-3">
-                        <div className="d-flex flex-column gap-2">
-                          <label
-                            htmlFor={fieldName.displayName}
-                            className={
-                              isError.displayName.length > 0
-                                ? "is-invalid p-error"
-                                : ""
-                            }
-                          >
-                            Display name *
-                          </label>
-
-                          <InputText
-                            id={fieldName.displayName}
-                            value={tenantDetail?.displayName ?? ""}
-                            onChange={onFormValChange}
-                            className={
-                              isError.displayName.length > 0 ? "p-invalid" : ""
-                            }
-                            required
-                          />
-                          <small className="p-error">
-                            {isError.displayName}
-                          </small>
-                        </div>
-                      </div>
                     </div>
-
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="form-group">
-                          <div className="mt-3 mb-3">
-                            <Checkbox
-                              inputId={fieldName.isActive}
-                              name={fieldName.isActive}
-                              value={tenantDetail.isActive}
-                              onChange={onFormValChange}
-                              checked={tenantDetail.isActive}
-                            ></Checkbox>
-                            <label
-                              htmlFor={fieldName.isActive}
-                              className="ms-2"
-                            >
-                              <figcaption>
-                                Active
-                                <span className="inline-sub-title ms-2">
-                                  - tenant activation status
-                                </span>
-                              </figcaption>
-                            </label>
-                          </div>
-                        </div>
+                    <div className="form-group">
+                      <div className="mt-3 mb-3">
+                        <Checkbox
+                          inputId={fieldName?.isActive}
+                          name={fieldName?.isActive}
+                          value={tenantDetail.isActive}
+                          onChange={onFormValChange}
+                          checked={tenantDetail.isActive}
+                        ></Checkbox>
+                        <label htmlFor={fieldName?.isActive} className="ms-2">
+                          <figcaption>
+                            Active
+                            <span className="inline-sub-title ms-2">
+                              Keep the Tenant as active.
+                            </span>
+                          </figcaption>
+                        </label>
                       </div>
                     </div>
                   </div>
                 </TabPanel>
                 <TabPanel
-                  leftIcon="pi pi-tenant me-2"
-                  header="Roles"
+                  leftIcon="pi pi-user me-2"
+                  header="Permissions"
                   rightIcon={
                     <>
-                      <Badge
-                        value={tenantDetail?.isActive ? "Active" : "InActive"}
-                      ></Badge>
+                      <Badge value={0}></Badge>
                     </>
                   }
                 >
-                  hi
+                  <PermissionsApp
+                    nodes={permissionList}
+                    selectedNodes={selectedPermissionList}
+                    onSelectionChange={onSelectionChange}
+                  />
                 </TabPanel>
               </TabView>
 
@@ -312,16 +359,16 @@ const TenantEditApp = () => {
                   label={"Save"}
                   icon="pi pi-save"
                   size="small"
-                  disabled={!formValid()}
-                  enableLoader={tenants.update.pending}
+                  disabled={!formValid() || tenantUpdate.pending}
+                  enableLoader={tenantUpdate.pending}
                 />
               </div>
             </form>
           </>
           <br />
         </Card>
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 

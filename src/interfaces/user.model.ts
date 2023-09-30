@@ -1,94 +1,163 @@
-export interface IUserResponseModel {
-  totalCount: number;
-  items: IUserModel[];
-  success: boolean;
-  error: string;
-  unAuthorizedRequest: boolean;
-}
-
 export interface IUserModel {
   id: string;
-  mailId: string;
-  name: string;
-  surname: string;
+  tenantId?: string;
   userName: string;
-  emailAddress: string;
-  lockoutEndDateUtc: string;
+  email: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
-  profilePictureId: string;
-  isEmailConfirmed: boolean;
-  roles: IUserRoleModel[];
+  address: string;
+  profilePhoto?: string;
+  provider?: string;
+  password?: string;
+  isEmailConfirmed?: boolean;
   isActive: boolean;
-  creationTime: any;
+  isImageUpdate?: boolean;
+  imgSrc?: string;
+  userRoles?: IUserRoleModel[];
+  userClaims?: IUserClaimsModel[];
+}
+
+export interface IUserClaimsModel {
+  userId: string;
+  claimType: string;
+  claimValue: string;
+  actionId: string;
 }
 
 export class UserModel implements IUserModel {
   id: string;
-  mailId: string;
-  name: string;
-  surname: string;
+  tenantId: string;
   userName: string;
-  emailAddress: string;
-  lockoutEndDateUtc: string;
+  email: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
-  profilePictureId: string;
+  address: string;
+  profilePhoto: string;
+  provider: string;
+  password: string;
   isEmailConfirmed: boolean;
-  roles: IUserRoleModel[];
   isActive: boolean;
-  creationTime: any;
+  isImageUpdate?: boolean;
+  imgSrc?: string;
+  userRoles: IUserRoleModel[];
+  userClaims: IUserClaimsModel[];
 
   constructor() {
     this.id = "";
-    this.mailId = "";
-    this.name = "";
-    this.surname = "";
+    this.tenantId = "";
     this.userName = "";
-    this.emailAddress = "";
-    this.lockoutEndDateUtc = "";
+    this.email = "";
+    this.firstName = "";
+    this.lastName = "";
     this.phoneNumber = "";
-    this.profilePictureId = "";
+    this.address = "";
+    this.profilePhoto = "";
+    this.provider = "";
+    this.password = "";
     this.isEmailConfirmed = false;
-    this.roles = [];
     this.isActive = false;
-    this.creationTime = new Date();
+    this.isImageUpdate = false;
+    this.imgSrc = "";
+    this.userRoles = [];
+    this.userClaims = [];
   }
 }
-
-export interface IUserFormModel {
+export class UserFormModel {
   id: string;
-  name: string;
-  surname: string;
+  tenantId?: string;
   userName: string;
-  emailAddress: string;
+  email: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
-  password: string;
+  address: string;
+  profilePhoto: string;
+  provider: string;
+  password?: string;
+  isEmailConfirmed: boolean;
   isActive: boolean;
+  userRoles?: IUserRoleModel[];
+  userClaims?: IUserClaimsModel[];
+  isImageUpdate?: boolean;
   shouldChangePasswordOnNextLogin: boolean;
-  isTwoFactorEnabled: boolean;
   isLockoutEnabled: boolean;
-  roles: IUserRoleFormModel[];
   isError: {
-    name: string;
-    surname: string;
+    id: string;
+    tenantId: string;
     userName: string;
-    emailAddress: string;
-    phoneNumber: string;
+    email: string;
+    firstName: string;
+    lastName: string;
     password: string;
+    phoneNumber: string;
+    address: string;
     isActive: string;
   };
   fieldName: {
     id: string;
-    name: string;
-    surname: string;
+    tenantId: string;
     userName: string;
-    emailAddress: string;
-    phoneNumber: string;
+    email: string;
+    firstName: string;
+    lastName: string;
     password: string;
+    phoneNumber: string;
+    address: string;
     isActive: string;
+    userRoles: string;
     shouldChangePasswordOnNextLogin: string;
-    isTwoFactorEnabled: string;
     isLockoutEnabled: string;
   };
+
+  constructor() {
+    this.id = "";
+    this.tenantId = "";
+    this.userName = "";
+    this.email = "";
+    this.firstName = "";
+    this.lastName = "";
+    this.phoneNumber = "";
+    this.address = "";
+    this.profilePhoto = "";
+    this.provider = "";
+    this.password = "";
+    this.isEmailConfirmed = false;
+    this.isActive = false;
+    this.userRoles = [];
+    this.userClaims = [];
+    this.isImageUpdate = false;
+    this.shouldChangePasswordOnNextLogin = false;
+    this.isLockoutEnabled = false;
+    this.isError = {
+      id: "",
+      tenantId: "",
+      userName: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      phoneNumber: "",
+      address: "",
+      isActive: "",
+    };
+    this.fieldName = {
+      id: "id",
+      tenantId: "tenantId",
+      userName: "userName",
+      email: "email",
+      firstName: "firstName",
+      lastName: "lastName",
+      password: "password",
+      phoneNumber: "phoneNumber",
+      address: "address",
+      isActive: "isActive",
+      userRoles: "userRoles",
+      shouldChangePasswordOnNextLogin: "shouldChangePasswordOnNextLogin",
+      isLockoutEnabled: "isLockoutEnabled",
+    };
+  }
 }
 
 export interface IUserRoleFormModel {
@@ -100,83 +169,68 @@ export interface IUserRoleFormModel {
 }
 
 export interface IUserRoleModel {
-  roleId: number;
-  roleName: string;
+  roleName?: string;
+  userId: string;
+  roleId: string;
+  userName?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 export interface IUsersRequestModel {
-  id: string;
+  tenantId?: string;
   name: string;
-  mailId: string;
+  Fields: string;
+  OrderBy: string;
+  PageSize: number;
+  Skip: number;
+  SearchQuery: string;
 }
 
 //#region Role model - Reducer
 
-export interface IUserAppStore {
+export class UserAppStore {
   list: {
-    result: IUserResponseModel | null | undefined;
+    result: IUserModel[] | null | undefined;
     pending: boolean;
-    error: string;
+    error: any[];
   };
   view: {
     result: IUserModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any[];
   };
   update: {
     result: IUserModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any[];
   };
   delete: {
     result: IUserModel | null | undefined;
     pending: boolean;
-    error: string;
-  };
-}
-
-export class UserAppStore implements IUserAppStore {
-  list: {
-    result: IUserResponseModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
-  view: {
-    result: IUserModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
-  update: {
-    result: IUserModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
-  delete: {
-    result: IUserModel | null | undefined;
-    pending: boolean;
-    error: string;
+    error: any[];
   };
 
   constructor() {
     this.list = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.view = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.update = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.delete = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
   }
 }

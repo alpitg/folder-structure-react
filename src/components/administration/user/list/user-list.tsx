@@ -1,18 +1,60 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { AppState } from "../../../../store/reducers/root.reducer";
-import { IUserModel } from "../../../../interfaces/user.model";
+import {
+  IUserModel,
+  IUsersRequestModel,
+} from "../../../../interfaces/user.model";
 import HeaderInlineTextApp from "../../../ui/header-inline-text/header-inline-text";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
 import NoRecordApp from "../../../ui/no-record/no-record";
 import UserOverviewApp from "./overview/user-overview";
 import UserListItemApp from "./list-item/user-list-item";
+import MessagesApp from "../../../ui/messages/messages";
+import {
+  fetchUsersRequest,
+  resetDeleteUser,
+} from "../../store/actions/user.action";
+import { useEffect, useState } from "react";
+import { hasClaim } from "../../../../utils/auth.util";
+import { LOADING } from "../../../../constants/global-contants/global-key.const";
+import { USR_ADD_USER } from "../../../../constants/global-contants/claims.const";
 import "./user-list.scss";
 
 const UserListApp = () => {
   const users = useSelector((x: AppState) => x.administration.users);
+  const { globalSelectedTenant } = useSelector(
+    (x: AppState) => x.administration.tenants
+  );
+  const dispatch = useDispatch();
+  const [filter, setFilter] = useState<IUsersRequestModel>({
+    tenantId: globalSelectedTenant,
+    name: "",
+    Fields: "",
+    OrderBy: "",
+    PageSize: 10,
+    Skip: 0,
+    SearchQuery: "",
+  });
+
+  useEffect(() => {
+    setFilter((prev) => ({
+      ...prev,
+      tenantId: globalSelectedTenant,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [globalSelectedTenant]);
+
+  useEffect(() => {
+    dispatch(fetchUsersRequest(filter));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter.tenantId]);
+
+  const closeError = () => {
+    dispatch(resetDeleteUser());
+  };
 
   return (
     <div className="user-list-app">
@@ -23,44 +65,56 @@ const UserListApp = () => {
             subTitle="Manage users and permissions."
             children={
               <>
-                <Link to={`${ROUTE_URL.ADMIN.USER.USER_DETAIL_ADD}`}>
-                  <Button
-                    className=" float-end"
-                    label="Create new user"
-                    icon="pi pi-plus"
-                    size="small"
-                  />
-                </Link>
+                {hasClaim([USR_ADD_USER]) && (
+                  <Link to={`${ROUTE_URL.ADMIN.USER.USER_DETAIL_ADD}`}>
+                    <Button
+                      className=" float-end"
+                      label="Create new user"
+                      icon="pi pi-plus"
+                      size="small"
+                    />
+                  </Link>
+                )}
               </>
             }
           />
         </div>
       </div>
-      <Card title={(users?.list?.result?.totalCount ?? 0) + " Users"}>
+      <Card title={" Users"}>
         <>
           <div className="container">
+            {users?.delete?.error &&
+              users?.delete?.error?.map((error: string) => (
+                <MessagesApp
+                  type="alert-danger"
+                  message={error}
+                  close={closeError}
+                  key={error}
+                />
+              ))}
+
+            {users?.list.pending && LOADING}
             <div className="row">
               <div className="col-12">
-                <UserOverviewApp />
+                <UserOverviewApp
+                  filter={filter}
+                  total={users?.list?.result?.length}
+                />
                 <div className="list-view">
                   <div className="table-responsive">
                     <table className="table">
                       <tbody>
-                        {Array.isArray(users?.list?.result?.items)
-                          ? users?.list?.result?.items?.map(
-                              (user: IUserModel) => {
-                                return (
-                                  <UserListItemApp user={user} key={user.id} />
-                                );
-                              }
-                            )
+                        {Array.isArray(users?.list?.result)
+                          ? users?.list?.result?.map((user: IUserModel) => {
+                              return (
+                                <UserListItemApp user={user} key={user.id} />
+                              );
+                            })
                           : null}
                       </tbody>
                     </table>
 
-                    {users?.list?.result?.items?.length === 0 && (
-                      <NoRecordApp />
-                    )}
+                    {users?.list?.result?.length === 0 && <NoRecordApp />}
                   </div>
                 </div>
               </div>

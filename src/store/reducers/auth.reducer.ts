@@ -1,5 +1,5 @@
-import { IAuthenticationModel } from "../../interfaces/auth.model";
-import { IAppStore, AppStore } from "../../interfaces/generic.model";
+import { AuthenticationModel } from "../../interfaces/auth.model";
+import { AppStore } from "../../interfaces/generic.model";
 import {
   AuthenticateActions,
   AUTHENTICATE_USER_FAILED,
@@ -7,8 +7,8 @@ import {
   AUTHENTICATE_USER_SUCCESS,
 } from "../actions/auth.action";
 
-const initialState: IAppStore<IAuthenticationModel> =
-  new AppStore<IAuthenticationModel>();
+const initialState: AppStore<AuthenticationModel> =
+  new AppStore<AuthenticationModel>();
 
 const authenticateReducer = (
   state = initialState,
@@ -18,6 +18,7 @@ const authenticateReducer = (
     case AUTHENTICATE_USER_REQUEST:
       return {
         ...state,
+        error: [],
         pending: true,
       } as typeof initialState;
     case AUTHENTICATE_USER_SUCCESS:

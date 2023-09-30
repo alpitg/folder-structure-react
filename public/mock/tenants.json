@@ -1,22 +1,16 @@
-{
-  "totalCount": 15,
-  "items": [
-    {
-      "name": "SmartBasePvtLtd",
-      "displayName": "Smart Base Pvt Ltd",
-      "isActive": true,
-      "creationTime": "2023-07-28T16:47:15.0541333",
-      "id": 3045571
-    },
-    {
-      "name": "BroCodePvtLtd",
-      "displayName": "Bro Code Pvt Ltd",
-      "isActive": false,
-      "creationTime": "2023-07-28T16:47:15.0541333",
-      "id": 3045572
-    }
-  ],
-  "success": true,
-  "error": null,
-  "unAuthorizedRequest": false
-}
+[
+  {
+    "name": "SmartBasePvtLtd",
+    "displayName": "Smart Base Pvt Ltd",
+    "isActive": true,
+    "creationTime": "2023-07-28T16:47:15.0541333",
+    "id": 3045571
+  },
+  {
+    "name": "BroCodePvtLtd",
+    "displayName": "Bro Code Pvt Ltd",
+    "isActive": false,
+    "creationTime": "2023-07-28T16:47:15.0541333",
+    "id": 3045572
+  }
+]

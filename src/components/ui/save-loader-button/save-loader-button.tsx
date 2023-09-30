@@ -1,4 +1,6 @@
 import { Button } from "primereact/button";
+import LoaderSpinnerApp from "../loader-spinner/loader-spinner";
+import "./save-loader-button.scss";
 
 const SaveLoaderButtonApp = (props: {
   label: string;
@@ -9,7 +11,7 @@ const SaveLoaderButtonApp = (props: {
   enableLoader?: boolean;
 }) => {
   return (
-    <div className="header-inline-text-app pt-2 pb-2">
+    <div className="save-loader-button-app pt-2 pb-2">
       <>
         {!props.enableLoader && (
           <Button
@@ -21,7 +23,12 @@ const SaveLoaderButtonApp = (props: {
           />
         )}
         {props?.enableLoader && (
-          <Button label={"Loading..."} icon="pi pi-spinner" size="small" disabled />
+          <Button
+            label={"Loading..."}
+            icon={<LoaderSpinnerApp />}
+            size={props.size}
+            disabled
+          />
         )}
       </>
     </div>

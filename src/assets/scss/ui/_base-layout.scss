@@ -5,7 +5,7 @@
     padding: 2px;
     border-radius: 22%;
     background: var(--app-bg-color);
-    z-index: 99999;
+    z-index: 999999;
     :hover {
       cursor: pointer;
     }
@@ -21,14 +21,14 @@
   }
 
   .base-layout-main-body {
+    margin-top: var(--app-header-height);
+    transition: margin-left 0.5s;
     .base-layout-content {
       padding: 20px;
     }
   }
-  .navbar-margin-space {
-    margin-top: var(--app-header-height);
-  }
-  .sidebar-margin-space {
+
+  .sidebar-opened {
     margin-left: var(--sidebar-width);
   }
 }

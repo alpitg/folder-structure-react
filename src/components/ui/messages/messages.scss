@@ -3,6 +3,9 @@
     padding: 8px 15px 8px 15px;
     margin-bottom: 30px;
     font-size: small;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
   }
   .alert:before {
     content: "";

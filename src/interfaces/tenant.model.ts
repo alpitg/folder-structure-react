@@ -1,24 +1,16 @@
-export interface ITenantResponseModel {
-  totalCount: number;
-  items: ITenantModel[];
-  success: boolean;
-  error: string;
-  unAuthorizedRequest: boolean;
-}
-
 export interface ITenantModel {
-  id: string;
+  id?: string;
   name: string;
-  displayName: string;
-  isActive: boolean;
+  displayName?: string;
+  isActive?: boolean;
   creationTime?: any;
 }
 
 export class TenantModel implements ITenantModel {
-  id: string;
+  id?: string;
   name: string;
-  displayName: string;
-  isActive: boolean;
+  displayName?: string;
+  isActive?: boolean;
   creationTime?: any;
 
   constructor() {
@@ -30,7 +22,7 @@ export class TenantModel implements ITenantModel {
   }
 }
 
-export interface ITenantFormModel {
+export class TenantFormModel {
   id: string;
   name: string;
   displayName: string;
@@ -47,6 +39,24 @@ export interface ITenantFormModel {
     displayName: string;
     isActive: string;
   };
+
+  constructor() {
+    this.id = "";
+    this.name = "";
+    this.displayName = "";
+    this.isActive = false;
+    this.isError = {
+      id: "",
+      name: "",
+      displayName: "",
+    };
+    this.fieldName = {
+      id: "id",
+      name: "name",
+      displayName: "displayName",
+      isActive: "isActive",
+    };
+  }
 }
 
 export interface ITenantsRequestModel {
@@ -56,73 +66,52 @@ export interface ITenantsRequestModel {
 }
 
 //#region Role model - Reducer
-
-export interface ITenantAppStore {
+export class TenantAppStore {
   list: {
-    result: ITenantResponseModel | null | undefined;
+    result: ITenantModel[] | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   view: {
     result: ITenantModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   update: {
     result: ITenantModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   delete: {
     result: ITenantModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
-}
 
-export class TenantAppStore implements ITenantAppStore {
-  list: {
-    result: ITenantResponseModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
-  view: {
-    result: ITenantModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
-  update: {
-    result: ITenantModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
-  delete: {
-    result: ITenantModel | null | undefined;
-    pending: boolean;
-    error: string;
-  };
+  globalSelectedTenant: string;
 
   constructor() {
     this.list = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.view = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.update = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.delete = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
+    this.globalSelectedTenant = "";
   }
 }
 

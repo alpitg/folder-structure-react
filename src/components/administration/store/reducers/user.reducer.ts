@@ -1,10 +1,4 @@
-import { AppStore, IAppStore } from "../../../../interfaces/generic.model";
-import {
-  IUserAppStore,
-  IUserModel,
-  IUserResponseModel,
-  UserAppStore,
-} from "../../../../interfaces/user.model";
+import { UserAppStore } from "../../../../interfaces/user.model";
 import {
   DELETE_USER_FAILED,
   DELETE_USER_REQUEST,
@@ -12,20 +6,31 @@ import {
   FETCH_USERS_FAILED,
   FETCH_USERS_REQUEST,
   FETCH_USERS_SUCCESS,
-  UPDATE_USERS_FAILED,
+  UPDATE_USER_FAILED,
   UPDATE_USER_REQUEST,
-  UPDATE_USERS_SUCCESS,
+  UPDATE_USER_SUCCESS,
   UsersActions,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILED,
+  RESET_DELETE_USER,
+  RESET_UPDATE_USER,
+  UPDATE_USER_CLAIM_REQUEST,
+  UPDATE_USER_CLAIM_SUCCESS,
+  UPDATE_USER_CLAIM_FAILED,
 } from "../actions/user.action";
 
-const initialState: IUserAppStore = new UserAppStore();
+const initialState: UserAppStore = new UserAppStore();
 
 const userReducer = (state = initialState, action: UsersActions) => {
   switch (action.type) {
+    //#region FETCH ALL
     case FETCH_USERS_REQUEST:
       return {
         ...state,
-        pending: true,
+        list: {
+          pending: true,
+        },
       } as typeof initialState;
     case FETCH_USERS_SUCCESS:
       return {
@@ -43,43 +48,108 @@ const userReducer = (state = initialState, action: UsersActions) => {
           error: action.payload.error,
         },
       } as typeof initialState;
+    //#endregion
+
+    //#region FETCH
+    case FETCH_USER_REQUEST:
+      return {
+        ...state,
+        update: {
+          pending: true,
+        },
+      } as typeof initialState;
+    case FETCH_USER_SUCCESS:
+      return {
+        ...state,
+        update: {
+          result: action.payload.result,
+          pending: false,
+        },
+      } as typeof initialState;
+    case FETCH_USER_FAILED:
+      return {
+        ...state,
+        update: {
+          pending: false,
+          error: action.payload.error,
+        },
+      } as typeof initialState;
+    //#endregion
+
+    //#region UPDATE
     case UPDATE_USER_REQUEST:
       return {
         ...state,
-        pending: true,
+        update: {
+          result: null,
+          pending: true,
+          error: [],
+        },
       } as typeof initialState;
-    case UPDATE_USERS_SUCCESS:
+    case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        result: state.list.result?.items?.map((x) => {
-          if (x.id === action.payload.result?.id) {
-            return { ...x, name: action.payload.result.name };
-          }
-          return x;
-        }),
-        pending: false,
+        update: {
+          result: action.payload.result,
+          pending: false,
+          error: [],
+        },
       } as typeof initialState;
-    case UPDATE_USERS_FAILED:
+    case UPDATE_USER_FAILED:
       return {
         ...state,
-        result: state.list?.result?.items?.map((x) => {
-          if (x.id === action.payload.result?.id) {
-            return { ...x, name: action.payload.result.name };
-          }
-          return x;
-        }),
-        pending: false,
+        update: {
+          error: action.payload.error,
+          pending: false,
+        },
       } as typeof initialState;
-    // return {
-    //   ...state,
-    //   pending: false,
-    //   error: action.payload.error,
-    // } as typeof initialState;
+    case UPDATE_USER_CLAIM_REQUEST:
+      return {
+        ...state,
+        update: {
+          result: null,
+          pending: true,
+          error: [],
+        },
+      } as typeof initialState;
+    case UPDATE_USER_CLAIM_SUCCESS:
+      return {
+        ...state,
+        update: {
+          result: action.payload.result,
+          pending: false,
+          error: [],
+        },
+      } as typeof initialState;
+    case UPDATE_USER_CLAIM_FAILED:
+      return {
+        ...state,
+        update: {
+          result: action.payload.result,
+          error: action.payload.error,
+          pending: false,
+        },
+      } as typeof initialState;
 
+    case RESET_UPDATE_USER:
+      return {
+        ...state,
+        update: {
+          error: [],
+          pending: false,
+          result: null,
+        },
+      } as typeof initialState;
+
+    //#endregion
+
+    //#region DELETE
     case DELETE_USER_REQUEST:
       return {
         ...state,
-        pending: true,
+        delete: {
+          pending: true,
+        },
       } as typeof initialState;
     case DELETE_USER_SUCCESS:
       return {
@@ -89,34 +159,30 @@ const userReducer = (state = initialState, action: UsersActions) => {
           pending: false,
         },
         list: {
-          result: {
-            items: state.list.result?.items?.filter(
-              (item) => item.id !== action.payload.result
-            ),
-          },
+          result: state.list.result?.filter(
+            (item) => item.id !== action.payload.result
+          ),
         },
       } as typeof initialState;
     case DELETE_USER_FAILED:
-      // TODO: Update this once Actual API is implemented
       return {
         ...state,
         delete: {
-          result: action.payload.result,
+          error: action.payload.error,
           pending: false,
         },
-        list: {
-          result: {
-            items: state.list.result?.items?.filter(
-              (item) => item.id !== action.payload.result
-            ),
-          },
+      } as typeof initialState;
+    case RESET_DELETE_USER:
+      return {
+        ...state,
+        delete: {
+          error: [],
+          pending: false,
+          result: null,
         },
       } as typeof initialState;
-    // return {
-    //   ...state,
-    //   pending: false,
-    //   error: action.payload.error,
-    // } as typeof initialState;
+    //#endregion
+
     default:
       return state;
   }

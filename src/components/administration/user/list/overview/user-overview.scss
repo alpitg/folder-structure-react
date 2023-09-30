@@ -3,9 +3,6 @@
     display: flex;
     align-items: center;
   }
-  .search-body {
-    margin-bottom: 1.5rem;
-  }
 
   .search-body .search-filters .filter-list {
     margin-bottom: 1.3rem;
@@ -21,7 +18,7 @@
   }
 
   .search-body .search-result .result-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .search-body .search-result .result-header .records {

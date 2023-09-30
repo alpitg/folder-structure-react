@@ -7,16 +7,19 @@
  * 4. Type of actions variable
  */
 
-import { IAppStore } from "../../../../interfaces/generic.model";
-import {
-  ITenantModel,
-  ITenantResponseModel,
-  ITenantsRequestModel,
-} from "../../../../interfaces/tenant.model";
+import { AppStore } from "../../../../interfaces/generic.model";
+import { ITenantModel } from "../../../../interfaces/tenant.model";
+
+export const FETCH_GLOBAL_SELECTED_TENANT = "FETCH_GLOBAL_SELECTED_TENANT";
+export const UPDATE_GLOBAL_SELECTED_TENANT = "UPDATE_GLOBAL_SELECTED_TENANT";
 
 export const FETCH_TENANTS_REQUEST = "FETCH_TENANTS_REQUEST";
 export const FETCH_TENANTS_SUCCESS = "FETCH_TENANTS_SUCCESS";
 export const FETCH_TENANTS_FAILED = "FETCH_TENANTS_FAILED";
+
+export const FETCH_TENANT_REQUEST = "FETCH_TENANT_REQUEST";
+export const FETCH_TENANT_SUCCESS = "FETCH_TENANT_SUCCESS";
+export const FETCH_TENANT_FAILED = "FETCH_TENANT_FAILED";
 
 export const UPDATE_TENANT_REQUEST = "UPDATE_TENANT_REQUEST";
 export const UPDATE_TENANTS_SUCCESS = "UPDATE_TENANTS_SUCCESS";
@@ -26,22 +29,46 @@ export const DELETE_TENANT_REQUEST = "DELETE_TENANT_REQUEST";
 export const DELETE_TENANT_SUCCESS = "DELETE_TENANT_SUCCESS";
 export const DELETE_TENANT_FAILED = "DELETE_TENANT_FAILED";
 
+export const RESET_FETCH_TENANTS = "RESET_FETCH_TENANTS";
+export const RESET_UPDATE_TENANT = "RESET_UPDATE_TENANT";
+export const RESET_DELETE_TENANT = "RESET_DELETE_TENANT";
+
 //#region - Action interfaces
 
-// FETCH
+export interface IUpdateGlobalSelectedTenantAction {
+  type: typeof UPDATE_GLOBAL_SELECTED_TENANT;
+  payload: string;
+}
+
+// FETCH ALL
 export interface IFetchTenantsRequestAction {
   type: typeof FETCH_TENANTS_REQUEST;
-  payload: ITenantsRequestModel;
 }
 
 export interface IFetchTenantsSuccessAction {
   type: typeof FETCH_TENANTS_SUCCESS;
-  payload: IAppStore<ITenantResponseModel[]>;
+  payload: AppStore<ITenantModel>;
 }
 
 export interface IFetchTenantsFailureAction {
   type: typeof FETCH_TENANTS_FAILED;
-  payload: IAppStore<ITenantResponseModel[]>;
+  payload: AppStore<ITenantModel>;
+}
+
+// FETCH
+export interface IFetchTenantRequestAction {
+  type: typeof FETCH_TENANT_REQUEST;
+  payload: string;
+}
+
+export interface IFetchTenantSuccessAction {
+  type: typeof FETCH_TENANT_SUCCESS;
+  payload: AppStore<ITenantModel>;
+}
+
+export interface IFetchTenantFailureAction {
+  type: typeof FETCH_TENANT_FAILED;
+  payload: AppStore<ITenantModel>;
 }
 
 // UPDATE
@@ -52,12 +79,12 @@ export interface IUpdateTenantsRequestAction {
 
 export interface IUpdateTenantsSuccessAction {
   type: typeof UPDATE_TENANTS_SUCCESS;
-  payload: IAppStore<ITenantModel>;
+  payload: AppStore<ITenantModel>;
 }
 
 export interface IUpdateTenantsFailureAction {
   type: typeof UPDATE_TENANTS_FAILED;
-  payload: IAppStore<ITenantModel>;
+  payload: AppStore<ITenantModel>;
 }
 
 // DELETE
@@ -68,59 +95,101 @@ export interface IDeleteTenantRequestAction {
 
 export interface IDeleteTenantSuccessAction {
   type: typeof DELETE_TENANT_SUCCESS;
-  payload: IAppStore<string>;
+  payload: AppStore<string>;
 }
 
 export interface IDeleteTenantFailedAction {
   type: typeof DELETE_TENANT_FAILED;
-  payload: IAppStore<string>;
+  payload: AppStore<string>;
+}
+
+export interface IResetFetchTenants {
+  type: typeof RESET_FETCH_TENANTS;
+}
+
+export interface IResetUpdateTenant {
+  type: typeof RESET_UPDATE_TENANT;
+}
+
+export interface IResetDeleteTenant {
+  type: typeof RESET_DELETE_TENANT;
 }
 
 //#endregion
 
 //#region - Action functions
-export const fetchTenantsRequest = (
-  payload: ITenantsRequestModel
-): IFetchTenantsRequestAction => ({
-  type: FETCH_TENANTS_REQUEST,
+
+export const updateGlobalSelectedTenantAction = (
+  payload: string
+): IUpdateGlobalSelectedTenantAction => ({
+  type: UPDATE_GLOBAL_SELECTED_TENANT,
   payload,
 });
 
+// FETCH ALL
+export const fetchTenantsRequest = (): IFetchTenantsRequestAction => ({
+  type: FETCH_TENANTS_REQUEST,
+});
+
 export const fetchTenantsSuccess = (
-  payload: IAppStore<ITenantResponseModel[]>
+  payload: AppStore<ITenantModel>
 ): IFetchTenantsSuccessAction => ({
   type: FETCH_TENANTS_SUCCESS,
   payload,
 });
 
 export const fetchTenantsFailed = (
-  payload: IAppStore<ITenantResponseModel[]>
+  payload: AppStore<ITenantModel>
 ): IFetchTenantsFailureAction => ({
   type: FETCH_TENANTS_FAILED,
   payload,
 });
 
-export const updateTenantRequest = (
+// FETCH
+export const fetchTenantRequest = (
+  payload: string
+): IFetchTenantRequestAction => ({
+  type: FETCH_TENANT_REQUEST,
+  payload,
+});
+
+export const fetchTenantSuccess = (
+  payload: AppStore<ITenantModel>
+): IFetchTenantSuccessAction => ({
+  type: FETCH_TENANT_SUCCESS,
+  payload,
+});
+
+export const fetchTenantFailed = (
+  payload: AppStore<ITenantModel>
+): IFetchTenantFailureAction => ({
+  type: FETCH_TENANT_FAILED,
+  payload,
+});
+
+// UPDATE
+export const updateTenantsRequest = (
   payload: ITenantModel
 ): IUpdateTenantsRequestAction => ({
   type: UPDATE_TENANT_REQUEST,
   payload,
 });
 
-export const updateTenantSuccess = (
-  payload: IAppStore<ITenantModel>
+export const updateTenantsSuccess = (
+  payload: AppStore<ITenantModel>
 ): IUpdateTenantsSuccessAction => ({
   type: UPDATE_TENANTS_SUCCESS,
   payload,
 });
 
-export const updateTenantFailed = (
-  payload: IAppStore<ITenantModel>
+export const updateTenantsFailed = (
+  payload: AppStore<ITenantModel>
 ): IUpdateTenantsFailureAction => ({
   type: UPDATE_TENANTS_FAILED,
   payload,
 });
 
+// DELETE
 export const deleteTenantRequest = (
   payload: string
 ): IDeleteTenantRequestAction => ({
@@ -129,27 +198,44 @@ export const deleteTenantRequest = (
 });
 
 export const deleteTenantSuccess = (
-  payload: IAppStore<string>
+  payload: AppStore<string>
 ): IDeleteTenantSuccessAction => ({
   type: DELETE_TENANT_SUCCESS,
   payload,
 });
 
 export const deleteTenantFailed = (
-  payload: IAppStore<string>
+  payload: AppStore<string>
 ): IDeleteTenantFailedAction => ({
   type: DELETE_TENANT_FAILED,
   payload,
 });
+
+export const resetFetchTenant = (): IResetFetchTenants => ({
+  type: RESET_FETCH_TENANTS,
+});
+export const resetUpdateTenant = (): IResetUpdateTenant => ({
+  type: RESET_UPDATE_TENANT,
+});
+export const resetDeleteTenant = (): IResetDeleteTenant => ({
+  type: RESET_DELETE_TENANT,
+});
 //#endregion
 
 export type TenantsActions =
+  | IUpdateGlobalSelectedTenantAction
   | IFetchTenantsRequestAction
   | IFetchTenantsSuccessAction
   | IFetchTenantsFailureAction
+  | IFetchTenantRequestAction
+  | IFetchTenantSuccessAction
+  | IFetchTenantFailureAction
   | IUpdateTenantsRequestAction
   | IUpdateTenantsSuccessAction
   | IUpdateTenantsFailureAction
   | IDeleteTenantRequestAction
   | IDeleteTenantSuccessAction
-  | IDeleteTenantFailedAction;
+  | IDeleteTenantFailedAction
+  | IResetFetchTenants
+  | IResetUpdateTenant
+  | IResetDeleteTenant;

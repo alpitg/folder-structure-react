@@ -9,5 +9,4 @@ const administrationRootReducer = combineReducers({
   tenants: tenantReducer,
 });
 
-export type AppState = ReturnType<typeof administrationRootReducer>;
 export default administrationRootReducer;

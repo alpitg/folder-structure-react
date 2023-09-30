@@ -1,7 +1,7 @@
 import "./no-record.scss";
 
 const NoRecordApp = () => {
-  const noRecord = "No record found";
+  const noRecord = "No record found.";
   return (
     <div className="no-record-app">
       <div className="row">
@@ -9,10 +9,10 @@ const NoRecordApp = () => {
           <img
             className="img-size-no-data"
             src="/static/media/svg/no-record.svg"
-            alt="no record found"
+            alt={noRecord}
           />
-          <blockquote className="blockquote  text-center user-select-none no-record-text">
-            <i> {noRecord}.</i>
+          <blockquote className="blockquote text-center text">
+            <i> {noRecord}</i>
           </blockquote>
         </div>
       </div>

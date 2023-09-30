@@ -13,7 +13,7 @@ const UserDetailApp = () => {
   const [userDetail, setUserDetaiil] = useState<IUserModel>();
 
   useEffect(() => {
-    const temp = users.list?.result?.items?.find((x) => x.id === id);
+    const temp = users.list?.result?.find((x) => x.id === id);
     setUserDetaiil(temp);
   }, [id]);
 
@@ -31,7 +31,7 @@ const UserDetailApp = () => {
           </>
         }
       >
-        Hi From UserDetailApp {userDetail?.name}
+        Hi From UserDetailApp {userDetail?.userName}
       </Card>
     </>
   );

@@ -1,10 +1,4 @@
-import { AppStore, IAppStore } from "../../../../interfaces/generic.model";
-import {
-  ITenantAppStore,
-  ITenantModel,
-  ITenantResponseModel,
-  TenantAppStore,
-} from "../../../../interfaces/tenant.model";
+import { TenantAppStore } from "../../../../interfaces/tenant.model";
 import {
   DELETE_TENANT_FAILED,
   DELETE_TENANT_REQUEST,
@@ -15,17 +9,33 @@ import {
   UPDATE_TENANTS_FAILED,
   UPDATE_TENANT_REQUEST,
   UPDATE_TENANTS_SUCCESS,
+  RESET_UPDATE_TENANT,
+  RESET_DELETE_TENANT,
+  RESET_FETCH_TENANTS,
   TenantsActions,
+  FETCH_TENANT_REQUEST,
+  FETCH_TENANT_SUCCESS,
+  FETCH_TENANT_FAILED,
+  UPDATE_GLOBAL_SELECTED_TENANT,
 } from "../actions/tenant.action";
 
-const initialState: ITenantAppStore = new TenantAppStore();
+const initialState: TenantAppStore = new TenantAppStore();
 
 const tenantReducer = (state = initialState, action: TenantsActions) => {
   switch (action.type) {
+    case UPDATE_GLOBAL_SELECTED_TENANT:
+      return {
+        ...state,
+        globalSelectedTenant: action.payload,
+      } as typeof initialState;
+
+    //#region FETCH ALL
     case FETCH_TENANTS_REQUEST:
       return {
         ...state,
-        pending: true,
+        list: {
+          pending: true,
+        },
       } as typeof initialState;
     case FETCH_TENANTS_SUCCESS:
       return {
@@ -43,43 +53,89 @@ const tenantReducer = (state = initialState, action: TenantsActions) => {
           error: action.payload.error,
         },
       } as typeof initialState;
+    case RESET_FETCH_TENANTS:
+      return {
+        ...state,
+        list: {
+          error: [],
+          pending: false,
+          result: null,
+        },
+      } as typeof initialState;
+    //#endregion
+
+    //#region FETCH
+    case FETCH_TENANT_REQUEST:
+      return {
+        ...state,
+        update: {
+          pending: true,
+        },
+      } as typeof initialState;
+    case FETCH_TENANT_SUCCESS:
+      return {
+        ...state,
+        update: {
+          result: action.payload.result,
+          pending: false,
+        },
+      } as typeof initialState;
+    case FETCH_TENANT_FAILED:
+      return {
+        ...state,
+        update: {
+          pending: false,
+          error: action.payload.error,
+        },
+      } as typeof initialState;
+    //#endregion
+
+    //#region UPDATE
     case UPDATE_TENANT_REQUEST:
       return {
         ...state,
-        pending: true,
+        update: {
+          result: null,
+          pending: true,
+          error: [],
+        },
       } as typeof initialState;
     case UPDATE_TENANTS_SUCCESS:
       return {
         ...state,
-        result: state.list.result?.items?.map((x) => {
-          if (x.id === action.payload.result?.id) {
-            return { ...x, name: action.payload.result.name };
-          }
-          return x;
-        }),
-        pending: false,
+        update: {
+          result: action.payload.result,
+          pending: false,
+          error: [],
+        },
       } as typeof initialState;
     case UPDATE_TENANTS_FAILED:
       return {
         ...state,
-        result: state.list?.result?.items?.map((x) => {
-          if (x.id === action.payload.result?.id) {
-            return { ...x, name: action.payload.result.name };
-          }
-          return x;
-        }),
-        pending: false,
+        update: {
+          result: action.payload.result,
+          error: action.payload.error,
+          pending: false,
+        },
       } as typeof initialState;
-    // return {
-    //   ...state,
-    //   pending: false,
-    //   error: action.payload.error,
-    // } as typeof initialState;
+    case RESET_UPDATE_TENANT:
+      return {
+        ...state,
+        update: {
+          error: [],
+          pending: false,
+          result: null,
+        },
+      } as typeof initialState;
+    //#endregion
 
+    //#region DELETE
     case DELETE_TENANT_REQUEST:
       return {
         ...state,
-        pending: true,
+        delete: {
+          pending: true,
+        },
       } as typeof initialState;
     case DELETE_TENANT_SUCCESS:
       return {
@@ -89,34 +145,29 @@ const tenantReducer = (state = initialState, action: TenantsActions) => {
           pending: false,
         },
         list: {
-          result: {
-            items: state.list.result?.items?.filter(
-              (item) => item.id !== action.payload.result
-            ),
-          },
+          result: state.list.result?.filter(
+            (item) => item.id !== action.payload.result
+          ),
         },
       } as typeof initialState;
     case DELETE_TENANT_FAILED:
-      // TODO: Update this once Actual API is implemented
       return {
         ...state,
         delete: {
-          result: action.payload.result,
+          error: action.payload.result,
           pending: false,
         },
-        list: {
-          result: {
-            items: state.list.result?.items?.filter(
-              (item) => item.id !== action.payload.result
-            ),
-          },
+      } as typeof initialState;
+    case RESET_DELETE_TENANT:
+      return {
+        ...state,
+        delete: {
+          error: [],
+          pending: false,
+          result: null,
         },
       } as typeof initialState;
-    // return {
-    //   ...state,
-    //   pending: false,
-    //   error: action.payload.error,
-    // } as typeof initialState;
+    //#endregion
     default:
       return state;
   }

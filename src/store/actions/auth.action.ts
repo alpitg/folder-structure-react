@@ -8,14 +8,15 @@
  */
 
 import {
-  IAuthenticationModel,
+  AuthenticationModel,
   IAuthenticationRequestModel,
 } from "../../interfaces/auth.model";
-import { IAppStore } from "../../interfaces/generic.model";
+import { AppStore } from "../../interfaces/generic.model";
 
 export const AUTHENTICATE_USER_REQUEST = "AUTHENTICATE_USER_REQUEST";
 export const AUTHENTICATE_USER_SUCCESS = "AUTHENTICATE_USER_SUCCESS";
 export const AUTHENTICATE_USER_FAILED = "AUTHENTICATE_USER_FAILED";
+export const LOGOUT_USER_REQUEST = "LOGOUT_USER_REQUEST";
 
 //#region - Action interfaces
 export interface IAuthenticationRequestAction {
@@ -25,12 +26,17 @@ export interface IAuthenticationRequestAction {
 
 export interface IAuthenticationSuccessAction {
   type: typeof AUTHENTICATE_USER_SUCCESS;
-  payload: IAppStore<IAuthenticationModel>;
+  payload: AppStore<AuthenticationModel>;
 }
 
 export interface IAuthenticationFailureAction {
   type: typeof AUTHENTICATE_USER_FAILED;
-  payload: IAppStore<IAuthenticationModel>;
+  payload: AppStore<AuthenticationModel>;
+}
+
+export interface ILogoutUserRequestAction {
+  type: typeof LOGOUT_USER_REQUEST;
+  payload: any;
 }
 //#endregion
 
@@ -43,21 +49,28 @@ export const authenticateRequest = (
 });
 
 export const authenticateSuccess = (
-  payload: IAppStore<IAuthenticationModel>
+  payload: AppStore<AuthenticationModel>
 ): IAuthenticationSuccessAction => ({
   type: AUTHENTICATE_USER_SUCCESS,
   payload,
 });
 
 export const authenticateFailed = (
-  payload: IAppStore<IAuthenticationModel>
+  payload: AppStore<AuthenticationModel>
 ): IAuthenticationFailureAction => ({
   type: AUTHENTICATE_USER_FAILED,
   payload,
 });
+
+export const logoutUserRequest = (payload: any): ILogoutUserRequestAction => ({
+  type: LOGOUT_USER_REQUEST,
+  payload,
+});
+
 //#endregion
 
 export type AuthenticateActions =
   | IAuthenticationRequestAction
   | IAuthenticationSuccessAction
-  | IAuthenticationFailureAction;
+  | IAuthenticationFailureAction
+  | ILogoutUserRequestAction;

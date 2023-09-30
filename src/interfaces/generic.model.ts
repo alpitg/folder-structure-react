@@ -1,17 +1,11 @@
-export interface IAppStore<T> {
-  result: T | null | undefined;
+export class AppStore<T> {
+  result?: T | null | undefined;
   pending: boolean;
-  error: string;
-}
-
-export class AppStore<T> implements IAppStore<T> {
-  result: T | null | undefined;
-  pending: boolean;
-  error: string;
+  error: any[];
 
   constructor() {
     this.pending = false;
-    this.error = "";
+    this.error = [];
   }
 }
 

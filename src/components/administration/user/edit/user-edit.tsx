@@ -1,110 +1,141 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { AppState } from "../../../../store/reducers/root.reducer";
-import { IUserFormModel } from "../../../../interfaces/user.model";
+import {
+  IUserModel,
+  IUserRoleModel,
+  UserFormModel,
+} from "../../../../interfaces/user.model";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
 import { TabPanel, TabView } from "primereact/tabview";
 import MessagesApp from "../../../ui/messages/messages";
 import { Checkbox } from "primereact/checkbox";
 import SaveLoaderButtonApp from "../../../ui/save-loader-button/save-loader-button";
+import {
+  fetchUserRequest,
+  resetDeleteUser,
+  resetUpdateUser,
+  updateUserRequest,
+} from "../../store/actions/user.action";
+import { fetchRolesRequest } from "../../store/actions/role.action";
+import { fetchTenantsRequest } from "../../store/actions/tenant.action";
+import { minimumCharValidation } from "../../../../utils/validation.util";
 
 const UserEditApp = () => {
+  //#region variables
   const { id } = useParams();
   const dispatch = useDispatch();
-  const users = useSelector((x: AppState) => x.administration.users);
+  const navigate = useNavigate();
 
-  const [userDetail, setUserDetail] = useState<IUserFormModel>({
-    id: "",
-    name: "",
-    surname: "",
-    userName: "",
-    emailAddress: "",
-    phoneNumber: "",
-    password: "",
-    isActive: true,
-    shouldChangePasswordOnNextLogin: false,
-    isTwoFactorEnabled: false,
-    isLockoutEnabled: false,
-    roles: [],
-    isError: {
-      name: "",
-      surname: "",
-      userName: "",
-      emailAddress: "",
-      phoneNumber: "",
-      password: "",
-      isActive: "",
-    },
-    fieldName: {
-      id: "id",
-      name: "name",
-      surname: "surname",
-      userName: "userName",
-      emailAddress: "emailAddress",
-      phoneNumber: "phoneNumber",
-      password: "password",
-      isActive: "isActive",
-      shouldChangePasswordOnNextLogin: "shouldChangePasswordOnNextLogin",
-      isTwoFactorEnabled: "isTwoFactorEnabled",
-      isLockoutEnabled: "isLockoutEnabled",
-    },
-  });
+  const userUpdate = useSelector(
+    (x: AppState) => x.administration.users.update
+  );
+  const roles = useSelector((x: AppState) => x.administration.roles.list);
+  const { tenants } = useSelector((x: AppState) => x.administration);
+
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [userDetail, setUserDetail] = useState<UserFormModel>(
+    new UserFormModel()
+  );
   const { isError, fieldName } = userDetail;
-  const [saveError, setSaveError] = useState<string>();
+  //#endregion
 
+  //#region methods
   useEffect(() => {
     if (id) {
-      fetchUserDetail(id);
+      dispatch(fetchUserRequest(id));
     }
+    dispatch(fetchRolesRequest());
+    dispatch(fetchTenantsRequest());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
 
   useEffect(() => {
-    setSaveError(users.update.error);
-  }, [users.update.error]);
+    dispatch(resetUpdateUser());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const fetchUserDetail = (id: any) => {
-    fetch("/mock/user-detail.json", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBdmFuaSIsImV4cCI6MTY5MDM4OTA2OCwiaWF0IjoxNjkwMzUzMDY4fQ.uPxNE6IanMeAVziXYCFzBmydcw2EXUvIEgLJha4GVIU",
-      },
-    })
-      .then((res) => res.json())
-      .then((json: any) => {
-        console.log(json);
-        setUserDetail((prev) => ({
-          ...prev,
-          ...json?.user,
-          roles: json?.roles,
-        }));
-      });
-  };
+  // NOTE: Use this only for Navigation once form submitted
+  useEffect(() => {
+    if (!userUpdate?.pending && !userUpdate?.error?.length && isSubmitted) {
+      navigate(ROUTE_URL.ADMIN.USER.BASE);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userUpdate?.pending]);
 
-  const updateUserDetail = () => {
-    // dispatch(updateUsersRequest(userDetail));
+  useEffect(() => {
+    setUserDetail((prev) => ({
+      ...prev,
+      ...userUpdate?.result,
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userUpdate?.result]);
+
+  const postUpdateUserDetail = () => {
+    let tenantId: any;
+    if (id) {
+      tenantId = userDetail?.tenantId ? userDetail?.tenantId : null;
+    } else {
+      tenantId = tenants?.globalSelectedTenant
+        ? tenants?.globalSelectedTenant
+        : null;
+    }
+    // const tenantId = id ? userDetail?.tenantId : tenants?.globalSelectedTenant
+    const userDetailPostData: IUserModel = {
+      id: id ?? "",
+      tenantId: tenantId,
+      userName: userDetail?.userName,
+      email: userDetail?.email,
+      firstName: userDetail?.firstName,
+      lastName: userDetail?.lastName,
+      phoneNumber: userDetail?.phoneNumber,
+      address: userDetail?.address,
+      password: userDetail?.password,
+      isActive: userDetail?.isActive,
+      isImageUpdate: userDetail?.isImageUpdate,
+      imgSrc: "" as string,
+      userRoles: userDetail?.userRoles
+        ? userDetail?.userRoles?.map((x) => {
+            return { userId: x.userId, roleId: x.roleId } as IUserRoleModel;
+          })
+        : [],
+    };
+
+    // const userDetailPostData = {
+    //   id: "",
+    //   tenantId: "d8e9a933-5555-42ee-9325-2fc67f0d874a",
+    //   userName: "Usertenant1@gmail.com",
+    //   email: "Usertenant1@gmail.com",
+    //   firstName: "Usertenant1@gmail.com",
+    //   lastName: "Usertenant1@gmail.com",
+    //   phoneNumber: "1110200045",
+    //   address: "Usertenant1@gmail.com",
+    //   password: "admin@123",
+    //   isActive: true,
+    //   isImageUpdate: false,
+    //   imgSrc: "",
+    //   userRoles: [],
+    // };
+
+    dispatch(updateUserRequest(userDetailPostData));
   };
 
   const closeError = () => {
-    // dispatch(resetDeleteUser());
+    dispatch(resetDeleteUser());
   };
 
   //#region Form operation
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (formValid()) {
-      console.log(userDetail);
-      updateUserDetail();
-    } else {
-      console.log("Form is invalid!");
+      postUpdateUserDetail();
     }
+    setIsSubmitted(true);
   };
 
   const formValid = () => {
@@ -118,7 +149,13 @@ const UserEditApp = () => {
     });
 
     // NOTE: Add further validations here as AND condition
-    if (nameIsValid(userDetail.name).isValid) {
+    if (nameIsValid(userDetail.firstName).isValid) {
+      isValid = true;
+    } else {
+      isValid = false;
+    }
+
+    if (nameIsValid(userDetail.lastName).isValid) {
       isValid = true;
     } else {
       isValid = false;
@@ -130,12 +167,8 @@ const UserEditApp = () => {
   /**
    * NOTE: Name validation
    */
-  const nameIsValid = (userName: string) => {
-    if (userName.length < 3 || userName.length === 0) {
-      return { isValid: false, errorMsg: "Atleast 3 characaters required" };
-    } else {
-      return { isValid: true, errorMsg: "" };
-    }
+  const nameIsValid = (name: string) => {
+    return minimumCharValidation(3, name);
   };
 
   /**
@@ -159,98 +192,129 @@ const UserEditApp = () => {
       field = e?.target?.name;
       value = e?.target?.checked;
     } else {
-      field = e?.currentTarget?.id;
-      value = e?.currentTarget?.value;
+      field = e?.target?.id;
+      value = e?.target?.value;
     }
-
-    const formValChange = (field: string, value: any) => {
-      let errorMsg = "";
-      switch (field) {
-        case fieldName.name:
-          errorMsg = nameIsValid(value).errorMsg;
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            name: value,
-            isError: {
-              ...prev.isError,
-              name: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.surname:
-          // errorMsg = userNameIsValid(value).errorMsg;
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            surname: value,
-            isError: {
-              ...prev.isError,
-              surname: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.emailAddress:
-          errorMsg = emailAddressIsValid(value).errorMsg;
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            emailAddress: value,
-            isError: {
-              ...prev.isError,
-              emailAddress: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.phoneNumber:
-          // errorMsg = userNameIsValid(value).errorMsg;
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            phoneNumber: value,
-            isError: {
-              ...prev.isError,
-              phoneNumber: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.userName:
-          // errorMsg = userNameIsValid(value).errorMsg;
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            userName: value,
-            isError: {
-              ...prev.isError,
-              userName: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.password:
-          // errorMsg = passwordIsValid(value).errorMsg;
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            password: value,
-            isError: {
-              ...prev.isError,
-              password: errorMsg,
-            },
-          }));
-          break;
-        case fieldName.shouldChangePasswordOnNextLogin:
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            shouldChangePasswordOnNextLogin: value,
-          }));
-          break;
-        case fieldName.isActive:
-          setUserDetail((prev: IUserFormModel) => ({
-            ...prev,
-            isActive: value,
-          }));
-          break;
-        default:
-          break;
-      }
-    };
-
     formValChange(field, value);
   };
+
+  const formValChange = (field: string, value: any) => {
+    let errorMsg = "";
+    switch (field) {
+      case fieldName.firstName:
+        errorMsg = nameIsValid(value).errorMsg;
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.firstName]: value,
+          isError: {
+            ...prev.isError,
+            [fieldName.firstName]: errorMsg,
+          },
+        }));
+        break;
+      case fieldName.lastName:
+        errorMsg = nameIsValid(value).errorMsg;
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.lastName]: value,
+          isError: {
+            ...prev.isError,
+            [fieldName.lastName]: errorMsg,
+          },
+        }));
+        break;
+      case fieldName.password:
+        // errorMsg = emailAddressIsValid(value).errorMsg;
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.password]: value,
+          isError: {
+            ...prev.isError,
+            [fieldName.password]: errorMsg,
+          },
+        }));
+        break;
+      case fieldName.email:
+        errorMsg = emailAddressIsValid(value).errorMsg;
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.email]: value,
+          [fieldName.userName]: value,
+          isError: {
+            ...prev.isError,
+            [fieldName.email]: errorMsg,
+          },
+        }));
+        break;
+      case fieldName.phoneNumber:
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.phoneNumber]: value,
+          isError: {
+            ...prev.isError,
+            [fieldName.phoneNumber]: errorMsg,
+          },
+        }));
+        break;
+      case fieldName.address:
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.address]: value,
+          isError: {
+            ...prev.isError,
+            [fieldName.address]: errorMsg,
+          },
+        }));
+        break;
+      case fieldName.shouldChangePasswordOnNextLogin:
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.shouldChangePasswordOnNextLogin]: value,
+        }));
+        break;
+      case fieldName.isActive:
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.isActive]: value,
+        }));
+        break;
+      case fieldName.userRoles:
+        setUserDetail((prev: UserFormModel) => ({
+          ...prev,
+          [fieldName.isActive]: value,
+        }));
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  /**
+   * NOTE: Update the role using this method
+   * @param
+   */
+  const onSelectionChange = (e: any) => {
+    if (e?.target?.checked) {
+      const newRole: IUserRoleModel[] = [
+        { userId: id ?? "", roleId: e?.target?.value },
+      ];
+      setUserDetail((prev) => ({
+        ...prev,
+        userRoles: [...(prev?.userRoles ?? []), ...newRole],
+      }));
+    } else {
+      const updatedRole = userDetail?.userRoles?.filter(
+        (item) => item.roleId !== e?.target?.value
+      );
+      setUserDetail((prev) => ({
+        ...prev,
+        userRoles: updatedRole,
+      }));
+    }
+  };
+  //#endregion
+
   //#endregion
 
   return (
@@ -266,7 +330,7 @@ const UserEditApp = () => {
                   </span>
                 </Link>
                 <span className="p-2">
-                  {id ? "Edit User: " + userDetail?.name : "Create new user"}
+                  {id ? "Edit User: " + userDetail?.email : "Create new user"}
                 </span>
               </>
             }
@@ -278,21 +342,23 @@ const UserEditApp = () => {
                     leftIcon="pi pi-fw pi-briefcase me-2"
                     header="User Information"
                   >
-                    {users.update.error && (
-                      <MessagesApp
-                        type="alert-danger"
-                        message={users.update.error}
-                        close={closeError}
-                      />
-                    )}
+                    {userUpdate?.error &&
+                      userUpdate?.error?.map((error: string) => (
+                        <MessagesApp
+                          type="alert-danger"
+                          message={error}
+                          close={closeError}
+                          key={error}
+                        />
+                      ))}
                     <div className="m-0 mt-3">
                       <div className="row">
-                        <div className="col-sm-12">
+                        <div className="col-sm-12 pt-3">
                           <div className="d-flex flex-column gap-2">
                             <label
-                              htmlFor={fieldName.name}
+                              htmlFor={fieldName.firstName}
                               className={
-                                isError.name.length > 0
+                                isError.firstName.length > 0
                                   ? "is-invalid p-error"
                                   : ""
                               }
@@ -300,73 +366,48 @@ const UserEditApp = () => {
                               First name *
                             </label>
                             <InputText
-                              id={fieldName.name}
-                              value={userDetail?.name ?? ""}
+                              id={fieldName.firstName}
+                              value={userDetail?.firstName ?? ""}
                               onChange={onFormValChange}
                               className={
-                                isError.name.length > 0 ? "p-invalid" : ""
+                                isError.firstName.length > 0 ? "p-invalid" : ""
                               }
                               required
                             />
-                            <small className="p-error">{isError.name}</small>
+                            <small className="p-error">
+                              {isError.firstName}
+                            </small>
                           </div>
                         </div>
                         <div className="col-sm-12 pt-3">
                           <div className="d-flex flex-column gap-2">
                             <label
-                              htmlFor={fieldName.surname}
+                              htmlFor={fieldName.lastName}
                               className={
-                                isError.surname.length > 0
+                                isError.lastName.length > 0
                                   ? "is-invalid p-error"
                                   : ""
                               }
                             >
-                              Surname *
+                              Last name *
                             </label>
-
                             <InputText
-                              id={fieldName.surname}
-                              value={userDetail?.surname ?? ""}
+                              id={fieldName.lastName}
+                              value={userDetail?.lastName ?? ""}
                               onChange={onFormValChange}
                               className={
-                                isError.surname.length > 0 ? "p-invalid" : ""
+                                isError.lastName.length > 0 ? "p-invalid" : ""
                               }
                               required
                             />
-                            <small className="p-error">{isError.surname}</small>
+                            <small className="p-error">
+                              {isError.lastName}
+                            </small>
                           </div>
                         </div>
                       </div>
 
                       <div className="row">
-                        <div className="col-sm-12 pt-3">
-                          <div className="d-flex flex-column gap-2">
-                            <label
-                              htmlFor={fieldName.emailAddress}
-                              className={
-                                isError.emailAddress.length > 0
-                                  ? "is-invalid p-error"
-                                  : ""
-                              }
-                            >
-                              Email Address *
-                            </label>
-                            <InputText
-                              id={fieldName.emailAddress}
-                              value={userDetail?.emailAddress ?? ""}
-                              onChange={onFormValChange}
-                              className={
-                                isError.emailAddress.length > 0
-                                  ? "p-invalid"
-                                  : ""
-                              }
-                              required
-                            />
-                            <small className="p-error">
-                              {isError.emailAddress}
-                            </small>
-                          </div>
-                        </div>
                         <div className="col-sm-12 pt-3">
                           <div className="d-flex flex-column gap-2">
                             <label
@@ -394,58 +435,83 @@ const UserEditApp = () => {
                             </small>
                           </div>
                         </div>
-
                         <div className="col-sm-12 pt-3">
                           <div className="d-flex flex-column gap-2">
                             <label
-                              htmlFor={fieldName.userName}
+                              htmlFor={fieldName.email}
                               className={
-                                isError.userName.length > 0
+                                isError.email.length > 0
                                   ? "is-invalid p-error"
                                   : ""
                               }
                             >
-                              User Name *
+                              Email *
                             </label>
                             <InputText
-                              id={fieldName.userName}
-                              value={userDetail?.userName ?? ""}
-                              onChange={onFormValChange}
+                              id={fieldName.email}
+                              value={userDetail?.email ?? ""}
+                              onChange={id ? undefined : onFormValChange}
                               className={
-                                isError.userName.length > 0 ? "p-invalid" : ""
+                                isError.email.length > 0 ? "p-invalid" : ""
                               }
                               required
+                              disabled={id ? true : false}
                             />
-                            <small className="p-error">
-                              {isError.userName}
-                            </small>
+                            <small className="p-error">{isError.email}</small>
                           </div>
                         </div>
 
+                        {!id && (
+                          <div className="col-sm-12 pt-3">
+                            <div className="d-flex flex-column gap-2">
+                              <label
+                                htmlFor={fieldName.password}
+                                className={
+                                  isError.password.length > 0
+                                    ? "is-invalid p-error"
+                                    : ""
+                                }
+                              >
+                                Password *
+                              </label>
+                              <InputText
+                                id={fieldName.password}
+                                value={userDetail?.password ?? ""}
+                                onChange={onFormValChange}
+                                className={
+                                  isError.password.length > 0 ? "p-invalid" : ""
+                                }
+                                required
+                              />
+                              <small className="p-error">
+                                {isError.password}
+                              </small>
+                            </div>
+                          </div>
+                        )}
+
                         <div className="col-sm-12 pt-3">
                           <div className="d-flex flex-column gap-2">
                             <label
-                              htmlFor={fieldName.password}
+                              htmlFor={fieldName.address}
                               className={
-                                isError.password.length > 0
+                                isError.address.length > 0
                                   ? "is-invalid p-error"
                                   : ""
                               }
                             >
-                              Password *
+                              Address *
                             </label>
                             <InputText
-                              id={fieldName.password}
-                              value={userDetail?.password ?? ""}
+                              id={fieldName.address}
+                              value={userDetail?.address ?? ""}
                               onChange={onFormValChange}
                               className={
-                                isError.password.length > 0 ? "p-invalid" : ""
+                                isError.address.length > 0 ? "p-invalid" : ""
                               }
                               required
                             />
-                            <small className="p-error">
-                              {isError.password}
-                            </small>
+                            <small className="p-error">{isError.address}</small>
                           </div>
                         </div>
 
@@ -506,34 +572,36 @@ const UserEditApp = () => {
                     header="Roles"
                     rightIcon={
                       <>
-                        <Badge
-                          value={
-                            userDetail?.roles?.filter((x) => x.isAssigned)
-                              ?.length
-                          }
-                        ></Badge>
+                        <Badge value={userDetail?.userRoles?.length}></Badge>
                       </>
                     }
                   >
                     <div className="col-sm-12">
-                      {userDetail?.roles?.map((item) => {
-                        return (
-                          <div key={"role-" + item?.roleName}>
-                            <div className="mt-3 mb-3">
-                              <Checkbox
-                                inputId={item?.roleName}
-                                name={item?.roleName}
-                                value={item?.isAssigned}
-                                onChange={onFormValChange}
-                                checked={item?.isAssigned}
-                              ></Checkbox>
-                              <label htmlFor={item?.roleName} className="ms-2">
-                                {item?.roleDisplayName}
-                              </label>
+                      {roles?.result &&
+                        roles?.result?.map((item) => {
+                          return (
+                            <div key={"role-" + item?.id}>
+                              <div className="mt-3 mb-3">
+                                <Checkbox
+                                  inputId={item?.id}
+                                  name={item?.name}
+                                  value={item?.id}
+                                  onChange={onSelectionChange}
+                                  checked={
+                                    userDetail?.userRoles
+                                      ? userDetail?.userRoles?.some(
+                                          (x) => x.roleId === item.id
+                                        )
+                                      : false
+                                  }
+                                ></Checkbox>
+                                <label htmlFor={item?.id} className="ms-2">
+                                  {item?.name}
+                                </label>
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
                     </div>
                   </TabPanel>
                 </TabView>
@@ -544,8 +612,8 @@ const UserEditApp = () => {
                     label={"Save"}
                     icon="pi pi-save"
                     size="small"
-                    disabled={!formValid()}
-                    enableLoader={users.update.pending}
+                    disabled={!formValid() || userUpdate?.pending}
+                    enableLoader={userUpdate?.pending}
                   />
                 </div>
               </form>

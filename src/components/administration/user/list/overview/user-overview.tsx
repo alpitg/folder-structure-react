@@ -1,6 +1,6 @@
 import "./user-overview.scss";
 
-const UserOverviewApp = () => {
+const UserOverviewApp = ({ filter, total }: any) => {
   return (
     <div className="user-overview-app">
       <div className="row search-body">
@@ -10,7 +10,11 @@ const UserOverviewApp = () => {
               <div className="row">
                 <div className="col-lg-6 flex-center">
                   <div className="records">
-                    Showing: <b>1-20</b> of <b>200</b> result
+                    Showing:
+                    <b>
+                      {" " + (filter?.Skip + 1)} - {filter?.PageSize + " "}
+                    </b>
+                    of <b> {total}</b> result
                   </div>
                 </div>
                 <div className="col-lg-6">

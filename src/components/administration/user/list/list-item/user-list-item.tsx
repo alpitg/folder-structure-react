@@ -4,6 +4,13 @@ import { ROUTE_URL } from "../../../../auth/constants/routes.const";
 import { useDispatch } from "react-redux";
 import { deleteUserRequest } from "../../../store/actions/user.action";
 import { IUserRoleModel } from "../../../../../interfaces/user.model";
+import { hasClaim } from "../../../../../utils/auth.util";
+import {
+  USR_ADD_USER,
+  USR_ASSIGN_USR_PERMISSIONS,
+  USR_DELETE_USER,
+  USR_UPDATE_USER,
+} from "../../../../../constants/global-contants/claims.const";
 import "./user-list-item.scss";
 
 const UserListItemApp = (props: { user: IUserModel }) => {
@@ -43,27 +50,22 @@ const UserListItemApp = (props: { user: IUserModel }) => {
       </td>
       <td>
         <div className="user-list-job-title">
-          <span title={"User name: " + props?.user.userName}>
-            {props?.user.userName}
-          </span>
           <p className="m-0">
-            <span className="user-name">
-              {props?.user.name + " " + props?.user.surname + " | "}
-            </span>
-            <span className="text-muted time">{props?.user.emailAddress}</span>
+            {props?.user.firstName + " " + props?.user?.lastName}
           </p>
+          <p className="text-muted m-0">{props?.user?.email}</p>
         </div>
       </td>
       <td>
         <div className="user-list-job-info">
           <p className="type m-0">
-            {Array.isArray(props?.user.roles)
-              ? props?.user?.roles?.map(
+            {Array.isArray(props?.user?.userRoles)
+              ? props?.user?.userRoles?.map(
                   (role: IUserRoleModel, index: number) => {
                     return (
-                      <span key={role.roleName}>
+                      <span key={role?.roleName}>
                         {index !== 0 ? ", " : null}
-                        {role.roleName}
+                        {role?.roleName}
                       </span>
                     );
                   }
@@ -71,8 +73,8 @@ const UserListItemApp = (props: { user: IUserModel }) => {
               : null}
           </p>
           <p className="text-muted m-0">
-            Created Date:
-            <span className="location">{" " + props?.user.creationTime}</span>
+            Phone Number:
+            <span className="location">{" " + props?.user.phoneNumber}</span>
           </p>
         </div>
       </td>
@@ -101,28 +103,31 @@ const UserListItemApp = (props: { user: IUserModel }) => {
 
       <td>
         <div className="d-flex">
-          <Link to={`${ROUTE_URL.ADMIN.USER.BASE}/${props?.user?.id}`}>
-            <span className="icon" title="View">
-              <i className="pi pi-fw pi-eye"></i>
+          {hasClaim([USR_ADD_USER, USR_UPDATE_USER]) && (
+            <Link to={`${ROUTE_URL.ADMIN.USER.BASE}/edit/${props?.user?.id}`}>
+              <span className="icon" title="Edit">
+                <i className="pi pi-fw pi-pencil"></i>
+              </span>
+            </Link>
+          )}
+          {hasClaim([USR_ASSIGN_USR_PERMISSIONS]) && (
+            <Link
+              to={`${ROUTE_URL.ADMIN.USER.BASE}/permissions/${props?.user?.id}`}
+            >
+              <span className="icon" title="Permissions">
+                <i className="pi pi-fw pi-shield"></i>
+              </span>
+            </Link>
+          )}
+          {hasClaim([USR_DELETE_USER]) && (
+            <span
+              className="icon cursor-pointer"
+              title="Delete"
+              onClick={() => deleteUser(props?.user?.id)}
+            >
+              <i className="pi pi-fw pi-times"></i>
             </span>
-          </Link>
-          <Link to={`${ROUTE_URL.ADMIN.USER.BASE}/edit/${props?.user?.id}`}>
-            <span className="icon" title="Edit">
-              <i className="pi pi-fw pi-pencil"></i>
-            </span>
-          </Link>
-          <Link to={`${ROUTE_URL.ADMIN.USER.BASE}/permissions/${props?.user?.id}`}>
-            <span className="icon" title="Permissions">
-              <i className="pi pi-fw pi-shield"></i>
-            </span>
-          </Link>
-          <span
-            className="icon cursor-pointer"
-            title="Delete"
-            onClick={() => deleteUser(props?.user?.id)}
-          >
-            <i className="pi pi-fw pi-times"></i>
-          </span>
+          )}
         </div>
       </td>
     </tr>

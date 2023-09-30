@@ -11,8 +11,6 @@ const PermissionsApp = ({
   selectedNodes: any[];
   onSelectionChange(checked: any[]): void;
 }) => {
-  // const nodes = data;
-
   const [treeState, setTreeState] = useState({
     checked: [],
     expanded: [],
@@ -28,7 +26,7 @@ const PermissionsApp = ({
     }));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedNodes]);
 
   const getNodeIds = (nodes: any[]) => {
     let ids: any = [];

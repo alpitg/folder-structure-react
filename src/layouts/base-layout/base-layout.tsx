@@ -1,18 +1,28 @@
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { Outlet } from "react-router";
+import { useDispatch } from "react-redux";
 import SidebarApp from "../../components/ui/sidebar/sidebar";
 import NavbarApp from "../../components/ui/navbar/navbar";
-import AuthApp from "../../components/auth/auth";
+import AuthResolver from "../../components/auth/auth.resolver";
+import { fetchPagesRequest } from "../../store/actions/pages.action";
+import { fetchActionsRequest } from "../../store/actions/actions.action";
+import { LOADING } from "../../constants/global-contants/global-key.const";
 
 const BaseLayoutApp = () => {
   const [isOpenSideBar, setIsOpenSidebar] = useState<boolean>(true);
+  const dispatch = useDispatch();
 
   const onToggleSidebar = () => {
     setIsOpenSidebar(!isOpenSideBar);
   };
 
+  useEffect(() => {
+    dispatch(fetchPagesRequest());
+    dispatch(fetchActionsRequest());
+  }, []);
+
   return (
-    <AuthApp>
+    <AuthResolver>
       <div className="base-layout-app">
         <span
           className={
@@ -45,21 +55,21 @@ const BaseLayoutApp = () => {
         <NavbarApp isOpenSideBar={isOpenSideBar} />
         <div
           className={
-            "base-layout-main-body navbar-margin-space " +
-            (isOpenSideBar ? "sidebar-margin-space" : "")
+            "base-layout-main-body " +
+            (isOpenSideBar ? "sidebar-opened" : "")
           }
         >
           <div className="base-layout-sidebar">
             {isOpenSideBar && <SidebarApp />}
           </div>
           <div className="base-layout-content">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div>{LOADING}</div>}>
               <Outlet />
             </Suspense>
           </div>
         </div>
       </div>
-    </AuthApp>
+    </AuthResolver>
   );
 };
 

@@ -1,16 +1,47 @@
-
 /**
  * @Rulebook
- * Interface name should have prefix - `I` & suffix - `Model`. 
- * example: IAuthenticationModel
+ * Interface name should have prefix - `I` & suffix - `Model`.
+ * example: IClaimModel
  */
+export interface IClaimModel {
+  claimType: string;
+  claimValue: boolean;
+}
 
-export interface IAuthenticationModel {
-    isValid: boolean;
-    details: any;
+export class AuthenticationModel {
+  id: string;
+  tenantId: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  bearerToken: string;
+  isAuthenticated: boolean;
+  profilePhoto: string;
+  claims: IClaimModel[];
+  /**
+   *
+   */
+  constructor() {
+    this.id = "";
+    this.tenantId = "";
+    this.userName = "";
+    this.firstName = "";
+    this.lastName = "";
+    this.email = "";
+    this.phoneNumber = "";
+    this.bearerToken = "";
+    this.isAuthenticated = false;
+    this.profilePhoto = "";
+    this.claims = [];
+  }
 }
 
 export interface IAuthenticationRequestModel {
-    userId: string;
-    password: string;
+  userName: string;
+  password: string;
+  remoteIp: string;
+  latitude: string;
+  longitude: string;
 }

@@ -1,9 +1,18 @@
 export interface IRoleModel {
-  id: string;
+  id?: string;
   name: string;
-  createdDate: string;
-  isDefault: boolean;
-  grantedPermissionNames: any[];
+  createdDate?: string;
+  isDefault?: boolean;
+  roleClaims: IRoleClaimsModel[];
+  userRoles?: any[];
+}
+
+export interface IRoleClaimsModel {
+  actionId: string;
+  claimType: string;
+  claimValue: string;
+  id?: number;
+  roleId?: string;
 }
 
 export interface IRolesRequestModel {
@@ -18,7 +27,7 @@ export interface IRoleFormModel {
   name: string;
   createdDate: string;
   isDefault: boolean;
-  grantedPermissionNames: any[];
+  roleClaims: IRoleClaimsModel[];
   isError: {
     name: string;
   };
@@ -34,22 +43,22 @@ export interface IRoleAppStore {
   list: {
     result: IRoleModel[] | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   view: {
     result: IRoleModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   update: {
     result: IRoleModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   delete: {
     result: IRoleModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
 }
 
@@ -57,44 +66,44 @@ export class RoleAppStore implements IRoleAppStore {
   list: {
     result: IRoleModel[] | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   view: {
     result: IRoleModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   update: {
     result: IRoleModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
   delete: {
     result: IRoleModel | null | undefined;
     pending: boolean;
-    error: string;
+    error: any;
   };
 
   constructor() {
     this.list = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.view = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.update = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
     this.delete = {
       result: null,
       pending: false,
-      error: "",
+      error: [],
     };
   }
 }

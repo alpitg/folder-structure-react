@@ -1,13 +1,13 @@
 import axios from "axios";
 import { ENDPOINT } from "../constants/global-contants/endpoint.const";
+import AuthService from "../services/auth.service";
 
 export const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use(async (req) => {
-  // const token = await getAccessToken()
-  const token = "";
-  req.baseURL = "";
+  const token = AuthService.getAccessToken();
+  req.baseURL = ENDPOINT.API_BASE_URL;
   req.headers.Authorization = `Bearer ${token}`;
-  req.headers["Access-Control-Allow-Origin"] = "*";
+  // req.headers["Access-Control-Allow-Origin"] = "*";
   req.headers["Content-Type"] = "application/json";
   return req;
 });
@@ -16,9 +16,6 @@ export const pythonAxiosInstance = axios.create();
 pythonAxiosInstance.interceptors.request.use(async (req) => {
   req.withCredentials = false;
   req.baseURL = ENDPOINT.SOCIAL_MEDIA.API.PYTHON_API.BASE;
-  //   const token = "";
-  //   req.headers.Authorization = `Bearer ${token}`;
-  //   req.headers["Access-Control-Allow-Origin"] = "*";
   req.headers["Content-Type"] = "application/json";
   return req;
 });

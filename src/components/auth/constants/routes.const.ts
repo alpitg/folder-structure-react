@@ -6,6 +6,7 @@ export const ROUTE_URL = {
   ABOUT: "/about",
   CONTACT: "/contact",
   UI: "/ui",
+  NOT_ALLOWED: "/not-allowed",
   SOCIAL_MEDIA_MANAGEMENT: "/social-media",
   ADMIN: {
     BASE: "/admin",

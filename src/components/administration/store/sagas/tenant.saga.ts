@@ -2,49 +2,83 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import {
   DELETE_TENANT_REQUEST,
   FETCH_TENANTS_REQUEST,
+  FETCH_TENANT_REQUEST,
   IDeleteTenantRequestAction,
-  IFetchTenantsRequestAction,
+  IFetchTenantRequestAction,
   IUpdateTenantsRequestAction,
   UPDATE_TENANT_REQUEST,
   deleteTenantFailed,
   deleteTenantSuccess,
+  fetchTenantFailed,
+  fetchTenantSuccess,
   fetchTenantsFailed,
   fetchTenantsSuccess,
-  updateTenantFailed,
-  updateTenantSuccess,
+  updateTenantsFailed,
+  updateTenantsSuccess,
 } from "../actions/tenant.action";
 import { IAxiosResponse } from "../../../../interfaces/generic.model";
 import TenantService from "../../services/tenant.service";
 
-function* fetchTenants(action: IFetchTenantsRequestAction) {
+function* fetchTenants() {
   try {
     const response: IAxiosResponse<any> = yield call(
-      TenantService.fetchTenants,
-      action.payload
+      TenantService.fetchTenants
     );
 
     yield put(
-      fetchTenantsSuccess({ result: response.data, error: "", pending: false })
+      fetchTenantsSuccess({ result: response.data, error: [], pending: false })
     );
   } catch (error) {
     yield put(
-      fetchTenantsFailed({ result: null, error: "error", pending: false })
+      fetchTenantsFailed({ result: null, error: ["error"], pending: false })
     );
   }
 }
 
-function* updateTenants(action: IUpdateTenantsRequestAction) {
-  const data = action.payload;
+function* fetchTenant(action: IFetchTenantRequestAction) {
   try {
     const response: IAxiosResponse<any> = yield call(
-      TenantService.updateTenant,
+      TenantService.fetchTenant,
       action.payload
     );
 
-    yield put(updateTenantSuccess({ result: data, error: "", pending: false }));
+    yield put(
+      fetchTenantSuccess({ result: response.data, error: [], pending: false })
+    );
   } catch (error) {
     yield put(
-      updateTenantFailed({ result: data, error: "error", pending: false })
+      fetchTenantFailed({ result: null, error: ["error"], pending: false })
+    );
+  }
+}
+
+function* updateTenant(action: IUpdateTenantsRequestAction) {
+  const data = action.payload;
+  try {
+    let response: IAxiosResponse<any>;
+
+    if (action.payload?.id) {
+      response = yield call(TenantService.updateTenant, action.payload);
+    } else {
+      response = yield call(TenantService.addTenant, action.payload);
+    }
+
+    yield put(
+      updateTenantsSuccess({
+        result: response?.data,
+        error: [],
+        pending: false,
+      })
+    );
+  } catch (error: any) {
+    yield put(
+      updateTenantsFailed({
+        error:
+          typeof error?.response?.data === "string"
+            ? [error?.response?.data]
+            : error?.response?.data,
+        pending: false,
+      })
     );
   }
 }
@@ -60,15 +94,15 @@ function* deleteTenant(action: IDeleteTenantRequestAction) {
     yield put(
       deleteTenantSuccess({
         result: id,
-        error: "",
+        error: [],
         pending: false,
       })
     );
-  } catch (error) {
+  } catch (error: any) {
     yield put(
       deleteTenantFailed({
-        result: id,
-        error: "error",
+        result: error?.response?.data,
+        error: ["error"],
         pending: false,
       })
     );
@@ -78,7 +112,8 @@ function* deleteTenant(action: IDeleteTenantRequestAction) {
 export default function* fetchTenantSaga() {
   yield all([
     takeLatest(FETCH_TENANTS_REQUEST, fetchTenants),
-    takeLatest(UPDATE_TENANT_REQUEST, updateTenants),
+    takeLatest(FETCH_TENANT_REQUEST, fetchTenant),
+    takeLatest(UPDATE_TENANT_REQUEST, updateTenant),
     takeLatest(DELETE_TENANT_REQUEST, deleteTenant),
   ]);
 }

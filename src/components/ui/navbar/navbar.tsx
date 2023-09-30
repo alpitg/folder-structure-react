@@ -1,17 +1,32 @@
 import { Button } from "primereact/button";
+import SelectTenantApp from "../../administration/select-tenant/select-tenant";
+import AuthService from "../../../services/auth.service";
+import { useNavigate } from "react-router";
+import { ROUTE_URL } from "../../auth/constants/routes.const";
+import { useDispatch } from "react-redux";
+import { logoutUserRequest } from "../../../store/actions/auth.action";
 import "./navbar.scss";
 
 const NavbarApp = ({ isOpenSideBar }: any) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onLogoutClick = () => {
+    dispatch(logoutUserRequest(AuthService.getAuthDetail()?.email));
+    navigate(ROUTE_URL.LOGIN);
+  };
+
   return (
     <>
       <div className="navbar-app">
         <nav
-          className={
-            "navbar-content " + (isOpenSideBar ? "margin-left" : "")
-          }
+          className={"navbar-content " + (isOpenSideBar ? "margin-left" : "")}
         >
           <div className="nav-left"> Techno </div>
           <div className="nav-right">
+            <>
+              <SelectTenantApp />
+            </>
             <Button
               icon="pi pi-moon"
               text
@@ -40,6 +55,15 @@ const NavbarApp = ({ isOpenSideBar }: any) => {
               severity="secondary"
               aria-label="notification"
             />
+            <Button
+              icon="pi pi-sign-out"
+              text
+              title="Logout"
+              severity="secondary"
+              aria-label="logout"
+              onClick={onLogoutClick}
+            />
+
             {/* <i className="pi pi-bell p-overlay-badge">
             <Badge value="2"></Badge>
           </i>

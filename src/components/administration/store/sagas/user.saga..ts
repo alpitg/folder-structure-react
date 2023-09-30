@@ -2,16 +2,21 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import {
   DELETE_USER_REQUEST,
   FETCH_USERS_REQUEST,
+  FETCH_USER_REQUEST,
   IDeleteUserRequestAction,
+  IFetchUserRequestAction,
   IFetchUsersRequestAction,
-  IUpdateUsersRequestAction,
+  IUpdateUserRequestAction,
+  UPDATE_USER_CLAIM_REQUEST,
   UPDATE_USER_REQUEST,
   deleteUserFailed,
   deleteUserSuccess,
+  fetchUserFailed,
+  fetchUserSuccess,
   fetchUsersFailed,
   fetchUsersSuccess,
-  updateUsersFailed,
-  updateUsersSuccess,
+  updateUserFailed,
+  updateUserSuccess,
 } from "../actions/user.action";
 import { IAxiosResponse } from "../../../../interfaces/generic.model";
 import UserService from "../../services/user.service";
@@ -24,27 +29,75 @@ function* fetchUsers(action: IFetchUsersRequestAction) {
     );
 
     yield put(
-      fetchUsersSuccess({ result: response.data, error: "", pending: false })
+      fetchUsersSuccess({
+        result: response.data,
+        error: [],
+        pending: false,
+      })
     );
   } catch (error) {
     yield put(
-      fetchUsersFailed({ result: null, error: "error", pending: false })
+      fetchUsersFailed({ result: null, error: ["error"], pending: false })
     );
   }
 }
 
-function* updateUsers(action: IUpdateUsersRequestAction) {
-  const data = action.payload;
+function* fetchUser(action: IFetchUserRequestAction) {
   try {
     const response: IAxiosResponse<any> = yield call(
-      UserService.updateUser,
+      UserService.fetchUser,
       action.payload
     );
 
-    yield put(updateUsersSuccess({ result: data, error: "", pending: false }));
+    yield put(
+      fetchUserSuccess({ result: response.data, error: [], pending: false })
+    );
   } catch (error) {
     yield put(
-      updateUsersFailed({ result: data, error: "error", pending: false })
+      fetchUserFailed({ result: null, error: ["error"], pending: false })
+    );
+  }
+}
+
+function* updateUser(action: IUpdateUserRequestAction) {
+  const data = action.payload;
+  try {
+    let response: IAxiosResponse<any>;
+
+    if (action.payload?.id) {
+      response = yield call(UserService.updateUser, action.payload);
+    } else {
+      response = yield call(UserService.addUser, action.payload);
+    }
+
+    yield put(
+      updateUserSuccess({ result: response?.data, error: [], pending: false })
+    );
+  } catch (error: any) {
+    yield put(
+      updateUserFailed({
+        error:
+          typeof error?.response?.data === "string"
+            ? [error?.response?.data]
+            : error?.response?.data,
+        pending: false,
+      })
+    );
+  }
+}
+
+function* updateUserClaim(action: IUpdateUserRequestAction) {
+  const data = action.payload;
+  try {
+    let response: IAxiosResponse<any>;
+    response = yield call(UserService.updateUserClaim, action.payload);
+
+    yield put(
+      updateUserSuccess({ result: response?.data, error: [], pending: false })
+    );
+  } catch (error) {
+    yield put(
+      updateUserFailed({ result: data, error: ["error"], pending: false })
     );
   }
 }
@@ -60,15 +113,15 @@ function* deleteUser(action: IDeleteUserRequestAction) {
     yield put(
       deleteUserSuccess({
         result: id,
-        error: "",
+        error: [],
         pending: false,
       })
     );
-  } catch (error) {
+  } catch (error: any) {
     yield put(
       deleteUserFailed({
-        result: id,
-        error: "error",
+        result: error?.response?.data,
+        error: ["error"],
         pending: false,
       })
     );
@@ -78,7 +131,9 @@ function* deleteUser(action: IDeleteUserRequestAction) {
 export default function* fetchUserSaga() {
   yield all([
     takeLatest(FETCH_USERS_REQUEST, fetchUsers),
-    takeLatest(UPDATE_USER_REQUEST, updateUsers),
+    takeLatest(FETCH_USER_REQUEST, fetchUser),
+    takeLatest(UPDATE_USER_REQUEST, updateUser),
+    takeLatest(UPDATE_USER_CLAIM_REQUEST, updateUserClaim),
     takeLatest(DELETE_USER_REQUEST, deleteUser),
   ]);
 }
