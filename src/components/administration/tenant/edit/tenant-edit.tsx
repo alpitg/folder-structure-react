@@ -300,7 +300,7 @@ const TenantEditApp = () => {
                                 : ""
                             }
                           >
-                            Tenant name *
+                            Tenancy name *
                           </label>
                           <InputText
                             id={fieldName?.name}
@@ -313,6 +313,181 @@ const TenantEditApp = () => {
                           />
                           <small className="p-error">{isError.name}</small>
                         </div>
+                      </div>
+                      <div className="col-sm-12">
+                        <div
+                          className={
+                            "d-flex flex-column gap-2 " + fieldName?.name
+                          }
+                        >
+                          <label
+                            htmlFor={fieldName?.name}
+                            className={
+                              isError.name.length > 0
+                                ? "is-invalid p-error"
+                                : ""
+                            }
+                          >
+                            Name *
+                          </label>
+                          <InputText
+                            id={fieldName?.name}
+                            value={tenantDetail?.name ?? ""}
+                            onChange={onFormValChange}
+                            className={
+                              isError.name.length > 0 ? "p-invalid" : ""
+                            }
+                            required
+                          />
+                          <small className="p-error">{isError.name}</small>
+                        </div>
+                      </div>
+                      <div className="col-sm-12">
+                        <div
+                          className={
+                            "d-flex flex-column gap-2 " + fieldName?.name
+                          }
+                        >
+                          <label
+                            htmlFor={fieldName?.name}
+                            className={
+                              isError.name.length > 0
+                                ? "is-invalid p-error"
+                                : ""
+                            }
+                          >
+                            Admin email *
+                          </label>
+                          <InputText
+                            id={fieldName?.name}
+                            value={tenantDetail?.name ?? ""}
+                            onChange={onFormValChange}
+                            className={
+                              isError.name.length > 0 ? "p-invalid" : ""
+                            }
+                            required
+                          />
+                          <small className="p-error">{isError.name}</small>
+                        </div>
+                      </div>
+                      <div className="col-sm-12">
+                        <div className="form-group">
+                          <div className="mt-3 mb-3">
+                            <Checkbox
+                              inputId={fieldName?.isActive}
+                              name={fieldName?.isActive}
+                              value={tenantDetail.isActive}
+                              onChange={onFormValChange}
+                              checked={tenantDetail.isActive}
+                            ></Checkbox>
+                            <label
+                              htmlFor={fieldName?.isActive}
+                              className="ms-2"
+                            >
+                              <figcaption>
+                                Password
+                                <span className="inline-sub-title ms-2">
+                                  Generate random password.
+                                </span>
+                              </figcaption>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-12">
+                        <div
+                          className={
+                            "d-flex flex-column gap-2 " + fieldName?.name
+                          }
+                        >
+                          <label
+                            htmlFor={fieldName?.name}
+                            className={
+                              isError.name.length > 0
+                                ? "is-invalid p-error"
+                                : ""
+                            }
+                          >
+                            Edition
+                          </label>
+                          <InputText
+                            id={fieldName?.name}
+                            value={tenantDetail?.name ?? ""}
+                            onChange={onFormValChange}
+                            className={
+                              isError.name.length > 0 ? "p-invalid" : ""
+                            }
+                            required
+                          />
+                          <small className="p-error">{isError.name}</small>
+                        </div>
+                      </div>
+                      <div className="col-sm-12">
+                        <div
+                          className={
+                            "d-flex flex-column gap-2 " + fieldName?.name
+                          }
+                        >
+                          <label
+                            htmlFor={fieldName?.name}
+                            className={
+                              isError.name.length > 0
+                                ? "is-invalid p-error"
+                                : ""
+                            }
+                          >
+                            Subscription end date (UTC)*
+                          </label>
+                          <InputText
+                            id={fieldName?.name}
+                            value={tenantDetail?.name ?? ""}
+                            onChange={onFormValChange}
+                            type="date"
+                            className={
+                              isError.name.length > 0 ? "p-invalid" : ""
+                            }
+                            required
+                          />
+                          <small className="p-error">{isError.name}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="mt-3 mb-3">
+                        <Checkbox
+                          inputId={fieldName?.isActive}
+                          name={fieldName?.isActive}
+                          value={tenantDetail.isActive}
+                          onChange={onFormValChange}
+                          checked={tenantDetail.isActive}
+                        ></Checkbox>
+                        <label htmlFor={fieldName?.isActive} className="ms-2">
+                          <figcaption>
+                            Trial Period
+                            <span className="inline-sub-title ms-2">
+                              Is in trial period ?
+                            </span>
+                          </figcaption>
+                        </label>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="mt-3 mb-3">
+                        <Checkbox
+                          inputId={fieldName?.isActive}
+                          name={fieldName?.isActive}
+                          value={tenantDetail.isActive}
+                          onChange={onFormValChange}
+                          checked={tenantDetail.isActive}
+                        ></Checkbox>
+                        <label htmlFor={fieldName?.isActive} className="ms-2">
+                          <figcaption>
+                            Change password
+                            <span className="inline-sub-title ms-2">
+                              Should change password in next login.
+                            </span>
+                          </figcaption>
+                        </label>
                       </div>
                     </div>
                     <div className="form-group">
