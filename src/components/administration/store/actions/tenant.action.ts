@@ -8,7 +8,7 @@
  */
 
 import { AppStore } from "../../../../interfaces/generic.model";
-import { ITenantModel } from "../../../../interfaces/tenant.model";
+import { TenantModel } from "../../../../interfaces/tenant.model";
 
 export const FETCH_GLOBAL_SELECTED_TENANT = "FETCH_GLOBAL_SELECTED_TENANT";
 export const UPDATE_GLOBAL_SELECTED_TENANT = "UPDATE_GLOBAL_SELECTED_TENANT";
@@ -47,12 +47,12 @@ export interface IFetchTenantsRequestAction {
 
 export interface IFetchTenantsSuccessAction {
   type: typeof FETCH_TENANTS_SUCCESS;
-  payload: AppStore<ITenantModel>;
+  payload: AppStore<TenantModel>;
 }
 
 export interface IFetchTenantsFailureAction {
   type: typeof FETCH_TENANTS_FAILED;
-  payload: AppStore<ITenantModel>;
+  payload: AppStore<TenantModel>;
 }
 
 // FETCH
@@ -63,28 +63,28 @@ export interface IFetchTenantRequestAction {
 
 export interface IFetchTenantSuccessAction {
   type: typeof FETCH_TENANT_SUCCESS;
-  payload: AppStore<ITenantModel>;
+  payload: AppStore<TenantModel>;
 }
 
 export interface IFetchTenantFailureAction {
   type: typeof FETCH_TENANT_FAILED;
-  payload: AppStore<ITenantModel>;
+  payload: AppStore<TenantModel>;
 }
 
 // UPDATE
 export interface IUpdateTenantsRequestAction {
   type: typeof UPDATE_TENANT_REQUEST;
-  payload: ITenantModel;
+  payload: TenantModel;
 }
 
 export interface IUpdateTenantsSuccessAction {
   type: typeof UPDATE_TENANTS_SUCCESS;
-  payload: AppStore<ITenantModel>;
+  payload: AppStore<TenantModel>;
 }
 
 export interface IUpdateTenantsFailureAction {
   type: typeof UPDATE_TENANTS_FAILED;
-  payload: AppStore<ITenantModel>;
+  payload: AppStore<TenantModel>;
 }
 
 // DELETE
@@ -132,14 +132,14 @@ export const fetchTenantsRequest = (): IFetchTenantsRequestAction => ({
 });
 
 export const fetchTenantsSuccess = (
-  payload: AppStore<ITenantModel>
+  payload: AppStore<TenantModel>
 ): IFetchTenantsSuccessAction => ({
   type: FETCH_TENANTS_SUCCESS,
   payload,
 });
 
 export const fetchTenantsFailed = (
-  payload: AppStore<ITenantModel>
+  payload: AppStore<TenantModel>
 ): IFetchTenantsFailureAction => ({
   type: FETCH_TENANTS_FAILED,
   payload,
@@ -154,14 +154,14 @@ export const fetchTenantRequest = (
 });
 
 export const fetchTenantSuccess = (
-  payload: AppStore<ITenantModel>
+  payload: AppStore<TenantModel>
 ): IFetchTenantSuccessAction => ({
   type: FETCH_TENANT_SUCCESS,
   payload,
 });
 
 export const fetchTenantFailed = (
-  payload: AppStore<ITenantModel>
+  payload: AppStore<TenantModel>
 ): IFetchTenantFailureAction => ({
   type: FETCH_TENANT_FAILED,
   payload,
@@ -169,21 +169,21 @@ export const fetchTenantFailed = (
 
 // UPDATE
 export const updateTenantsRequest = (
-  payload: ITenantModel
+  payload: TenantModel
 ): IUpdateTenantsRequestAction => ({
   type: UPDATE_TENANT_REQUEST,
   payload,
 });
 
 export const updateTenantsSuccess = (
-  payload: AppStore<ITenantModel>
+  payload: AppStore<TenantModel>
 ): IUpdateTenantsSuccessAction => ({
   type: UPDATE_TENANTS_SUCCESS,
   payload,
 });
 
 export const updateTenantsFailed = (
-  payload: AppStore<ITenantModel>
+  payload: AppStore<TenantModel>
 ): IUpdateTenantsFailureAction => ({
   type: UPDATE_TENANTS_FAILED,
   payload,

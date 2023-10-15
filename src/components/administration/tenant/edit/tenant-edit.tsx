@@ -9,7 +9,7 @@ import { Checkbox } from "primereact/checkbox";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import {
   TenantFormModel,
-  ITenantModel,
+  TenantModel,
 } from "../../../../interfaces/tenant.model";
 import {
   fetchTenantRequest,
@@ -113,21 +113,23 @@ const TenantEditApp = () => {
 
   // NOTE: Handle Add/Update both
   const postUpdateTenantDetail = () => {
-    let tenantDetailPostData: ITenantModel;
+    let tenantDetailPostData: TenantModel;
     if (id) {
       // NOTE: Update model
       tenantDetailPostData = {
         id: tenantDetail.id,
         name: tenantDetail.name,
+        email: tenantDetail.email,
         displayName: tenantDetail.displayName,
-        isActive: tenantDetail.isActive,
+        isActive: tenantDetail?.isActive ? true : false,
       };
     } else {
       // NOTE: Add model
       tenantDetailPostData = {
         name: tenantDetail.name,
+        email: tenantDetail.email,
         displayName: tenantDetail.displayName,
-        isActive: tenantDetail.isActive,
+        isActive: tenantDetail?.isActive ? true : false,
       };
       // tenantDetailPostData = {
       //   name: tenantDetail.name,
@@ -218,6 +220,17 @@ const TenantEditApp = () => {
           isError: {
             ...prev.isError,
             name: errorMsg,
+          },
+        }));
+        break;
+      case fieldName?.email:
+        errorMsg = tenantNameIsValid(value).errorMsg;
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.email]: value,
+          isError: {
+            ...prev.isError,
+            email: errorMsg,
           },
         }));
         break;
@@ -345,13 +358,13 @@ const TenantEditApp = () => {
                       <div className="col-sm-12">
                         <div
                           className={
-                            "d-flex flex-column gap-2 " + fieldName?.name
+                            "d-flex flex-column gap-2 " + fieldName?.email
                           }
                         >
                           <label
-                            htmlFor={fieldName?.name}
+                            htmlFor={fieldName?.email}
                             className={
-                              isError.name.length > 0
+                              isError.email.length > 0
                                 ? "is-invalid p-error"
                                 : ""
                             }
@@ -359,15 +372,15 @@ const TenantEditApp = () => {
                             Admin email *
                           </label>
                           <InputText
-                            id={fieldName?.name}
-                            value={tenantDetail?.name ?? ""}
+                            id={fieldName?.email}
+                            value={tenantDetail?.email ?? ""}
                             onChange={onFormValChange}
                             className={
-                              isError.name.length > 0 ? "p-invalid" : ""
+                              isError.email.length > 0 ? "p-invalid" : ""
                             }
                             required
                           />
-                          <small className="p-error">{isError.name}</small>
+                          <small className="p-error">{isError.email}</small>
                         </div>
                       </div>
                       <div className="col-sm-12">
@@ -376,9 +389,9 @@ const TenantEditApp = () => {
                             <Checkbox
                               inputId={fieldName?.isActive}
                               name={fieldName?.isActive}
-                              value={tenantDetail.isActive}
+                              value={tenantDetail?.isActive ? true : false}
                               onChange={onFormValChange}
-                              checked={tenantDetail.isActive}
+                              checked={tenantDetail?.isActive ? true : false}
                             ></Checkbox>
                             <label
                               htmlFor={fieldName?.isActive}
@@ -457,9 +470,9 @@ const TenantEditApp = () => {
                         <Checkbox
                           inputId={fieldName?.isActive}
                           name={fieldName?.isActive}
-                          value={tenantDetail.isActive}
+                          value={tenantDetail?.isActive ? true : false}
                           onChange={onFormValChange}
-                          checked={tenantDetail.isActive}
+                          checked={tenantDetail?.isActive ? true : false}
                         ></Checkbox>
                         <label htmlFor={fieldName?.isActive} className="ms-2">
                           <figcaption>
@@ -476,9 +489,9 @@ const TenantEditApp = () => {
                         <Checkbox
                           inputId={fieldName?.isActive}
                           name={fieldName?.isActive}
-                          value={tenantDetail.isActive}
+                          value={tenantDetail?.isActive ? true : false}
                           onChange={onFormValChange}
-                          checked={tenantDetail.isActive}
+                          checked={tenantDetail?.isActive ? true : false}
                         ></Checkbox>
                         <label htmlFor={fieldName?.isActive} className="ms-2">
                           <figcaption>
@@ -495,9 +508,9 @@ const TenantEditApp = () => {
                         <Checkbox
                           inputId={fieldName?.isActive}
                           name={fieldName?.isActive}
-                          value={tenantDetail.isActive}
+                          value={tenantDetail?.isActive ? true : false}
                           onChange={onFormValChange}
-                          checked={tenantDetail.isActive}
+                          checked={tenantDetail?.isActive ? true : false}
                         ></Checkbox>
                         <label htmlFor={fieldName?.isActive} className="ms-2">
                           <figcaption>

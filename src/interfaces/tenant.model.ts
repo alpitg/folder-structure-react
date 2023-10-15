@@ -1,14 +1,8 @@
-export interface ITenantModel {
-  id?: string;
-  name: string;
-  displayName?: string;
-  isActive?: boolean;
-  creationTime?: any;
-}
 
-export class TenantModel implements ITenantModel {
+export class TenantModel {
   id?: string;
   name: string;
+  email: string;
   displayName?: string;
   isActive?: boolean;
   creationTime?: any;
@@ -16,43 +10,41 @@ export class TenantModel implements ITenantModel {
   constructor() {
     this.id = "";
     this.name = "";
+    this.email = "";
     this.displayName = "";
     this.isActive = false;
     this.creationTime = new Date();
   }
 }
 
-export class TenantFormModel {
-  id: string;
-  name: string;
-  displayName: string;
-  isActive: boolean;
-
+export class TenantFormModel extends TenantModel {
   isError: {
     id: string;
     name: string;
+    email: string;
     displayName: string;
   };
   fieldName: {
     id: string;
     name: string;
+    email: string;
     displayName: string;
     isActive: string;
   };
 
   constructor() {
-    this.id = "";
-    this.name = "";
-    this.displayName = "";
-    this.isActive = false;
+    super();
+
     this.isError = {
       id: "",
       name: "",
+      email: "",
       displayName: "",
     };
     this.fieldName = {
       id: "id",
       name: "name",
+      email: "email",
       displayName: "displayName",
       isActive: "isActive",
     };
@@ -68,22 +60,22 @@ export interface ITenantsRequestModel {
 //#region Role model - Reducer
 export class TenantAppStore {
   list: {
-    result: ITenantModel[] | null | undefined;
+    result: TenantModel[] | null | undefined;
     pending: boolean;
     error: any;
   };
   view: {
-    result: ITenantModel | null | undefined;
+    result: TenantModel | null | undefined;
     pending: boolean;
     error: any;
   };
   update: {
-    result: ITenantModel | null | undefined;
+    result: TenantModel | null | undefined;
     pending: boolean;
     error: any;
   };
   delete: {
-    result: ITenantModel | null | undefined;
+    result: TenantModel | null | undefined;
     pending: boolean;
     error: any;
   };

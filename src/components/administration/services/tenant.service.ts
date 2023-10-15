@@ -1,5 +1,5 @@
 import { ENDPOINT } from "../../../constants/global-contants/endpoint.const";
-import { ITenantModel } from "../../../interfaces/tenant.model";
+import { TenantModel } from "../../../interfaces/tenant.model";
 import { axiosInstance } from "../../../utils/axios.util";
 
 export default class TenantService {
@@ -16,14 +16,14 @@ export default class TenantService {
     );
   };
 
-  static addTenant = (param: ITenantModel) => {
+  static addTenant = (param: TenantModel) => {
     return axiosInstance.post(
       ENDPOINT.API_BASE_URL + ENDPOINT.TENANT.API.ADD_TENANT,
       param
     );
   };
 
-  static updateTenant = (param: ITenantModel) => {
+  static updateTenant = (param: TenantModel) => {
     return axiosInstance.put(
       ENDPOINT.API_BASE_URL +
         ENDPOINT.TENANT.API.UPDATE_TENANT +

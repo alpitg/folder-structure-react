@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ITenantModel } from "../../../../../interfaces/tenant.model";
+import { TenantModel } from "../../../../../interfaces/tenant.model";
 import { ROUTE_URL } from "../../../../auth/constants/routes.const";
 import { useDispatch } from "react-redux";
 import { deleteTenantRequest } from "../../../store/actions/tenant.action";
@@ -11,7 +11,7 @@ import {
 } from "../../../../../constants/global-contants/claims.const";
 import "./tenant-list-item.scss";
 
-const TenantListItemApp = (props: { tenant: ITenantModel }) => {
+const TenantListItemApp = (props: { tenant: TenantModel }) => {
   const dispatch = useDispatch();
 
   const deleteTenant = (id: string) => {

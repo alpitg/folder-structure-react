@@ -6,7 +6,7 @@ import {
   updateGlobalSelectedTenantAction,
 } from "../store/actions/tenant.action";
 import { AppState } from "../../../store/reducers/root.reducer";
-import { ITenantModel } from "../../../interfaces/tenant.model";
+import { TenantModel } from "../../../interfaces/tenant.model";
 
 const SelectTenantApp = () => {
   const authDetail = useSelector((x: AppState) => x.authenticate?.result);
@@ -27,7 +27,7 @@ const SelectTenantApp = () => {
       <Dropdown
         value={tenants?.globalSelectedTenant}
         onChange={onFormValChange}
-        options={tenants?.list?.result?.map((x: ITenantModel) => {
+        options={tenants?.list?.result?.map((x: TenantModel) => {
           return {
             name: x.name,
             id: x.id,

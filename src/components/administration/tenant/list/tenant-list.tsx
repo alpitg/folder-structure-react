@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { AppState } from "../../../../store/reducers/root.reducer";
-import { ITenantModel } from "../../../../interfaces/tenant.model";
+import { TenantModel } from "../../../../interfaces/tenant.model";
 import HeaderInlineTextApp from "../../../ui/header-inline-text/header-inline-text";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
 import NoRecordApp from "../../../ui/no-record/no-record";
@@ -68,7 +68,7 @@ const TenantListApp = () => {
         <div className="table-responsive">
           <table className="table">
             <tbody>
-              {tenants?.list?.result?.map((tenant: ITenantModel) => {
+              {tenants?.list?.result?.map((tenant: TenantModel) => {
                 return <TenantListItemApp tenant={tenant} key={tenant.id} />;
               })}
             </tbody>

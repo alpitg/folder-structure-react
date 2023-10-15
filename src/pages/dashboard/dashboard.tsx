@@ -1,8 +1,10 @@
+import DoughnutChartApp from "../../components/chart/dough-chart/dough-chart";
+
 const DashboardApp = () => {
 
     return (
         <>
-            Hi From Dashboard
+            <DoughnutChartApp />
         </>
     );
 }
