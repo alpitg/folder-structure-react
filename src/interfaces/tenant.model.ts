@@ -1,34 +1,65 @@
 
 export class TenantModel {
   id?: string;
+  tenancyName: string;
   name: string;
   email: string;
-  displayName?: string;
+  shouldGenerateRandomPasssword: boolean;
+  shouldUseHostDatabase: boolean;
+  connectionString: string;
+  edition?: string;
+  address?: string;
+  subscriptionEndDate?: any;
+  isInTrialPeriod?: boolean;
+  ShouldChangePasswordOnNextLogin?: boolean;
   isActive?: boolean;
-  creationTime?: any;
 
   constructor() {
-    this.id = "";
+    this.id = undefined;
+    this.tenancyName = "";
     this.name = "";
     this.email = "";
-    this.displayName = "";
-    this.isActive = false;
-    this.creationTime = new Date();
+    this.shouldGenerateRandomPasssword = true;
+    this.shouldUseHostDatabase = true;
+    this.connectionString = "";
+    this.edition = "";
+    this.address = "";
+    this.subscriptionEndDate = undefined;
+    this.isInTrialPeriod = false;
+    this.ShouldChangePasswordOnNextLogin = false;
+    this.isActive = true;
   }
 }
 
 export class TenantFormModel extends TenantModel {
   isError: {
     id: string;
+    tenancyName: string;
     name: string;
     email: string;
-    displayName: string;
+    shouldGenerateRandomPasssword: string;
+    shouldUseHostDatabase: string;
+    connectionString: string;
+    edition: string;
+    address: string;
+    subscriptionEndDate: string;
+    isInTrialPeriod: string;
+    ShouldChangePasswordOnNextLogin: string;
+    isActive: string;
   };
   fieldName: {
     id: string;
+    tenancyName: string;
     name: string;
     email: string;
-    displayName: string;
+    shouldGenerateRandomPasssword: string;
+    shouldUseHostDatabase: string;
+    connectionString: string;
+    edition: string;
+    address: string;
+    subscriptionEndDate: string;
+    isInTrialPeriod: string;
+    ShouldChangePasswordOnNextLogin: string;
     isActive: string;
   };
 
@@ -36,16 +67,33 @@ export class TenantFormModel extends TenantModel {
     super();
 
     this.isError = {
-      id: "",
+      id: "id",
+      tenancyName: "",
       name: "",
       email: "",
-      displayName: "",
+      shouldGenerateRandomPasssword: "",
+      shouldUseHostDatabase: "",
+      connectionString: "",
+      edition: "",
+      address: "",
+      subscriptionEndDate: "",
+      isInTrialPeriod: "",
+      ShouldChangePasswordOnNextLogin: "",
+      isActive: "",
     };
     this.fieldName = {
       id: "id",
+      tenancyName: "tenancyName",
       name: "name",
       email: "email",
-      displayName: "displayName",
+      shouldGenerateRandomPasssword: "",
+      shouldUseHostDatabase: "",
+      connectionString: "connectionString",
+      edition: "edition",
+      address: "address",
+      subscriptionEndDate: "subscriptionEndDate",
+      isInTrialPeriod: "isInTrialPeriod",
+      ShouldChangePasswordOnNextLogin: "ShouldChangePasswordOnNextLogin",
       isActive: "isActive",
     };
   }

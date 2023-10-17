@@ -97,11 +97,12 @@ const UserEditApp = () => {
       address: userDetail?.address,
       password: userDetail?.password ?? "",
       isActive: userDetail?.isActive,
+      ShouldChangePasswordOnNextLogin: userDetail?.ShouldChangePasswordOnNextLogin,
       isImageUpdate: userDetail?.isImageUpdate,
       imgSrc: "" as string,
       userRoles: userDetail?.userRoles
         ? userDetail?.userRoles?.map((x) => {
-          return { userId: x.userId, roleId: x.roleId } as IUserRoleModel;
+          return { userId: x.userId ?? null, roleId: x.roleId ?? null } as IUserRoleModel;
         })
         : [],
     };
@@ -157,7 +158,8 @@ const UserEditApp = () => {
 
     isValid = nameIsValid(userDetail.lastName).isValid;
     isValid = emailAddressIsValid(userDetail.email).isValid;
-    isValid = passwordIsValid(userDetail.password).isValid;
+    if (!id)
+      isValid = passwordIsValid(userDetail.password).isValid;
 
     return isValid;
   };
@@ -275,10 +277,10 @@ const UserEditApp = () => {
           },
         }));
         break;
-      case fieldName.shouldChangePasswordOnNextLogin:
+      case fieldName.ShouldChangePasswordOnNextLogin:
         setUserDetail((prev: UserFormModel) => ({
           ...prev,
-          [fieldName.shouldChangePasswordOnNextLogin]: value,
+          [fieldName.ShouldChangePasswordOnNextLogin]: value,
         }));
         break;
       case fieldName.isActive:
@@ -529,20 +531,20 @@ const UserEditApp = () => {
                             <div className="mt-3 mb-3">
                               <Checkbox
                                 inputId={
-                                  fieldName.shouldChangePasswordOnNextLogin
+                                  fieldName.ShouldChangePasswordOnNextLogin
                                 }
-                                name={fieldName.shouldChangePasswordOnNextLogin}
+                                name={fieldName.ShouldChangePasswordOnNextLogin}
                                 value={
-                                  userDetail.shouldChangePasswordOnNextLogin
+                                  userDetail.ShouldChangePasswordOnNextLogin ? true : false
                                 }
                                 onChange={onFormValChange}
                                 checked={
-                                  userDetail.shouldChangePasswordOnNextLogin
+                                  userDetail.ShouldChangePasswordOnNextLogin ? true : false
                                 }
                               ></Checkbox>
                               <label
                                 htmlFor={
-                                  fieldName.shouldChangePasswordOnNextLogin
+                                  fieldName.ShouldChangePasswordOnNextLogin
                                 }
                                 className="ms-2"
                               >

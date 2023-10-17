@@ -21,6 +21,7 @@ export class UserModel {
   isEmailConfirmed?: boolean;
   isActive: boolean;
   isImageUpdate?: boolean;
+  ShouldChangePasswordOnNextLogin?: boolean;
   imgSrc?: string;
   userRoles?: IUserRoleModel[];
   userClaims?: IUserClaimsModel[];
@@ -38,32 +39,16 @@ export class UserModel {
     this.provider = "";
     this.password = "";
     this.isEmailConfirmed = false;
-    this.isActive = false;
+    this.isActive = true;
     this.isImageUpdate = false;
+    this.ShouldChangePasswordOnNextLogin = false;
     this.imgSrc = "";
     this.userRoles = [];
     this.userClaims = [];
   }
 }
-export class UserFormModel {
-  id: string;
-  tenantId?: string;
-  userName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  address: string;
-  profilePhoto: string;
-  provider: string;
-  password?: string;
-  isEmailConfirmed: boolean;
-  isActive: boolean;
-  userRoles?: IUserRoleModel[];
-  userClaims?: IUserClaimsModel[];
-  isImageUpdate?: boolean;
-  shouldChangePasswordOnNextLogin: boolean;
-  isLockoutEnabled: boolean;
+export class UserFormModel extends UserModel {
+
   isError: {
     id: string;
     tenantId: string;
@@ -88,29 +73,13 @@ export class UserFormModel {
     address: string;
     isActive: string;
     userRoles: string;
-    shouldChangePasswordOnNextLogin: string;
+    ShouldChangePasswordOnNextLogin: string;
     isLockoutEnabled: string;
   };
 
   constructor() {
-    this.id = "";
-    this.tenantId = "";
-    this.userName = "";
-    this.email = "";
-    this.firstName = "";
-    this.lastName = "";
-    this.phoneNumber = "";
-    this.address = "";
-    this.profilePhoto = "";
-    this.provider = "";
-    this.password = "";
-    this.isEmailConfirmed = false;
-    this.isActive = true;
-    this.userRoles = [];
-    this.userClaims = [];
-    this.isImageUpdate = false;
-    this.shouldChangePasswordOnNextLogin = false;
-    this.isLockoutEnabled = false;
+    super()
+
     this.isError = {
       id: "",
       tenantId: "",
@@ -135,7 +104,7 @@ export class UserFormModel {
       address: "address",
       isActive: "isActive",
       userRoles: "userRoles",
-      shouldChangePasswordOnNextLogin: "shouldChangePasswordOnNextLogin",
+      ShouldChangePasswordOnNextLogin: "ShouldChangePasswordOnNextLogin",
       isLockoutEnabled: "isLockoutEnabled",
     };
   }

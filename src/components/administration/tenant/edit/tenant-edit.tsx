@@ -118,18 +118,34 @@ const TenantEditApp = () => {
       // NOTE: Update model
       tenantDetailPostData = {
         id: tenantDetail.id,
+        tenancyName: tenantDetail.tenancyName,
         name: tenantDetail.name,
         email: tenantDetail.email,
-        displayName: tenantDetail.displayName,
-        isActive: tenantDetail?.isActive ? true : false,
+        shouldGenerateRandomPasssword: tenantDetail.shouldGenerateRandomPasssword,
+        shouldUseHostDatabase: tenantDetail.shouldUseHostDatabase,
+        connectionString: tenantDetail.connectionString,
+        edition: tenantDetail.edition,
+        address: tenantDetail.address,
+        subscriptionEndDate: tenantDetail.subscriptionEndDate,
+        isInTrialPeriod: tenantDetail.isInTrialPeriod,
+        ShouldChangePasswordOnNextLogin: tenantDetail.ShouldChangePasswordOnNextLogin,
+        isActive: tenantDetail.isActive,
       };
     } else {
       // NOTE: Add model
       tenantDetailPostData = {
+        tenancyName: tenantDetail.tenancyName,
         name: tenantDetail.name,
         email: tenantDetail.email,
-        displayName: tenantDetail.displayName,
-        isActive: tenantDetail?.isActive ? true : false,
+        shouldGenerateRandomPasssword: tenantDetail.shouldGenerateRandomPasssword,
+        shouldUseHostDatabase: tenantDetail.shouldUseHostDatabase,
+        connectionString: tenantDetail.connectionString,
+        edition: tenantDetail.edition,
+        address: tenantDetail.address,
+        subscriptionEndDate: tenantDetail.subscriptionEndDate,
+        isInTrialPeriod: tenantDetail.isInTrialPeriod,
+        ShouldChangePasswordOnNextLogin: tenantDetail.ShouldChangePasswordOnNextLogin,
+        isActive: tenantDetail.isActive,
       };
       // tenantDetailPostData = {
       //   name: tenantDetail.name,
@@ -212,6 +228,14 @@ const TenantEditApp = () => {
   const formValChange = (field: string, value: any) => {
     let errorMsg = "";
     switch (field) {
+
+      case fieldName?.tenancyName:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.tenancyName]: value,
+        }));
+        break;
+
       case fieldName?.name:
         errorMsg = tenantNameIsValid(value).errorMsg;
         setTenantDetail((prev: TenantFormModel) => ({
@@ -223,6 +247,7 @@ const TenantEditApp = () => {
           },
         }));
         break;
+
       case fieldName?.email:
         errorMsg = tenantNameIsValid(value).errorMsg;
         setTenantDetail((prev: TenantFormModel) => ({
@@ -234,12 +259,70 @@ const TenantEditApp = () => {
           },
         }));
         break;
+
+      case fieldName?.shouldGenerateRandomPasssword:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.shouldGenerateRandomPasssword]: value,
+        }));
+        break;
+
+      case fieldName?.shouldUseHostDatabase:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.shouldUseHostDatabase]: value,
+        }));
+        break;
+
+      case fieldName?.connectionString:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.connectionString]: value,
+        }));
+        break;
+
+      case fieldName?.edition:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.edition]: value,
+        }));
+        break;
+
+      case fieldName?.address:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.address]: value,
+        }));
+        break;
+
+      case fieldName?.subscriptionEndDate:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.subscriptionEndDate]: value,
+        }));
+        break;
+
+      case fieldName?.isInTrialPeriod:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.isInTrialPeriod]: value,
+        }));
+        break;
+
+      case fieldName?.ShouldChangePasswordOnNextLogin:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.ShouldChangePasswordOnNextLogin]: value,
+        }));
+        break;
+
       case fieldName?.isActive:
         setTenantDetail((prev: TenantFormModel) => ({
           ...prev,
           [fieldName?.isActive]: value,
         }));
         break;
+
       default:
         break;
     }
@@ -302,13 +385,13 @@ const TenantEditApp = () => {
                       <div className="col-sm-12">
                         <div
                           className={
-                            "d-flex flex-column gap-2 " + fieldName?.name
+                            "d-flex flex-column gap-2 " + fieldName?.tenancyName
                           }
                         >
                           <label
-                            htmlFor={fieldName?.name}
+                            htmlFor={fieldName?.tenancyName}
                             className={
-                              isError.name.length > 0
+                              isError.tenancyName.length > 0
                                 ? "is-invalid p-error"
                                 : ""
                             }
@@ -316,15 +399,15 @@ const TenantEditApp = () => {
                             Tenancy name *
                           </label>
                           <InputText
-                            id={fieldName?.name}
-                            value={tenantDetail?.name ?? ""}
+                            id={fieldName?.tenancyName}
+                            value={tenantDetail?.tenancyName ?? ""}
                             onChange={onFormValChange}
                             className={
-                              isError.name.length > 0 ? "p-invalid" : ""
+                              isError.tenancyName.length > 0 ? "p-invalid" : ""
                             }
                             required
                           />
-                          <small className="p-error">{isError.name}</small>
+                          <small className="p-error">{isError.tenancyName}</small>
                         </div>
                       </div>
                       <div className="col-sm-12">
@@ -358,13 +441,13 @@ const TenantEditApp = () => {
                       <div className="form-group">
                         <div className="mt-3 mb-3">
                           <Checkbox
-                            inputId={fieldName?.isActive}
-                            name={fieldName?.isActive}
-                            value={tenantDetail?.isActive ? true : false}
+                            inputId={fieldName?.shouldUseHostDatabase}
+                            name={fieldName?.shouldUseHostDatabase}
+                            value={tenantDetail?.shouldUseHostDatabase ? true : false}
                             onChange={onFormValChange}
-                            checked={tenantDetail?.isActive ? true : false}
+                            checked={tenantDetail?.shouldUseHostDatabase ? true : false}
                           ></Checkbox>
-                          <label htmlFor={fieldName?.isActive} className="ms-2">
+                          <label htmlFor={fieldName?.shouldUseHostDatabase} className="ms-2">
                             <figcaption>
                               Host Database
                               <span className="inline-sub-title ms-2">
@@ -406,14 +489,15 @@ const TenantEditApp = () => {
                         <div className="form-group">
                           <div className="mt-3 mb-3">
                             <Checkbox
-                              inputId={fieldName?.isActive}
-                              name={fieldName?.isActive}
-                              value={tenantDetail?.isActive ? true : false}
+                              inputId={fieldName?.shouldGenerateRandomPasssword}
+                              name={fieldName?.shouldGenerateRandomPasssword}
+                              value={tenantDetail?.shouldGenerateRandomPasssword ? true : false}
                               onChange={onFormValChange}
-                              checked={tenantDetail?.isActive ? true : false}
+                              checked={tenantDetail?.shouldGenerateRandomPasssword ? true : false}
+                              disabled
                             ></Checkbox>
                             <label
-                              htmlFor={fieldName?.isActive}
+                              htmlFor={fieldName?.shouldGenerateRandomPasssword}
                               className="ms-2"
                             >
                               <figcaption>
@@ -429,13 +513,13 @@ const TenantEditApp = () => {
                       <div className="col-sm-12">
                         <div
                           className={
-                            "d-flex flex-column gap-2 " + fieldName?.name
+                            "d-flex flex-column gap-2 " + fieldName?.edition
                           }
                         >
                           <label
-                            htmlFor={fieldName?.name}
+                            htmlFor={fieldName?.edition}
                             className={
-                              isError.name.length > 0
+                              isError.edition.length > 0
                                 ? "is-invalid p-error"
                                 : ""
                             }
@@ -443,27 +527,27 @@ const TenantEditApp = () => {
                             Edition
                           </label>
                           <InputText
-                            id={fieldName?.name}
-                            value={tenantDetail?.name ?? ""}
+                            id={fieldName?.edition}
+                            value={tenantDetail?.edition ?? ""}
                             onChange={onFormValChange}
                             className={
-                              isError.name.length > 0 ? "p-invalid" : ""
+                              isError.edition.length > 0 ? "p-invalid" : ""
                             }
                             required
                           />
-                          <small className="p-error">{isError.name}</small>
+                          <small className="p-error">{isError.edition}</small>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div
                           className={
-                            "d-flex flex-column gap-2 " + fieldName?.name
+                            "d-flex flex-column gap-2 " + fieldName?.subscriptionEndDate
                           }
                         >
                           <label
-                            htmlFor={fieldName?.name}
+                            htmlFor={fieldName?.subscriptionEndDate}
                             className={
-                              isError.name.length > 0
+                              isError.subscriptionEndDate.length > 0
                                 ? "is-invalid p-error"
                                 : ""
                             }
@@ -471,29 +555,29 @@ const TenantEditApp = () => {
                             Subscription end date (UTC)*
                           </label>
                           <InputText
-                            id={fieldName?.name}
-                            value={tenantDetail?.name ?? ""}
+                            id={fieldName?.subscriptionEndDate}
+                            value={tenantDetail?.subscriptionEndDate ?? ""}
                             onChange={onFormValChange}
                             type="date"
                             className={
-                              isError.name.length > 0 ? "p-invalid" : ""
+                              isError.subscriptionEndDate.length > 0 ? "p-invalid" : ""
                             }
                             required
                           />
-                          <small className="p-error">{isError.name}</small>
+                          <small className="p-error">{isError.subscriptionEndDate}</small>
                         </div>
                       </div>
                     </div>
                     <div className="form-group">
                       <div className="mt-3 mb-3">
                         <Checkbox
-                          inputId={fieldName?.isActive}
-                          name={fieldName?.isActive}
-                          value={tenantDetail?.isActive ? true : false}
+                          inputId={fieldName?.isInTrialPeriod}
+                          name={fieldName?.isInTrialPeriod}
+                          value={tenantDetail?.isInTrialPeriod ? true : false}
                           onChange={onFormValChange}
-                          checked={tenantDetail?.isActive ? true : false}
+                          checked={tenantDetail?.isInTrialPeriod ? true : false}
                         ></Checkbox>
-                        <label htmlFor={fieldName?.isActive} className="ms-2">
+                        <label htmlFor={fieldName?.isInTrialPeriod} className="ms-2">
                           <figcaption>
                             Trial Period
                             <span className="inline-sub-title ms-2">
@@ -506,13 +590,13 @@ const TenantEditApp = () => {
                     <div className="form-group">
                       <div className="mt-3 mb-3">
                         <Checkbox
-                          inputId={fieldName?.isActive}
-                          name={fieldName?.isActive}
-                          value={tenantDetail?.isActive ? true : false}
+                          inputId={fieldName?.ShouldChangePasswordOnNextLogin}
+                          name={fieldName?.ShouldChangePasswordOnNextLogin}
+                          value={tenantDetail?.ShouldChangePasswordOnNextLogin ? true : false}
                           onChange={onFormValChange}
-                          checked={tenantDetail?.isActive ? true : false}
+                          checked={tenantDetail?.ShouldChangePasswordOnNextLogin ? true : false}
                         ></Checkbox>
-                        <label htmlFor={fieldName?.isActive} className="ms-2">
+                        <label htmlFor={fieldName?.ShouldChangePasswordOnNextLogin} className="ms-2">
                           <figcaption>
                             Change password
                             <span className="inline-sub-title ms-2">

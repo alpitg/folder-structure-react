@@ -9,7 +9,7 @@
     "phoneNumber": null,
     "password": null,
     "isActive": true,
-    "shouldChangePasswordOnNextLogin": false,
+    "ShouldChangePasswordOnNextLogin": false,
     "isTwoFactorEnabled": true,
     "isLockoutEnabled": true
   },
