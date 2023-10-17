@@ -9,7 +9,7 @@
 
 import { AppStore } from "../../../../interfaces/generic.model";
 import {
-  IUserModel,
+  UserModel,
   IUsersRequestModel,
 } from "../../../../interfaces/user.model";
 
@@ -47,12 +47,12 @@ export interface IFetchUsersRequestAction {
 
 export interface IFetchUsersSuccessAction {
   type: typeof FETCH_USERS_SUCCESS;
-  payload: AppStore<IUserModel[]>;
+  payload: AppStore<UserModel[]>;
 }
 
 export interface IFetchUsersFailureAction {
   type: typeof FETCH_USERS_FAILED;
-  payload: AppStore<IUserModel[]>;
+  payload: AppStore<UserModel[]>;
 }
 
 // FETCH
@@ -63,42 +63,42 @@ export interface IFetchUserRequestAction {
 
 export interface IFetchUserSuccessAction {
   type: typeof FETCH_USER_SUCCESS;
-  payload: AppStore<IUserModel[]>;
+  payload: AppStore<UserModel[]>;
 }
 
 export interface IFetchUserFailureAction {
   type: typeof FETCH_USER_FAILED;
-  payload: AppStore<IUserModel[]>;
+  payload: AppStore<UserModel[]>;
 }
 
 // UPDATE
 export interface IUpdateUserRequestAction {
   type: typeof UPDATE_USER_REQUEST;
-  payload: IUserModel;
+  payload: UserModel;
 }
 
 export interface IUpdateUserSuccessAction {
   type: typeof UPDATE_USER_SUCCESS;
-  payload: AppStore<IUserModel>;
+  payload: AppStore<UserModel>;
 }
 
 export interface IUpdateUserFailureAction {
   type: typeof UPDATE_USER_FAILED;
-  payload: AppStore<IUserModel>;
+  payload: AppStore<UserModel>;
 }
 
 // UPDATE CLAIM
 export interface IUpdateUserClaimRequestAction {
   type: typeof UPDATE_USER_CLAIM_REQUEST;
-  payload: IUserModel;
+  payload: UserModel;
 }
 export interface IUpdateUserClaimSuccessAction {
   type: typeof UPDATE_USER_CLAIM_SUCCESS;
-  payload: AppStore<IUserModel>;
+  payload: AppStore<UserModel>;
 }
 export interface IUpdateUserClaimFailureAction {
   type: typeof UPDATE_USER_CLAIM_FAILED;
-  payload: AppStore<IUserModel>;
+  payload: AppStore<UserModel>;
 }
 
 // DELETE
@@ -139,14 +139,14 @@ export const fetchUsersRequest = (
 });
 
 export const fetchUsersSuccess = (
-  payload: AppStore<IUserModel[]>
+  payload: AppStore<UserModel[]>
 ): IFetchUsersSuccessAction => ({
   type: FETCH_USERS_SUCCESS,
   payload,
 });
 
 export const fetchUsersFailed = (
-  payload: AppStore<IUserModel[]>
+  payload: AppStore<UserModel[]>
 ): IFetchUsersFailureAction => ({
   type: FETCH_USERS_FAILED,
   payload,
@@ -158,56 +158,56 @@ export const fetchUserRequest = (payload: string): IFetchUserRequestAction => ({
 });
 
 export const fetchUserSuccess = (
-  payload: AppStore<IUserModel[]>
+  payload: AppStore<UserModel[]>
 ): IFetchUserSuccessAction => ({
   type: FETCH_USER_SUCCESS,
   payload,
 });
 
 export const fetchUserFailed = (
-  payload: AppStore<IUserModel[]>
+  payload: AppStore<UserModel[]>
 ): IFetchUserFailureAction => ({
   type: FETCH_USER_FAILED,
   payload,
 });
 
 export const updateUserRequest = (
-  payload: IUserModel
+  payload: UserModel
 ): IUpdateUserRequestAction => ({
   type: UPDATE_USER_REQUEST,
   payload,
 });
 
 export const updateUserSuccess = (
-  payload: AppStore<IUserModel>
+  payload: AppStore<UserModel>
 ): IUpdateUserSuccessAction => ({
   type: UPDATE_USER_SUCCESS,
   payload,
 });
 
 export const updateUserFailed = (
-  payload: AppStore<IUserModel>
+  payload: AppStore<UserModel>
 ): IUpdateUserFailureAction => ({
   type: UPDATE_USER_FAILED,
   payload,
 });
 
 export const updateUserClaimRequest = (
-  payload: IUserModel
+  payload: UserModel
 ): IUpdateUserClaimRequestAction => ({
   type: UPDATE_USER_CLAIM_REQUEST,
   payload,
 });
 
 export const updateUserClaimSuccess = (
-  payload: AppStore<IUserModel>
+  payload: AppStore<UserModel>
 ): IUpdateUserClaimSuccessAction => ({
   type: UPDATE_USER_CLAIM_SUCCESS,
   payload,
 });
 
 export const updateUserClaimFailed = (
-  payload: AppStore<IUserModel>
+  payload: AppStore<UserModel>
 ): IUpdateUserClaimFailureAction => ({
   type: UPDATE_USER_CLAIM_FAILED,
   payload,

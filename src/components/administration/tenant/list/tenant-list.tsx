@@ -36,7 +36,7 @@ const TenantListApp = () => {
         <div className="col-sm-12">
           <HeaderInlineTextApp
             title="Tenants"
-            subTitle="Manage tenants and permissions."
+            subTitle="Manage your tenants."
             children={
               <>
                 {hasClaim([]) && (

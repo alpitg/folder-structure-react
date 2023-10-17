@@ -7,7 +7,7 @@ import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import {
-  IUserModel,
+  UserModel,
   IUserRoleModel,
   UserFormModel,
 } from "../../../../interfaces/user.model";
@@ -86,23 +86,23 @@ const UserEditApp = () => {
         : null;
     }
     // const tenantId = id ? userDetail?.tenantId : tenants?.globalSelectedTenant
-    const userDetailPostData: IUserModel = {
-      id: id ?? "",
-      tenantId: tenantId,
+    const userDetailPostData: UserModel = {
+      id: id ?? undefined,
+      tenantId: tenantId ?? undefined,
       userName: userDetail?.userName,
       email: userDetail?.email,
       firstName: userDetail?.firstName,
       lastName: userDetail?.lastName,
       phoneNumber: userDetail?.phoneNumber,
       address: userDetail?.address,
-      password: userDetail?.password,
+      password: userDetail?.password ?? "",
       isActive: userDetail?.isActive,
       isImageUpdate: userDetail?.isImageUpdate,
       imgSrc: "" as string,
       userRoles: userDetail?.userRoles
         ? userDetail?.userRoles?.map((x) => {
-            return { userId: x.userId, roleId: x.roleId } as IUserRoleModel;
-          })
+          return { userId: x.userId, roleId: x.roleId } as IUserRoleModel;
+        })
         : [],
     };
 
@@ -155,11 +155,9 @@ const UserEditApp = () => {
       isValid = false;
     }
 
-    if (nameIsValid(userDetail.lastName).isValid) {
-      isValid = true;
-    } else {
-      isValid = false;
-    }
+    isValid = nameIsValid(userDetail.lastName).isValid;
+    isValid = emailAddressIsValid(userDetail.email).isValid;
+    isValid = passwordIsValid(userDetail.password).isValid;
 
     return isValid;
   };
@@ -180,6 +178,17 @@ const UserEditApp = () => {
     );
     if (emailAddress.length === 0 || regex) {
       return { isValid: false, errorMsg: "Email Address is invalid" };
+    } else {
+      return { isValid: true, errorMsg: "" };
+    }
+  };
+
+  /**
+   * NOTE: Password validation
+   */
+  const passwordIsValid = (password: string = "") => {
+    if (!password || password?.length <= 0) {
+      return { isValid: false, errorMsg: "Password is invalid." };
     } else {
       return { isValid: true, errorMsg: "" };
     }
@@ -224,7 +233,7 @@ const UserEditApp = () => {
         }));
         break;
       case fieldName.password:
-        // errorMsg = emailAddressIsValid(value).errorMsg;
+        errorMsg = passwordIsValid(value).errorMsg;
         setUserDetail((prev: UserFormModel) => ({
           ...prev,
           [fieldName.password]: value,
@@ -500,7 +509,7 @@ const UserEditApp = () => {
                                   : ""
                               }
                             >
-                              Address *
+                              Address
                             </label>
                             <InputText
                               id={fieldName.address}
@@ -590,8 +599,8 @@ const UserEditApp = () => {
                                   checked={
                                     userDetail?.userRoles
                                       ? userDetail?.userRoles?.some(
-                                          (x) => x.roleId === item.id
-                                        )
+                                        (x) => x.roleId === item.id
+                                      )
                                       : false
                                   }
                                 ></Checkbox>

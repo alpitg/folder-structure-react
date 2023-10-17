@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IUserModel } from "../../../../../interfaces/user.model";
+import { UserModel } from "../../../../../interfaces/user.model";
 import { ROUTE_URL } from "../../../../auth/constants/routes.const";
 import { useDispatch } from "react-redux";
 import { deleteUserRequest } from "../../../store/actions/user.action";
@@ -13,10 +13,10 @@ import {
 } from "../../../../../constants/global-contants/claims.const";
 import "./user-list-item.scss";
 
-const UserListItemApp = (props: { user: IUserModel }) => {
+const UserListItemApp = (props: { user: UserModel }) => {
   const dispatch = useDispatch();
 
-  const deleteUser = (id: string) => {
+  const deleteUser = (id: string = "") => {
     dispatch(deleteUserRequest(id));
   };
 

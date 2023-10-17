@@ -355,6 +355,25 @@ const TenantEditApp = () => {
                           <small className="p-error">{isError.name}</small>
                         </div>
                       </div>
+                      <div className="form-group">
+                        <div className="mt-3 mb-3">
+                          <Checkbox
+                            inputId={fieldName?.isActive}
+                            name={fieldName?.isActive}
+                            value={tenantDetail?.isActive ? true : false}
+                            onChange={onFormValChange}
+                            checked={tenantDetail?.isActive ? true : false}
+                          ></Checkbox>
+                          <label htmlFor={fieldName?.isActive} className="ms-2">
+                            <figcaption>
+                              Host Database
+                              <span className="inline-sub-title ms-2">
+                                Use host database.
+                              </span>
+                            </figcaption>
+                          </label>
+                        </div>
+                      </div>
                       <div className="col-sm-12">
                         <div
                           className={

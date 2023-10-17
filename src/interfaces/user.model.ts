@@ -1,5 +1,13 @@
-export interface IUserModel {
-  id: string;
+
+export interface IUserClaimsModel {
+  userId: string;
+  claimType: string;
+  claimValue: string;
+  actionId: string;
+}
+
+export class UserModel {
+  id?: string;
   tenantId?: string;
   userName: string;
   email: string;
@@ -16,37 +24,10 @@ export interface IUserModel {
   imgSrc?: string;
   userRoles?: IUserRoleModel[];
   userClaims?: IUserClaimsModel[];
-}
-
-export interface IUserClaimsModel {
-  userId: string;
-  claimType: string;
-  claimValue: string;
-  actionId: string;
-}
-
-export class UserModel implements IUserModel {
-  id: string;
-  tenantId: string;
-  userName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  address: string;
-  profilePhoto: string;
-  provider: string;
-  password: string;
-  isEmailConfirmed: boolean;
-  isActive: boolean;
-  isImageUpdate?: boolean;
-  imgSrc?: string;
-  userRoles: IUserRoleModel[];
-  userClaims: IUserClaimsModel[];
 
   constructor() {
-    this.id = "";
-    this.tenantId = "";
+    this.id = undefined;
+    this.tenantId = undefined;
     this.userName = "";
     this.email = "";
     this.firstName = "";
@@ -124,7 +105,7 @@ export class UserFormModel {
     this.provider = "";
     this.password = "";
     this.isEmailConfirmed = false;
-    this.isActive = false;
+    this.isActive = true;
     this.userRoles = [];
     this.userClaims = [];
     this.isImageUpdate = false;
@@ -191,22 +172,22 @@ export interface IUsersRequestModel {
 
 export class UserAppStore {
   list: {
-    result: IUserModel[] | null | undefined;
+    result: UserModel[] | null | undefined;
     pending: boolean;
     error: any[];
   };
   view: {
-    result: IUserModel | null | undefined;
+    result: UserModel | null | undefined;
     pending: boolean;
     error: any[];
   };
   update: {
-    result: IUserModel | null | undefined;
+    result: UserModel | null | undefined;
     pending: boolean;
     error: any[];
   };
   delete: {
-    result: IUserModel | null | undefined;
+    result: UserModel | null | undefined;
     pending: boolean;
     error: any[];
   };

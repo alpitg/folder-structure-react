@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { AppState } from "../../../../store/reducers/root.reducer";
 import {
-  IUserModel,
+  UserModel,
   IUsersRequestModel,
 } from "../../../../interfaces/user.model";
 import HeaderInlineTextApp from "../../../ui/header-inline-text/header-inline-text";
@@ -105,7 +105,7 @@ const UserListApp = () => {
                     <table className="table">
                       <tbody>
                         {Array.isArray(users?.list?.result)
-                          ? users?.list?.result?.map((user: IUserModel) => {
+                          ? users?.list?.result?.map((user: UserModel) => {
                               return (
                                 <UserListItemApp user={user} key={user.id} />
                               );

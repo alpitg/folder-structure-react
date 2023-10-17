@@ -4,13 +4,13 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Card } from "primereact/card";
 import { AppState } from "../../../../store/reducers/root.reducer";
-import { IUserModel } from "../../../../interfaces/user.model";
+import { UserModel } from "../../../../interfaces/user.model";
 import { ROUTE_URL } from "../../../auth/constants/routes.const";
 
 const UserDetailApp = () => {
   const { id } = useParams();
   const users = useSelector((x: AppState) => x.administration.users);
-  const [userDetail, setUserDetaiil] = useState<IUserModel>();
+  const [userDetail, setUserDetaiil] = useState<UserModel>();
 
   useEffect(() => {
     const temp = users.list?.result?.find((x) => x.id === id);

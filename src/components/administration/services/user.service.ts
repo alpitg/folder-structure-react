@@ -1,5 +1,5 @@
 import { ENDPOINT } from "../../../constants/global-contants/endpoint.const";
-import { IUserModel, IUsersRequestModel } from "../../../interfaces/user.model";
+import { UserModel, IUsersRequestModel } from "../../../interfaces/user.model";
 import { axiosInstance } from "../../../utils/axios.util";
 
 export default class UserService {
@@ -19,14 +19,14 @@ export default class UserService {
     );
   };
 
-  static addUser = (param: IUserModel) => {
+  static addUser = (param: UserModel) => {
     return axiosInstance.post(
       ENDPOINT.API_BASE_URL + ENDPOINT.USER.API.UPDATE_USER,
       param
     );
   };
 
-  static updateUser = (param: IUserModel) => {
+  static updateUser = (param: UserModel) => {
     return axiosInstance.put(
       ENDPOINT.API_BASE_URL + ENDPOINT.USER.API.UPDATE_USER + "/" + param?.id,
       param
