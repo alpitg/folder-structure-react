@@ -7,6 +7,7 @@ export class TenantModel {
   shouldGenerateRandomPasssword: boolean;
   shouldUseHostDatabase: boolean;
   connectionString: string;
+  contactNumber?: string;
   edition?: string;
   address?: string;
   subscriptionEndDate?: any;
@@ -22,6 +23,7 @@ export class TenantModel {
     this.shouldGenerateRandomPasssword = true;
     this.shouldUseHostDatabase = true;
     this.connectionString = "";
+    this.contactNumber = undefined;
     this.edition = "";
     this.address = "";
     this.subscriptionEndDate = undefined;
@@ -40,6 +42,7 @@ export class TenantFormModel extends TenantModel {
     shouldGenerateRandomPasssword: string;
     shouldUseHostDatabase: string;
     connectionString: string;
+    contactNumber: string;
     edition: string;
     address: string;
     subscriptionEndDate: string;
@@ -55,6 +58,7 @@ export class TenantFormModel extends TenantModel {
     shouldGenerateRandomPasssword: string;
     shouldUseHostDatabase: string;
     connectionString: string;
+    contactNumber: string;
     edition: string;
     address: string;
     subscriptionEndDate: string;
@@ -74,6 +78,7 @@ export class TenantFormModel extends TenantModel {
       shouldGenerateRandomPasssword: "",
       shouldUseHostDatabase: "",
       connectionString: "",
+      contactNumber: "",
       edition: "",
       address: "",
       subscriptionEndDate: "",
@@ -89,6 +94,7 @@ export class TenantFormModel extends TenantModel {
       shouldGenerateRandomPasssword: "",
       shouldUseHostDatabase: "",
       connectionString: "connectionString",
+      contactNumber: "contactNumber",
       edition: "edition",
       address: "address",
       subscriptionEndDate: "subscriptionEndDate",

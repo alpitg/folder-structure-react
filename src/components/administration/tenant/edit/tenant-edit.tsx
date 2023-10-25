@@ -124,6 +124,7 @@ const TenantEditApp = () => {
         shouldGenerateRandomPasssword: tenantDetail.shouldGenerateRandomPasssword,
         shouldUseHostDatabase: tenantDetail.shouldUseHostDatabase,
         connectionString: tenantDetail.connectionString,
+        contactNumber: tenantDetail.contactNumber,
         edition: tenantDetail.edition,
         address: tenantDetail.address,
         subscriptionEndDate: tenantDetail.subscriptionEndDate,
@@ -140,6 +141,7 @@ const TenantEditApp = () => {
         shouldGenerateRandomPasssword: tenantDetail.shouldGenerateRandomPasssword,
         shouldUseHostDatabase: tenantDetail.shouldUseHostDatabase,
         connectionString: tenantDetail.connectionString,
+        contactNumber: tenantDetail.contactNumber,
         edition: tenantDetail.edition,
         address: tenantDetail.address,
         subscriptionEndDate: tenantDetail.subscriptionEndDate,
@@ -278,6 +280,13 @@ const TenantEditApp = () => {
         setTenantDetail((prev: TenantFormModel) => ({
           ...prev,
           [fieldName?.connectionString]: value,
+        }));
+        break;
+
+      case fieldName?.contactNumber:
+        setTenantDetail((prev: TenantFormModel) => ({
+          ...prev,
+          [fieldName?.contactNumber]: value,
         }));
         break;
 
@@ -510,6 +519,37 @@ const TenantEditApp = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="col-sm-12">
+                        <div
+                          className={
+                            "d-flex flex-column gap-2 " + fieldName?.contactNumber
+                          }
+                        >
+                          <label
+                            htmlFor={fieldName?.contactNumber}
+                            className={
+                              isError.contactNumber.length > 0
+                                ? "is-invalid p-error"
+                                : ""
+                            }
+                          >
+                            Contact Number
+                          </label>
+                          <InputText
+                            id={fieldName?.contactNumber}
+                            type="text"
+                            pattern="[0-9]*"
+                            value={tenantDetail?.contactNumber ?? ""}
+                            onChange={onFormValChange}
+                            className={
+                              isError.contactNumber.length > 0 ? "p-invalid" : ""
+                            }
+                            required
+                          />
+                          <small className="p-error">{isError.contactNumber}</small>
+                        </div>
+                      </div>
+
                       <div className="col-sm-12">
                         <div
                           className={
