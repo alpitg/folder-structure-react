@@ -1,12 +1,14 @@
+import "./admin-dashboard.scss";
 import { Card } from "primereact/card";
 import DoughnutChartApp from "../chart/dough-chart/dough-chart";
-import "./admin-dashboard.scss";
+import HorizontalBarApp from "../chart/horizontal-bar-chart/horizontal-bar-chart";
 
 const AdminDashboardApp = () => {
-    return <>
+    return <div className="admin-dashboard-app">
+
         <div className="row">
-            <div className="col-md-4 grid-margin stretch-card">
-                <Card title="Transaction History">
+            <div className="col-md-4 gx-2">
+                <Card className="card-height-charts" title="Transaction History">
 
                     <DoughnutChartApp />
 
@@ -23,9 +25,11 @@ const AdminDashboardApp = () => {
                             </div>
                         </div>
                     </div>
-
-
-
+                </Card>
+            </div>
+            <div className="col-md-8 gx-3">
+                <Card className="card-height-charts">
+                    <HorizontalBarApp />
                 </Card>
             </div>
 
@@ -40,9 +44,7 @@ const AdminDashboardApp = () => {
             </div>
         </div>
 
-        <br />
-
-    </>
+    </div>
 }
 
 export default AdminDashboardApp;
