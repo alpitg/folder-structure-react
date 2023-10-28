@@ -26,8 +26,15 @@ export default function DoughnutChartApp() {
                 }
             ]
         };
+
         const options = {
-            cutout: '60%'
+            plugins: {
+                legend: {
+                    labels: {
+                        usePointStyle: true
+                    }
+                }
+            }
         };
 
         setChartData(data);
@@ -36,9 +43,7 @@ export default function DoughnutChartApp() {
 
     return (
         <div className='dough-chart'>
-            <div className="card flex justify-content-center">
-                <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
-            </div>
+            <Chart type="doughnut" data={chartData} options={chartOptions} className="w-full md:w-30rem" />
         </div>
     )
 }

@@ -1,10 +1,14 @@
-import DoughnutChartApp from "../../components/chart/dough-chart/dough-chart";
+import AdminDashboardApp from "../../components/admin-dashboard/admin-dashboard";
 
 const DashboardApp = () => {
 
     return (
         <>
-            <DoughnutChartApp />
+
+            <AdminDashboardApp />
+
+            <br>
+            </br>
         </>
     );
 }
