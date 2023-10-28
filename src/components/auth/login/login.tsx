@@ -70,35 +70,34 @@ const LoginApp = () => {
                     <br />
                     <div className="row">
                       <div className="col-sm-12">
-                        <span className="p-float-label">
-                          <InputText
-                            id="userName"
-                            value={useLoginDetail?.userName}
-                            onChange={(event) =>
-                              setUseLoginDetail((prev) => ({
-                                ...prev,
-                                userName: event.target.value,
-                              }))
-                            }
-                          />
-                          <label htmlFor="userName">Email Address</label>
-                        </span>
+                        <label htmlFor="userName">Email Address</label>
+                        <InputText
+                          id="userName"
+                          value={useLoginDetail?.userName}
+                          onChange={(event) =>
+                            setUseLoginDetail((prev) => ({
+                              ...prev,
+                              userName: event.target.value,
+                            }))
+                          }
+                        />
                       </div>
-                      <div className="col-sm-12 pt-4">
-                        <span className="p-float-label">
-                          <InputText
-                            id="password"
-                            value={useLoginDetail?.password}
-                            onChange={(event) =>
-                              setUseLoginDetail((prev) => ({
-                                ...prev,
-                                password: event.target.value,
-                              }))
-                            }
-                          />
-                          <label htmlFor="password">Password</label>
-                        </span>
+
+                      <div className="col-sm-12 mt-2">
+                        <label htmlFor="password">Password</label>
+                        <InputText
+                          id="password"
+                          type="password"
+                          value={useLoginDetail?.password}
+                          onChange={(event) =>
+                            setUseLoginDetail((prev) => ({
+                              ...prev,
+                              password: event.target.value,
+                            }))
+                          }
+                        />
                       </div>
+
                     </div>
                     <div className="pt-4">
                       {auth?.error &&
