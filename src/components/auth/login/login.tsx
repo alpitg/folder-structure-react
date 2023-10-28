@@ -1,3 +1,4 @@
+import "./login.scss";
 import { useEffect, useState } from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
@@ -9,7 +10,6 @@ import { ROUTE_URL } from "../constants/routes.const";
 import SaveLoaderButtonApp from "../../ui/save-loader-button/save-loader-button";
 import AuthService from "../../../services/auth.service";
 import { AppState } from "../../../store/reducers/root.reducer";
-import "./login.scss";
 import MessagesApp from "../../ui/messages/messages";
 
 const LoginApp = () => {
@@ -43,14 +43,17 @@ const LoginApp = () => {
   return !isAuthenticated ? (
     <div className="login-app">
       <div className="login-section container">
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="image-bg">
-              <div className="image-bg-content"></div>
+        <Card className="login-card">
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-7 content-center display-none">
+              <img
+                className="image-bg"
+                src="/static/media/svg/secure_login.svg"
+                alt={"secure login"}
+              />
+              <div className="headerDivider"></div>
             </div>
-          </div>
-          <div className="col-sm-6">
-            <Card className="login-card">
+            <div className="col-sm-12 col-md-12 col-lg-5">
               <>
                 <div className="">
                   <p className="h1">Tsubaki India</p>
@@ -62,54 +65,53 @@ const LoginApp = () => {
                     </p>
                   </blockquote>
                 </div>
-              </>
-              <div>
-                <form onSubmit={onLogin} noValidate>
-                  <br />
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <span className="p-float-label">
-                        <InputText
-                          id="userName"
-                          value={useLoginDetail?.userName}
-                          onChange={(event) =>
-                            setUseLoginDetail((prev) => ({
-                              ...prev,
-                              userName: event.target.value,
-                            }))
-                          }
-                        />
-                        <label htmlFor="userName">Email Address</label>
-                      </span>
-                    </div>
-                    <div className="col-sm-12 pt-4">
-                      <span className="p-float-label">
-                        <InputText
-                          id="password"
-                          value={useLoginDetail?.password}
-                          onChange={(event) =>
-                            setUseLoginDetail((prev) => ({
-                              ...prev,
-                              password: event.target.value,
-                            }))
-                          }
-                        />
-                        <label htmlFor="password">Password</label>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="pt-4">
-                    {auth?.error &&
-                      auth?.error.map((error) => {
-                        return (
-                          <MessagesApp
-                            type="alert-danger"
-                            message={error}
-                            key={error}
+                <div>
+                  <form onSubmit={onLogin} noValidate>
+                    <br />
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <span className="p-float-label">
+                          <InputText
+                            id="userName"
+                            value={useLoginDetail?.userName}
+                            onChange={(event) =>
+                              setUseLoginDetail((prev) => ({
+                                ...prev,
+                                userName: event.target.value,
+                              }))
+                            }
                           />
-                        );
-                      })}
-                  </div>
+                          <label htmlFor="userName">Email Address</label>
+                        </span>
+                      </div>
+                      <div className="col-sm-12 pt-4">
+                        <span className="p-float-label">
+                          <InputText
+                            id="password"
+                            value={useLoginDetail?.password}
+                            onChange={(event) =>
+                              setUseLoginDetail((prev) => ({
+                                ...prev,
+                                password: event.target.value,
+                              }))
+                            }
+                          />
+                          <label htmlFor="password">Password</label>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="pt-4">
+                      {auth?.error &&
+                        auth?.error.map((error) => {
+                          return (
+                            <MessagesApp
+                              type="alert-danger"
+                              message={error}
+                              key={error}
+                            />
+                          );
+                        })}
+                    </div>
                     <SaveLoaderButtonApp
                       type="submit"
                       label={"Login"}
@@ -118,22 +120,23 @@ const LoginApp = () => {
                       disabled={auth.pending}
                       enableLoader={auth.pending}
                     />
-                </form>
-                <figure className="text-end">
-                  <figcaption className="blockquote-footer">
-                    Don't have an account?
-                    <cite title="Source Title">
-                      <b>Sign-Up</b>
-                    </cite>
-                  </figcaption>
-                </figure>
-              </div>
-              <div className="flex flex-wrap justify-content-end gap-2">
-                @ Please connect with CornPlex Pvt Ltd to report any issue.
-              </div>
-            </Card>
+                  </form>
+                  <figure className="text-end">
+                    <figcaption className="blockquote-footer">
+                      Don't have an account?
+                      <cite title="Source Title">
+                        <b>Sign-Up</b>
+                      </cite>
+                    </figcaption>
+                  </figure>
+                </div>
+                <div className="flex flex-wrap justify-content-end gap-2">
+                  @ Please connect with CornPlex Pvt Ltd to report any issue.
+                </div>
+              </>
+            </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   ) : null;

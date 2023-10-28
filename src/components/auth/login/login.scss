@@ -1,5 +1,5 @@
 .login-app {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
 
@@ -7,30 +7,51 @@
         width: 100%;
         // border-bottom: 1px solid #ced4da !important;
     }
+
     .p-card {
         border-radius: 0 0 0 0;
         box-shadow: -5px 0 10px 2px rgba(0, 0, 0, 0.2);
     }
-    .image-bg {
-        .image-bg-content {
-            padding: 60px;
-            font-weight: 400;
-            font-size: 44px;
-            color: #ffffff;
-            line-height: 1.2;
-            margin: 0 0 20px;
-            display: flex;
-            align-items: center;
-        }
 
+    .content-center {
         display: flex;
-        width: 100%;
+        justify-content: center;
+    }
+
+    .headerDivider {
+        border-left: 1px solid #38546d;
         height: 100%;
-        text-align: center;
-        background-position: center center;
-        background-repeat: no-repeat;
-        opacity: 0.6;
-        // background: rgba(76, 175, 80, 0.3);
-        background: url("/assets/img/login/pexels-tiger-lily-4483608.jpg") no-repeat center;
+    }
+
+    .image-bg {
+        padding: 40px;
+        width: 500px;
+
+        // .image-bg-content {
+        //     padding: 60px;
+        //     font-weight: 400;
+        //     font-size: 44px;
+        //     color: #ffffff;
+        //     line-height: 1.2;
+        //     margin: 0 0 20px;
+        //     display: flex;
+        //     align-items: center;
+        // }
+
+        // display: flex;
+        // width: 100%;
+        // height: 100%;
+        // text-align: center;
+        // background-position: center center;
+        // background-repeat: no-repeat;
+        // opacity: 0.6;
+        // // background: rgba(76, 175, 80, 0.3);
+        // background: url("/assets/img/login/pexels-tiger-lily-4483608.jpg") no-repeat center;
+    }
+
+    @media (max-width: 850px) {
+        .display-none {
+            display: none;
+        }
     }
 }

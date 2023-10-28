@@ -1,3 +1,4 @@
+import { TENANT_ID_KEY } from "../../../../constants/global-contants/global-key.const";
 import { TenantAppStore } from "../../../../interfaces/tenant.model";
 import {
   DELETE_TENANT_FAILED,
@@ -24,6 +25,7 @@ const initialState: TenantAppStore = new TenantAppStore();
 const tenantReducer = (state = initialState, action: TenantsActions) => {
   switch (action.type) {
     case UPDATE_GLOBAL_SELECTED_TENANT:
+      localStorage.setItem(TENANT_ID_KEY, action.payload);
       return {
         ...state,
         globalSelectedTenant: action.payload,
