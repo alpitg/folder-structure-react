@@ -35,6 +35,13 @@ export const ROUTE_URL = {
     },
     SUBSCRIPTION_MANAGEMENT: "subscription-management",
   },
+  GYMKHANACLUB: {
+    BASE: "",
+    SIGN_UP: "signup",
+    BOOKSLOTS: "book-slot"
+  },
+  GYMKHANACLUB_SIGNUP: "signup",
+
   CULTIVATION: "/cultivation",
   CULTIVATION_CREATE: "/cultivation/create",
   CULTIVATION_EDIT: "/cultivation/edit/:id",

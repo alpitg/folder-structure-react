@@ -17,6 +17,7 @@ import {
   USR_VIEW_USERS,
   USR_ASSIGN_USR_PERMISSIONS,
 } from "../../constants/global-contants/claims.const";
+import GymkhanaclubApp from "../../pages/gymkhanaclub/gymkhanaclub";
 
 const Dashboard = lazy(() => import("../../pages/dashboard/dashboard"));
 const Contact = lazy(() => import("../../pages/contact/contact"));
@@ -155,6 +156,14 @@ const ROOT_CLAIM = {
   REGISTRATION: {
     COMPONENT: <Register />,
   },
+  GYMKHANACLUB: {
+    SIGNUP: {
+      COMPONENT: <GymkhanaclubApp />,
+    },
+    BOOKSLOTS: {
+      COMPONENT: <GymkhanaclubApp />,
+    }
+  },
 };
 
 const RoutesApp = () => {
@@ -288,6 +297,14 @@ const RoutesApp = () => {
           <Route
             path={ROUTE_URL.REGISTER}
             element={ROOT_CLAIM.REGISTRATION.COMPONENT}
+          />
+          <Route
+            path={ROUTE_URL.GYMKHANACLUB.SIGN_UP}
+            element={ROOT_CLAIM.GYMKHANACLUB.SIGNUP.COMPONENT}
+          />
+          <Route
+            path={ROUTE_URL.GYMKHANACLUB.BOOKSLOTS}
+            element={ROOT_CLAIM.GYMKHANACLUB.BOOKSLOTS.COMPONENT}
           />
         </Routes>
       </BrowserRouter>

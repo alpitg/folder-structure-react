@@ -1,0 +1,54 @@
+.user-signup-app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+
+    input {
+        width: 100%;
+        // border-bottom: 1px solid #ced4da !important;
+    }
+
+    .p-card {
+        border-radius: 0 0 0 0;
+        box-shadow: -5px 0 10px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .content-center {
+        display: flex;
+        justify-content: center;
+    }
+
+    .headerDivider {
+        border-left: 1px solid #38546d;
+        height: 100%;
+    }
+
+    .image-bg {
+        padding: 40px;
+        width: 500px;
+    }
+
+
+    .or {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: grey;
+    }
+
+    .or:after,
+    .or:before {
+        content: "";
+        display: block;
+        background: grey;
+        width: 30%;
+        height: 1px;
+        margin: 0 10px;
+    }
+
+    @media (max-width: 850px) {
+        .display-none {
+            display: none;
+        }
+    }
+}

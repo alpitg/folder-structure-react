@@ -86,36 +86,6 @@ const SidebarApp = () => {
         },
       ],
     },
-    // {
-    //   label: "Cultivation",
-    //   path: ROUTE_URL.CULTIVATION,
-    //   icon: "pi pi-fw pi-chart-line",
-    //   claims: [],
-    // },
-    // {
-    //   label: "Expenditure",
-    //   path: ROUTE_URL.EXPENDITURE,
-    //   icon: "pi pi-fw pi-chart-line",
-    //   claims: [],
-    // },
-    // {
-    //   label: "Farmer",
-    //   path: ROUTE_URL.FARMERS,
-    //   icon: "pi pi-fw pi-chart-line",
-    //   claims: [],
-    // },
-    // {
-    //   label: "Craft",
-    //   path: ROUTE_URL.CRAFT,
-    //   icon: "pi pi-fw pi-chart-line",
-    //   claims: [],
-    // },
-    // {
-    //   label: "Category",
-    //   path: ROUTE_URL.CATEGORY,
-    //   icon: "pi pi-fw pi-chart-line",
-    //   claims: [],
-    // },
     {
       label: "About",
       path: ROUTE_URL.ABOUT,
@@ -143,6 +113,18 @@ const SidebarApp = () => {
     {
       label: "UI",
       path: ROUTE_URL.UI,
+      icon: "pi pi-fw pi-bolt",
+      claims: [],
+    },
+    {
+      label: "Signup",
+      path: ROUTE_URL.GYMKHANACLUB.SIGN_UP,
+      icon: "pi pi-fw pi-bolt",
+      claims: [],
+    },
+    {
+      label: "Book Slots",
+      path: ROUTE_URL.GYMKHANACLUB.BOOKSLOTS,
       icon: "pi pi-fw pi-bolt",
       claims: [],
     },
