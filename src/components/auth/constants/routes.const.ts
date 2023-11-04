@@ -37,24 +37,32 @@ export const ROUTE_URL = {
   },
   GYMKHANACLUB: {
     BASE: "",
-    SIGN_UP: "signup",
-    BOOKSLOTS: "book-slot"
-  },
-  GYMKHANACLUB_SIGNUP: "signup",
-
-  CULTIVATION: "/cultivation",
-  CULTIVATION_CREATE: "/cultivation/create",
-  CULTIVATION_EDIT: "/cultivation/edit/:id",
-  EXPENDITURE: "/expenditure",
-  EXPENDITURE_CREATE: "/expenditure/create",
-  EXPENDITURE_EDIT: "/expenditure/edit/:id",
-  FARMERS: "/farmer",
-  FARMER_CREATE: "/farmer/create",
-  FARMER_EDIT: "/farmer/edit/:id",
-  CRAFT: "/craft",
-  CRAFT_CREATE: "/craft/create",
-  CRAFT_EDIT: "/craft/edit/:id",
-  CATEGORY: "/category",
-  CATEGORY_CREATE: "/category/create",
-  CATEGORY_EDIT: "/category/edit/:id",
+    ADMIN: {
+      FACILITY: {
+        BASE: "/facility",
+        LIST: "",
+        EDIT: "edit/:id",
+        ADD: "add",
+      },
+      FACILITY_TYPE: {
+        BASE: "/facility-type",
+        LIST: "",
+        EDIT: "edit/:id",
+        ADD: "add",
+      },
+      FACILITY_COSTING: {
+        BASE: "/facility-costing",
+        LIST: "",
+        EDIT: "edit/:id",
+        ADD: "add",
+      },
+    },
+    FACILITY_BOOK_SLOTS: {
+      BASE: "/book-slots",
+      LIST: "",
+      EDIT: "edit/:id",
+      ADD: "add",
+    },
+    SIGNUP: "signup",
+  }
 };
