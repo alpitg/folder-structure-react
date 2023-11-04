@@ -27,6 +27,9 @@ import FacilityTypeApp from "../feature/gymkhanaclub/admin/facility-type/facilit
 import BookSlotsApp from "../feature/gymkhanaclub/book-slots/book-slots";
 import BookSlotsListApp from "../feature/gymkhanaclub/book-slots/list/book-slots-list";
 import BookSlotsEditApp from "../feature/gymkhanaclub/book-slots/edit/book-slots-edit";
+import FacilityCostingApp from "../feature/gymkhanaclub/admin/facility-costing/facility-costing";
+import FacilityCostingListApp from "../feature/gymkhanaclub/admin/facility-costing/list/facility-costing-list";
+import FacilityCostingEditApp from "../feature/gymkhanaclub/admin/facility-costing/edit/facility-costing-edit";
 
 const Dashboard = lazy(() => import("../../pages/dashboard/dashboard"));
 const Contact = lazy(() => import("../../pages/contact/contact"));
@@ -56,205 +59,212 @@ const RoutesApp = () => {
     <Suspense fallback={<div>{LOADING}</div>}>
       <BrowserRouter>
         <Routes>
+          <Route path={ROUTE_URL.LOGIN} element={<Login />} />
+          <Route path={ROUTE_URL.REGISTER} element={<Register />} />
+          <Route path={ROUTE_URL.GYMKHANACLUB.SIGNUP} element={<GymkhanaclubApp />} />
+
           <Route path={ROUTE_URL.HOME} element={<BaseLayoutApp />}>
             <Route path={ROUTE_URL.UI} element={<UI />} />
-            <Route
-              path={ROUTE_URL.SOCIAL_MEDIA_MANAGEMENT}
-              element={<SocialMedia />}
-            />
+            <Route path={ROUTE_URL.SOCIAL_MEDIA_MANAGEMENT} element={<SocialMedia />} />
             <Route path={ROUTE_URL.DASHBOARD} element={<Dashboard />} />
-            <Route
-              path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS}
-              element={<OrganizationUnits />}
-            />
-            <Route
-              path={ROUTE_URL.ADMIN.SUBSCRIPTION_MANAGEMENT}
-              element={<Subscription />}
-            />
-
-            <Route
-              path={ROUTE_URL.ADMIN.TENANT.BASE}
-              element={<Tenant />}
-            >
-              <Route
-                path={ROUTE_URL.ADMIN.TENANT.TENANT_LIST}
-                element={
-                  <ClaimGuard requiredClaims={[TENANTS_VIEW_TENANTS]}>
-                    <TenantList />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_ADD}
-                element={
-                  <ClaimGuard requiredClaims={[TENANTS_ADD_TENANTS]}>
-                    <TenantEdit />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_EDIT}
-                element={
-                  <ClaimGuard requiredClaims={[TENANTS_UPDATE_TENANTS]}>
-                    <TenantEdit />
-                  </ClaimGuard>
-                }
-              />
-
-            </Route>
-
-            <Route
-              path={ROUTE_URL.ADMIN.ROLE.BASE}
-              element={<Role />}
-            >
-              <Route
-                path={ROUTE_URL.ADMIN.ROLE.ROLE_LIST}
-                element={
-                  <ClaimGuard requiredClaims={[ROLES_VIEW_ROLES]}>
-                    <RoleList />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL}
-                element={
-                  <ClaimGuard requiredClaims={[ROLES_VIEW_ROLES]}>
-                    <RoleDetail />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_ADD}
-                element={
-                  <ClaimGuard requiredClaims={[ROLES_ADD_ROLE]}>
-                    <RoleDetailEdit />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_EDIT}
-                element={
-                  <ClaimGuard requiredClaims={[ROLES_ADD_ROLE, ROLES_UPDATE_ROLE]}>
-                    <RoleDetailEdit />
-                  </ClaimGuard>
-                }
-              />
-            </Route>
-
-            <Route
-              path={ROUTE_URL.ADMIN.USER.BASE}
-              element={<User />}
-            >
-              <Route
-                path={ROUTE_URL.ADMIN.USER.USER_LIST}
-                element={
-                  <ClaimGuard requiredClaims={[USR_VIEW_USERS]}>
-                    <UserList />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.USER.USER_DETAIL}
-                element={
-                  <ClaimGuard requiredClaims={[USR_VIEW_USERS]}>
-                    <UserDetail />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.USER.USER_DETAIL_ADD}
-                element={
-                  <ClaimGuard requiredClaims={[USR_ADD_USER]}>
-                    <UserDetailEdit />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.USER.USER_DETAIL_EDIT}
-                element={
-                  <ClaimGuard requiredClaims={[USR_ADD_USER, USR_UPDATE_USER]}>
-                    <UserList />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ADMIN.USER.USER_PERMISSIONS}
-                element={
-                  <ClaimGuard requiredClaims={[USR_ASSIGN_USR_PERMISSIONS]}>
-                    <UserPermissions />
-                  </ClaimGuard>
-                }
-              />
-            </Route>
-
+            <Route path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS} element={<OrganizationUnits />} />
+            <Route path={ROUTE_URL.ADMIN.SUBSCRIPTION_MANAGEMENT} element={<Subscription />} />
             <Route path={ROUTE_URL.ABOUT} element={<About />} />
             <Route path={ROUTE_URL.CONTACT} element={<Contact />} />
             <Route path={ROUTE_URL.NOT_ALLOWED} element={<NotAllowedApp />} />
-          </Route>
-          <Route path={ROUTE_URL.LOGIN} element={<Login />} />
-          <Route
-            path={ROUTE_URL.REGISTER}
-            element={<Register />}
-          />
 
-          <Route
-            path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE}
-            element={<FacilityApp />}
-          >
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.LIST}
-              element={<FacilityListApp />}
-            />
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.EDIT}
-              element={<FacilityEditApp />}
-            />
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.ADD}
-              element={<FacilityEditApp />}
-            />
-          </Route>
+            <Route>
 
-          <Route
-            path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE}
-            element={<FacilityTypeApp />}
-          >
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.LIST}
-              element={<FacilityTypeListApp />}
-            />
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.EDIT}
-              element={<FacilityTypeEditApp />}
-            />
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}
-              element={<FacilityTypeEditApp />}
-            />
-          </Route>
+              <Route
+                path={ROUTE_URL.ADMIN.TENANT.BASE}
+                element={<Tenant />}
+              >
+                <Route
+                  path={ROUTE_URL.ADMIN.TENANT.TENANT_LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[TENANTS_VIEW_TENANTS]}>
+                      <TenantList />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[TENANTS_ADD_TENANTS]}>
+                      <TenantEdit />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[TENANTS_UPDATE_TENANTS]}>
+                      <TenantEdit />
+                    </ClaimGuard>
+                  }
+                />
 
-          <Route
-            path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.BASE}
-            element={<BookSlotsApp />}
-          >
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.LIST}
-              element={<BookSlotsListApp />}
-            />
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.EDIT}
-              element={<BookSlotsEditApp />}
-            />
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.ADD}
-              element={<BookSlotsEditApp />}
-            />
-          </Route>
+              </Route>
 
-          <Route
-            path={ROUTE_URL.GYMKHANACLUB.SIGNUP}
-            element={<GymkhanaclubApp />}
-          />
+              <Route
+                path={ROUTE_URL.ADMIN.ROLE.BASE}
+                element={<Role />}
+              >
+                <Route
+                  path={ROUTE_URL.ADMIN.ROLE.ROLE_LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[ROLES_VIEW_ROLES]}>
+                      <RoleList />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL}
+                  element={
+                    <ClaimGuard requiredClaims={[ROLES_VIEW_ROLES]}>
+                      <RoleDetail />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[ROLES_ADD_ROLE]}>
+                      <RoleDetailEdit />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[ROLES_ADD_ROLE, ROLES_UPDATE_ROLE]}>
+                      <RoleDetailEdit />
+                    </ClaimGuard>
+                  }
+                />
+              </Route>
+
+              <Route
+                path={ROUTE_URL.ADMIN.USER.BASE}
+                element={<User />}
+              >
+                <Route
+                  path={ROUTE_URL.ADMIN.USER.USER_LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[USR_VIEW_USERS]}>
+                      <UserList />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.USER.USER_DETAIL}
+                  element={
+                    <ClaimGuard requiredClaims={[USR_VIEW_USERS]}>
+                      <UserDetail />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.USER.USER_DETAIL_ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[USR_ADD_USER]}>
+                      <UserDetailEdit />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.USER.USER_DETAIL_EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[USR_ADD_USER, USR_UPDATE_USER]}>
+                      <UserList />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.USER.USER_PERMISSIONS}
+                  element={
+                    <ClaimGuard requiredClaims={[USR_ASSIGN_USR_PERMISSIONS]}>
+                      <UserPermissions />
+                    </ClaimGuard>
+                  }
+                />
+              </Route>
+
+            </Route>
+
+            <Route
+              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE}
+              element={<FacilityApp />}
+            >
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.LIST}
+                element={<FacilityListApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.EDIT}
+                element={<FacilityEditApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.ADD}
+                element={<FacilityEditApp />}
+              />
+            </Route>
+
+            <Route
+              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE}
+              element={<FacilityTypeApp />}
+            >
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.LIST}
+                element={<FacilityTypeListApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.EDIT}
+                element={<FacilityTypeEditApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}
+                element={<FacilityTypeEditApp />}
+              />
+            </Route>
+
+            <Route
+              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.BASE}
+              element={<FacilityCostingApp />}
+            >
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.LIST}
+                element={<FacilityCostingListApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.EDIT}
+                element={<FacilityCostingEditApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.ADD}
+                element={<FacilityCostingEditApp />}
+              />
+            </Route>
+
+            <Route
+              path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.BASE}
+              element={<BookSlotsApp />}
+            >
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.LIST}
+                element={<BookSlotsListApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.EDIT}
+                element={<BookSlotsEditApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.ADD}
+                element={<BookSlotsEditApp />}
+              />
+            </Route>
+
+          </Route>
         </Routes>
       </BrowserRouter>
     </Suspense>
