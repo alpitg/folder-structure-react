@@ -62,7 +62,7 @@ const BaseLayoutApp = () => {
           <div className="base-layout-sidebar">
             {isOpenSideBar && <SidebarApp />}
           </div>
-          <div className="base-layout-content">
+          <div className="container pb-3">
             <Suspense fallback={<div>{LOADING}</div>}>
               <Outlet />
             </Suspense>

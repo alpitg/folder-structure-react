@@ -23,9 +23,6 @@
   .base-layout-main-body {
     margin-top: var(--app-header-height);
     transition: margin-left 0.5s;
-    .base-layout-content {
-      padding: 20px;
-    }
   }
 
   .sidebar-opened {
