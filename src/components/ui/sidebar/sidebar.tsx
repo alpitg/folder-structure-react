@@ -39,7 +39,7 @@ const SidebarApp = () => {
       route: [
         {
           label: "Organization Units",
-          path: ROUTE_URL.ADMIN.ORGANIZATION_UNITS,
+          path: ROUTE_URL.ADMIN.ORGANIZATION_UNITS.BASE,
           icon: "pi pi-fw pi-th-large",
           claims: [],
         },

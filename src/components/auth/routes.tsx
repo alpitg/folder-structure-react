@@ -30,6 +30,8 @@ import BookSlotsEditApp from "../feature/gymkhanaclub/book-slots/edit/book-slots
 import FacilityCostingApp from "../feature/gymkhanaclub/admin/facility-costing/facility-costing";
 import FacilityCostingListApp from "../feature/gymkhanaclub/admin/facility-costing/list/facility-costing-list";
 import FacilityCostingEditApp from "../feature/gymkhanaclub/admin/facility-costing/edit/facility-costing-edit";
+import OrganizationUnitsListApp from "../administration/organization-units/list/organization-units-list";
+import OrganizationUnitsEditApp from "../administration/organization-units/edit/organization-units-edit";
 
 const Dashboard = lazy(() => import("../../pages/dashboard/dashboard"));
 const Contact = lazy(() => import("../../pages/contact/contact"));
@@ -67,20 +69,38 @@ const RoutesApp = () => {
             <Route path={ROUTE_URL.UI} element={<UI />} />
             <Route path={ROUTE_URL.SOCIAL_MEDIA_MANAGEMENT} element={<SocialMedia />} />
             <Route path={ROUTE_URL.DASHBOARD} element={<Dashboard />} />
-            <Route path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS} element={<OrganizationUnits />} />
             <Route path={ROUTE_URL.ADMIN.SUBSCRIPTION_MANAGEMENT} element={<Subscription />} />
             <Route path={ROUTE_URL.ABOUT} element={<About />} />
             <Route path={ROUTE_URL.CONTACT} element={<Contact />} />
             <Route path={ROUTE_URL.NOT_ALLOWED} element={<NotAllowedApp />} />
 
+
+
             <Route>
+              <Route
+                path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS.BASE}
+                element={<OrganizationUnits />}
+              >
+                <Route
+                  path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS.LIST}
+                  element={<OrganizationUnitsListApp />}
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS.EDIT}
+                  element={<OrganizationUnitsEditApp />}
+                />
+                <Route
+                  path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS.ADD}
+                  element={<OrganizationUnitsEditApp />}
+                />
+              </Route>
 
               <Route
                 path={ROUTE_URL.ADMIN.TENANT.BASE}
                 element={<Tenant />}
               >
                 <Route
-                  path={ROUTE_URL.ADMIN.TENANT.TENANT_LIST}
+                  path={ROUTE_URL.ADMIN.TENANT.LIST}
                   element={
                     <ClaimGuard requiredClaims={[TENANTS_VIEW_TENANTS]}>
                       <TenantList />
@@ -88,7 +108,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_ADD}
+                  path={ROUTE_URL.ADMIN.TENANT.ADD}
                   element={
                     <ClaimGuard requiredClaims={[TENANTS_ADD_TENANTS]}>
                       <TenantEdit />
@@ -96,7 +116,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_EDIT}
+                  path={ROUTE_URL.ADMIN.TENANT.EDIT}
                   element={
                     <ClaimGuard requiredClaims={[TENANTS_UPDATE_TENANTS]}>
                       <TenantEdit />
@@ -111,7 +131,7 @@ const RoutesApp = () => {
                 element={<Role />}
               >
                 <Route
-                  path={ROUTE_URL.ADMIN.ROLE.ROLE_LIST}
+                  path={ROUTE_URL.ADMIN.ROLE.LIST}
                   element={
                     <ClaimGuard requiredClaims={[ROLES_VIEW_ROLES]}>
                       <RoleList />
@@ -119,7 +139,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL}
+                  path={ROUTE_URL.ADMIN.ROLE.DETAIL}
                   element={
                     <ClaimGuard requiredClaims={[ROLES_VIEW_ROLES]}>
                       <RoleDetail />
@@ -127,7 +147,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_ADD}
+                  path={ROUTE_URL.ADMIN.ROLE.ADD}
                   element={
                     <ClaimGuard requiredClaims={[ROLES_ADD_ROLE]}>
                       <RoleDetailEdit />
@@ -135,7 +155,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_EDIT}
+                  path={ROUTE_URL.ADMIN.ROLE.EDIT}
                   element={
                     <ClaimGuard requiredClaims={[ROLES_ADD_ROLE, ROLES_UPDATE_ROLE]}>
                       <RoleDetailEdit />
@@ -149,7 +169,7 @@ const RoutesApp = () => {
                 element={<User />}
               >
                 <Route
-                  path={ROUTE_URL.ADMIN.USER.USER_LIST}
+                  path={ROUTE_URL.ADMIN.USER.LIST}
                   element={
                     <ClaimGuard requiredClaims={[USR_VIEW_USERS]}>
                       <UserList />
@@ -157,7 +177,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.USER.USER_DETAIL}
+                  path={ROUTE_URL.ADMIN.USER.DETAIL}
                   element={
                     <ClaimGuard requiredClaims={[USR_VIEW_USERS]}>
                       <UserDetail />
@@ -165,7 +185,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.USER.USER_DETAIL_ADD}
+                  path={ROUTE_URL.ADMIN.USER.ADD}
                   element={
                     <ClaimGuard requiredClaims={[USR_ADD_USER]}>
                       <UserDetailEdit />
@@ -173,7 +193,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.USER.USER_DETAIL_EDIT}
+                  path={ROUTE_URL.ADMIN.USER.EDIT}
                   element={
                     <ClaimGuard requiredClaims={[USR_ADD_USER, USR_UPDATE_USER]}>
                       <UserList />
@@ -181,7 +201,7 @@ const RoutesApp = () => {
                   }
                 />
                 <Route
-                  path={ROUTE_URL.ADMIN.USER.USER_PERMISSIONS}
+                  path={ROUTE_URL.ADMIN.USER.PERMISSIONS}
                   element={
                     <ClaimGuard requiredClaims={[USR_ASSIGN_USR_PERMISSIONS]}>
                       <UserPermissions />
@@ -267,7 +287,7 @@ const RoutesApp = () => {
           </Route>
         </Routes>
       </BrowserRouter>
-    </Suspense>
+    </Suspense >
   );
 };
 

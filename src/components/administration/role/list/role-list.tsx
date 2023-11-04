@@ -43,7 +43,7 @@ const RoleListApp = () => {
               children={
                 <>
                   {hasClaim([ROLES_ADD_ROLE]) && (
-                    <Link to={`${ROUTE_URL.ADMIN.ROLE.ROLE_DETAIL_ADD}`}>
+                    <Link to={`${ROUTE_URL.ADMIN.ROLE.ADD}`}>
                       <Button
                         className=" float-end"
                         label="Create new role"

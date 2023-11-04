@@ -67,7 +67,7 @@ const UserListApp = () => {
             children={
               <>
                 {hasClaim([USR_ADD_USER]) && (
-                  <Link to={`${ROUTE_URL.ADMIN.USER.USER_DETAIL_ADD}`}>
+                  <Link to={`${ROUTE_URL.ADMIN.USER.ADD}`}>
                     <Button
                       className=" float-end"
                       label="Create new user"

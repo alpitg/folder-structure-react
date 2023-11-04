@@ -41,7 +41,7 @@ const TenantListApp = () => {
             children={
               <>
                 {hasClaim([]) && (
-                  <Link to={`${ROUTE_URL.ADMIN.TENANT.TENANT_DETAIL_ADD}`}>
+                  <Link to={`${ROUTE_URL.ADMIN.TENANT.ADD}`}>
                     <Button
                       className=" float-end"
                       label="Create new tenant"
