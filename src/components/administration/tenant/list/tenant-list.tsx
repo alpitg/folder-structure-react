@@ -55,28 +55,33 @@ const TenantListApp = () => {
           />
         </div>
       </div>
-      <Card title="Tenants">
-        {tenants?.delete?.error &&
-          tenants?.delete?.error?.map((error: string) => (
-            <MessagesApp
-              type="alert-danger"
-              message={error}
-              close={closeError}
-              key={error}
-            />
-          ))}
-        {tenants?.list.pending && LOADING}
-        <div className="table-responsive">
-          <table className="table">
-            <tbody>
-              {tenants?.list?.result?.map((tenant: TenantModel) => {
-                return <TenantListItemApp tenant={tenant} key={tenant.id} />;
-              })}
-            </tbody>
-          </table>
-          {tenants?.list?.result?.length === 0 && <NoRecordApp />}
-        </div>
-      </Card>
+
+      {
+        tenants?.list?.result?.length ? <NoRecordApp /> :
+
+          <Card title="Tenants">
+            {tenants?.delete?.error &&
+              tenants?.delete?.error?.map((error: string) => (
+                <MessagesApp
+                  type="alert-danger"
+                  message={error}
+                  close={closeError}
+                  key={error}
+                />
+              ))}
+            {tenants?.list.pending && LOADING}
+            <div className="table-responsive">
+              <table className="table">
+                <tbody>
+                  {tenants?.list?.result?.map((tenant: TenantModel) => {
+                    return <TenantListItemApp tenant={tenant} key={tenant.id} />;
+                  })}
+                </tbody>
+              </table>
+              {tenants?.list?.result?.length === 0 && <NoRecordApp />}
+            </div>
+          </Card>
+      }
     </div>
   );
 };

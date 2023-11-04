@@ -17,7 +17,6 @@ import {
   USR_VIEW_USERS,
   USR_ASSIGN_USR_PERMISSIONS,
 } from "../../constants/global-contants/claims.const";
-import GymkhanaclubApp from "../../pages/gymkhanaclub/gymkhanaclub";
 import FacilityApp from "../feature/gymkhanaclub/admin/facility/facility";
 import FacilityListApp from "../feature/gymkhanaclub/admin/facility/list/facility-list";
 import FacilityEditApp from "../feature/gymkhanaclub/admin/facility/edit/facility-edit";
@@ -53,6 +52,7 @@ const UserDetail = lazy(() => import("../../components/administration/user/detai
 const UserDetailEdit = lazy(() => import("../../components/administration/user/edit/user-edit"));
 const UserPermissions = lazy(() => import("../../components/administration/user/permissions/user-permissions"));
 
+const Signup = lazy(() => import("../../components/feature/gymkhanaclub/user-signup/user-signup"));
 const UI = lazy(() => import("../../pages/ui/ui"));
 const SocialMedia = lazy(() => import("../../pages/social-media/social-media"));
 
@@ -63,7 +63,7 @@ const RoutesApp = () => {
         <Routes>
           <Route path={ROUTE_URL.LOGIN} element={<Login />} />
           <Route path={ROUTE_URL.REGISTER} element={<Register />} />
-          <Route path={ROUTE_URL.GYMKHANACLUB.SIGNUP} element={<GymkhanaclubApp />} />
+          <Route path={ROUTE_URL.GYMKHANACLUB.SIGNUP} element={<Signup />} />
 
           <Route path={ROUTE_URL.HOME} element={<BaseLayoutApp />}>
             <Route path={ROUTE_URL.UI} element={<UI />} />
@@ -213,24 +213,6 @@ const RoutesApp = () => {
             </Route>
 
             <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE}
-              element={<FacilityApp />}
-            >
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.LIST}
-                element={<FacilityListApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.EDIT}
-                element={<FacilityEditApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.ADD}
-                element={<FacilityEditApp />}
-              />
-            </Route>
-
-            <Route
               path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE}
               element={<FacilityTypeApp />}
             >
@@ -245,6 +227,24 @@ const RoutesApp = () => {
               <Route
                 path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}
                 element={<FacilityTypeEditApp />}
+              />
+            </Route>
+
+            <Route
+              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE}
+              element={<FacilityApp />}
+            >
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.LIST}
+                element={<FacilityListApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.EDIT}
+                element={<FacilityEditApp />}
+              />
+              <Route
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.ADD}
+                element={<FacilityEditApp />}
               />
             </Route>
 

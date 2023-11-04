@@ -4,7 +4,7 @@ import { BOOK_SLOTS_SUB_TITLE, BOOK_SLOTS_TITLE } from "../book-slots.const";
 
 const BookSlotsListApp = () => {
     return <>
-        <div className="facility-type-list-app">
+        <div className="book-slots-list-app">
             <div className="row">
                 <div className="col-sm-12">
                     <HeaderInlineTextApp

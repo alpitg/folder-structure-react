@@ -126,15 +126,15 @@ const SidebarApp = () => {
       ]
     },
     {
-      label: "Facility Sports",
-      path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE,
-      icon: "pi pi-fw pi-tablet",
-      claims: [],
-    },
-    {
       label: "Facility Type",
       path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE,
       icon: "pi pi-fw pi-ticket",
+      claims: [],
+    },
+    {
+      label: "Facility Sports",
+      path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE,
+      icon: "pi pi-fw pi-tablet",
       claims: [],
     },
     {

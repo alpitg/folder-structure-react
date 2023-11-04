@@ -1,6 +1,7 @@
 import "./organization-units-list.scss";
 import HeaderInlineTextApp from "../../../ui/header-inline-text/header-inline-text";
 import { ORGANIZATION_UNITS_SUB_TITLE, ORGANIZATION_UNITS_TITLE } from "../organization-units.const";
+import NoRecordApp from "../../../ui/no-record/no-record";
 
 const OrganizationUnitsListApp = () => {
     return <>
@@ -12,12 +13,16 @@ const OrganizationUnitsListApp = () => {
                         subTitle={ORGANIZATION_UNITS_SUB_TITLE}
                         children={
                             <>
-                               Coming Next..
+                                Coming Next..
                             </>
                         }
                     />
                 </div>
             </div>
+
+            {
+                <NoRecordApp />
+            }
         </div>
     </>
 }

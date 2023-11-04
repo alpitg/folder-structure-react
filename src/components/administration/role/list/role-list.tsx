@@ -57,28 +57,32 @@ const RoleListApp = () => {
             />
           </div>
         </div>
-        <Card title="Roles">
-          {roles?.delete?.error &&
-            roles?.delete?.error?.map((error: string) => (
-              <MessagesApp
-                type="alert-danger"
-                message={error}
-                close={closeError}
-                key={error}
-              />
-            ))}
-          {roles?.list.pending && LOADING}
-          <div className="table-responsive">
-            <table className="table">
-              <tbody>
-                {roles?.list?.result?.map((role: IRoleModel) => {
-                  return <RoleItemApp role={role} key={role.id} />;
-                })}
-              </tbody>
-            </table>
-            {roles?.list?.result?.length === 0 && <NoRecordApp />}
-          </div>
-        </Card>
+
+        {
+          roles?.list?.result?.length ? <NoRecordApp /> :
+
+            <Card title="Roles">
+              {roles?.delete?.error &&
+                roles?.delete?.error?.map((error: string) => (
+                  <MessagesApp
+                    type="alert-danger"
+                    message={error}
+                    close={closeError}
+                    key={error}
+                  />
+                ))}
+              {roles?.list.pending && LOADING}
+              <div className="table-responsive">
+                <table className="table">
+                  <tbody>
+                    {roles?.list?.result?.map((role: IRoleModel) => {
+                      return <RoleItemApp role={role} key={role.id} />;
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+        }
       </>
     </div>
   );

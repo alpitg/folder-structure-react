@@ -81,48 +81,51 @@ const UserListApp = () => {
           />
         </div>
       </div>
-      <Card title={"Users"}>
-        <>
-          <div className="container">
-            {users?.delete?.error &&
-              users?.delete?.error?.map((error: string) => (
-                <MessagesApp
-                  type="alert-danger"
-                  message={error}
-                  close={closeError}
-                  key={error}
-                />
-              ))}
 
-            {users?.list.pending && LOADING}
-            <div className="row">
-              <div className="col-12">
-                <UserOverviewApp
-                  filter={filter}
-                  total={users?.list?.result?.length}
-                />
-                <div className="list-view">
-                  <div className="table-responsive">
-                    <table className="table">
-                      <tbody>
-                        {Array.isArray(users?.list?.result)
-                          ? users?.list?.result?.map((user: UserModel) => {
-                            return (
-                              <UserListItemApp user={user} key={user.id} />
-                            );
-                          })
-                          : null}
-                      </tbody>
-                    </table>
+      {
+        users?.list?.result?.length ? <NoRecordApp /> :
 
-                    {users?.list?.result?.length === 0 && <NoRecordApp />}
+          <Card title={USER_TITLE}>
+            <>
+              <div className="container">
+                {users?.delete?.error &&
+                  users?.delete?.error?.map((error: string) => (
+                    <MessagesApp
+                      type="alert-danger"
+                      message={error}
+                      close={closeError}
+                      key={error}
+                    />
+                  ))}
+
+                {users?.list.pending && LOADING}
+                <div className="row">
+                  <div className="col-12">
+                    <UserOverviewApp
+                      filter={filter}
+                      total={users?.list?.result?.length}
+                    />
+                    <div className="list-view">
+                      <div className="table-responsive">
+                        <table className="table">
+                          <tbody>
+                            {Array.isArray(users?.list?.result)
+                              ? users?.list?.result?.map((user: UserModel) => {
+                                return (
+                                  <UserListItemApp user={user} key={user.id} />
+                                );
+                              })
+                              : null}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </>
-      </Card>
+            </>
+          </Card>
+      }
     </div>
   );
 };
