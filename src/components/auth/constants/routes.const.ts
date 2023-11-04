@@ -8,6 +8,7 @@ export const ROUTE_URL = {
   UI: "/ui",
   NOT_ALLOWED: "/not-allowed",
   SOCIAL_MEDIA_MANAGEMENT: "/social-media",
+  TENANT_SETTINGS: "/tenant-settings",
   ADMIN: {
     BASE: "/admin",
     ORGANIZATION_UNITS: {

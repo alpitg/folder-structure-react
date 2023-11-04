@@ -31,6 +31,7 @@ import FacilityCostingListApp from "../feature/gymkhanaclub/admin/facility-costi
 import FacilityCostingEditApp from "../feature/gymkhanaclub/admin/facility-costing/edit/facility-costing-edit";
 import OrganizationUnitsListApp from "../administration/organization-units/list/organization-units-list";
 import OrganizationUnitsEditApp from "../administration/organization-units/edit/organization-units-edit";
+import TenantSettingsApp from "../administration/tenant-settings/tenant-settings";
 
 const Dashboard = lazy(() => import("../../pages/dashboard/dashboard"));
 const Contact = lazy(() => import("../../pages/contact/contact"));
@@ -73,6 +74,7 @@ const RoutesApp = () => {
             <Route path={ROUTE_URL.ABOUT} element={<About />} />
             <Route path={ROUTE_URL.CONTACT} element={<Contact />} />
             <Route path={ROUTE_URL.NOT_ALLOWED} element={<NotAllowedApp />} />
+            <Route path={ROUTE_URL.TENANT_SETTINGS} element={<TenantSettingsApp />} />
 
 
             {/* ADMINSTRATION */}

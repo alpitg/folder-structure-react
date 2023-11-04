@@ -6,7 +6,7 @@ import { Button } from "primereact/button";
 import { TabPanel, TabView } from "primereact/tabview";
 import SocialMediaManagementService from "../services/social-media-management.service";
 import InstaPostView from "./insta-post-view/insta-post-view";
-import UploadFileApp from "../../ui/upload-file/upload-file";
+import UploadFileApp from "../../ui/upload/upload-file/upload-file";
 import EditorApp from "../../ui/editor/editor";
 import {
   InstaSocialMediaContent,

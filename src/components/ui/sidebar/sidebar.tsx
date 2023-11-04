@@ -155,6 +155,12 @@ const SidebarApp = () => {
       icon: "pi pi-fw pi-bolt",
       claims: [],
     },
+    {
+      label: "Settings",
+      path: ROUTE_URL.TENANT_SETTINGS,
+      icon: "pi pi-fw pi-cog",
+      claims: [],
+    },
   ];
 
   const isActivePath = (routes: IRoutes[]) => {
