@@ -3,11 +3,28 @@ import FormApp from "../../components/ui/form/form";
 import InputApp from "../../components/ui/input/input";
 import MessagesApp from "../../components/ui/messages/messages";
 import LoaderSpinnerApp from "../../components/ui/loader-spinner/loader-spinner";
+import CalendarApp from "../../components/ui/calendar/calendar";
+import CalendarSample1App from "../../components/ui/calendar/calendar-sample1/calendar-sample1";
 
 const UIApp = () => {
   return (
     <>
       <>
+        <div className="mb-3">
+          <h2>
+            Calendar
+          </h2>
+          <CalendarApp />
+        </div>
+
+
+        <div className="mb-3">
+          <h2>
+            Calendar
+          </h2>
+          <CalendarSample1App />
+        </div>
+
         <div className="mb-3">
           <Card
             title={
