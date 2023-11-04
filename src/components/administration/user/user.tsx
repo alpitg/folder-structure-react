@@ -1,7 +1,7 @@
+import "./user.scss";
 import { Outlet } from "react-router";
 import { Suspense } from "react";
 import { LOADING } from "../../../constants/global-contants/global-key.const";
-import "./user.scss";
 
 const UsersApp = () => {
   return (

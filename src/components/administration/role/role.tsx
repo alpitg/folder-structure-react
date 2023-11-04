@@ -1,7 +1,7 @@
+import "./role.scss";
 import { Outlet } from "react-router";
 import { Suspense } from "react";
 import { LOADING } from "../../../constants/global-contants/global-key.const";
-import "./role.scss";
 
 const RolesApp = () => {
   return (

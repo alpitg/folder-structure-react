@@ -1,3 +1,5 @@
+import "./user-permissions.scss";
+import React from "react";
 import { useEffect, useState } from "react";
 import PermissionsApp from "../../permissions/permissions";
 import { Card } from "primereact/card";
@@ -14,8 +16,6 @@ import {
   IUserClaimsModel,
   UserFormModel,
 } from "../../../../interfaces/user.model";
-import "./user-permissions.scss";
-import React from "react";
 
 const UserPermissionsApp = () => {
   const { id } = useParams();

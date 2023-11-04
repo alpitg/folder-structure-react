@@ -1,3 +1,4 @@
+import "./role-list.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,7 +18,7 @@ import MessagesApp from "../../../ui/messages/messages";
 import { hasClaim } from "../../../../utils/auth.util";
 import { LOADING } from "../../../../constants/global-contants/global-key.const";
 import { ROLES_ADD_ROLE } from "../../../../constants/global-contants/claims.const";
-import "./role-list.scss";
+import { ROLE_SUB_TITLE, ROLE_TITLE } from "../role.const";
 
 const RoleListApp = () => {
   const roles = useSelector((x: AppState) => x.administration.roles);
@@ -37,8 +38,8 @@ const RoleListApp = () => {
         <div className="row">
           <div className="col-sm-12">
             <HeaderInlineTextApp
-              title="Roles"
-              subTitle="Use roles to group permissions."
+              title={ROLE_TITLE}
+              subTitle={ROLE_SUB_TITLE}
               children={
                 <>
                   {hasClaim([ROLES_ADD_ROLE]) && (

@@ -1,6 +1,6 @@
+import "./permissions.scss";
 import React, { useEffect, useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
-import "./permissions.scss";
 
 const PermissionsApp = ({
   nodes,

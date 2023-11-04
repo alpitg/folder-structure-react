@@ -1,3 +1,4 @@
+import "./tenant-list.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -16,7 +17,7 @@ import {
   resetDeleteTenant,
 } from "../../store/actions/tenant.action";
 import { LOADING } from "../../../../constants/global-contants/global-key.const";
-import "./tenant-list.scss";
+import { TENANT_TITLE, TENANT_SUB_TITLE } from "../tenant.const";
 
 const TenantListApp = () => {
   const tenants = useSelector((x: AppState) => x.administration.tenants);
@@ -35,8 +36,8 @@ const TenantListApp = () => {
       <div className="row">
         <div className="col-sm-12">
           <HeaderInlineTextApp
-            title="Tenants"
-            subTitle="Manage your tenants."
+            title={TENANT_TITLE}
+            subTitle={TENANT_SUB_TITLE}
             children={
               <>
                 {hasClaim([]) && (

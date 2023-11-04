@@ -1,3 +1,4 @@
+import "./role-item.scss";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { IRoleModel } from "../../../../../interfaces/role.model";
@@ -9,7 +10,6 @@ import {
   ROLES_UPDATE_ROLE,
   ROLES_DELETE_ROLE,
 } from "../../../../../constants/global-contants/claims.const";
-import "./role-item.scss";
 
 const RoleItemApp = (props: { role: IRoleModel }) => {
   const dispatch = useDispatch();

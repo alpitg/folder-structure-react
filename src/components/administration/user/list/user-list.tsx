@@ -1,3 +1,4 @@
+import "./user-list.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
@@ -21,7 +22,7 @@ import { useEffect, useState } from "react";
 import { hasClaim } from "../../../../utils/auth.util";
 import { LOADING } from "../../../../constants/global-contants/global-key.const";
 import { USR_ADD_USER } from "../../../../constants/global-contants/claims.const";
-import "./user-list.scss";
+import { USER_TITLE, USER_SUB_TITLE } from "../user.const";
 
 const UserListApp = () => {
   const users = useSelector((x: AppState) => x.administration.users);
@@ -61,8 +62,8 @@ const UserListApp = () => {
       <div className="row">
         <div className="col-sm-12">
           <HeaderInlineTextApp
-            title="Users"
-            subTitle="Manage users and permissions."
+            title={USER_TITLE}
+            subTitle={USER_SUB_TITLE}
             children={
               <>
                 {hasClaim([USR_ADD_USER]) && (
@@ -80,7 +81,7 @@ const UserListApp = () => {
           />
         </div>
       </div>
-      <Card title={" Users"}>
+      <Card title={"Users"}>
         <>
           <div className="container">
             {users?.delete?.error &&
@@ -106,10 +107,10 @@ const UserListApp = () => {
                       <tbody>
                         {Array.isArray(users?.list?.result)
                           ? users?.list?.result?.map((user: UserModel) => {
-                              return (
-                                <UserListItemApp user={user} key={user.id} />
-                              );
-                            })
+                            return (
+                              <UserListItemApp user={user} key={user.id} />
+                            );
+                          })
                           : null}
                       </tbody>
                     </table>

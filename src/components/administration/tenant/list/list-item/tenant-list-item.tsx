@@ -1,3 +1,4 @@
+import "./tenant-list-item.scss";
 import { Link } from "react-router-dom";
 import { TenantModel } from "../../../../../interfaces/tenant.model";
 import { ROUTE_URL } from "../../../../auth/constants/routes.const";
@@ -9,7 +10,6 @@ import {
   TENANTS_DELETE_TENANTS,
   TENANTS_UPDATE_TENANTS,
 } from "../../../../../constants/global-contants/claims.const";
-import "./tenant-list-item.scss";
 
 const TenantListItemApp = (props: { tenant: TenantModel }) => {
   const dispatch = useDispatch();
