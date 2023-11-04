@@ -196,7 +196,7 @@ const RoutesApp = () => {
                   path={ROUTE_URL.ADMIN.USER.EDIT}
                   element={
                     <ClaimGuard requiredClaims={[USR_ADD_USER, USR_UPDATE_USER]}>
-                      <UserList />
+                      <UserDetailEdit />
                     </ClaimGuard>
                   }
                 />
