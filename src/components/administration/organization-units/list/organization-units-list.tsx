@@ -4,7 +4,7 @@ import { ORGANIZATION_UNITS_SUB_TITLE, ORGANIZATION_UNITS_TITLE } from "../organ
 
 const OrganizationUnitsListApp = () => {
     return <>
-        <div className="tenant-list-app">
+        <div className="organization-units-list-app">
             <div className="row">
                 <div className="col-sm-12">
                     <HeaderInlineTextApp
