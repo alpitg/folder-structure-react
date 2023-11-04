@@ -83,7 +83,7 @@ const UserListApp = () => {
       </div>
 
       {
-        users?.list?.result?.length ? <NoRecordApp /> :
+        !users?.list?.result?.length ? <NoRecordApp /> :
 
           <Card title={USER_TITLE}>
             <>

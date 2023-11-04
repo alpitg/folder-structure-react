@@ -59,7 +59,7 @@ const RoleListApp = () => {
         </div>
 
         {
-          roles?.list?.result?.length ? <NoRecordApp /> :
+          !roles?.list?.result?.length ? <NoRecordApp /> :
 
             <Card title="Roles">
               {roles?.delete?.error &&

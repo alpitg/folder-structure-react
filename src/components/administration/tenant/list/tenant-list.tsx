@@ -57,7 +57,7 @@ const TenantListApp = () => {
       </div>
 
       {
-        tenants?.list?.result?.length ? <NoRecordApp /> :
+        !tenants?.list?.result?.length ? <NoRecordApp /> :
 
           <Card title="Tenants">
             {tenants?.delete?.error &&

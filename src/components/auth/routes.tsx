@@ -75,7 +75,7 @@ const RoutesApp = () => {
             <Route path={ROUTE_URL.NOT_ALLOWED} element={<NotAllowedApp />} />
 
 
-
+            {/* ADMINSTRATION */}
             <Route>
               <Route
                 path={ROUTE_URL.ADMIN.ORGANIZATION_UNITS.BASE}
@@ -209,79 +209,129 @@ const RoutesApp = () => {
                   }
                 />
               </Route>
-
             </Route>
 
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE}
-              element={<FacilityTypeApp />}
-            >
+            {/* GYMKHANA APP */}
+            <Route>
               <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.LIST}
-                element={<FacilityTypeListApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.EDIT}
-                element={<FacilityTypeEditApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}
-                element={<FacilityTypeEditApp />}
-              />
-            </Route>
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE}
+                element={<FacilityTypeApp />}
+              >
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityTypeListApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityTypeEditApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityTypeEditApp />
+                    </ClaimGuard>
+                  }
+                />
+              </Route>
 
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE}
-              element={<FacilityApp />}
-            >
               <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.LIST}
-                element={<FacilityListApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.EDIT}
-                element={<FacilityEditApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.ADD}
-                element={<FacilityEditApp />}
-              />
-            </Route>
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE}
+                element={<FacilityApp />}
+              >
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityListApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityEditApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityEditApp />
+                    </ClaimGuard>
+                  }
+                />
+              </Route>
 
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.BASE}
-              element={<FacilityCostingApp />}
-            >
               <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.LIST}
-                element={<FacilityCostingListApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.EDIT}
-                element={<FacilityCostingEditApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.ADD}
-                element={<FacilityCostingEditApp />}
-              />
-            </Route>
+                path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.BASE}
+                element={<FacilityCostingApp />}
+              >
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityCostingListApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityCostingEditApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <FacilityCostingEditApp />
+                    </ClaimGuard>
+                  }
+                />
+              </Route>
 
-            <Route
-              path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.BASE}
-              element={<BookSlotsApp />}
-            >
               <Route
-                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.LIST}
-                element={<BookSlotsListApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.EDIT}
-                element={<BookSlotsEditApp />}
-              />
-              <Route
-                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.ADD}
-                element={<BookSlotsEditApp />}
-              />
+                path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.BASE}
+                element={<BookSlotsApp />}
+              >
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.LIST}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <BookSlotsListApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.EDIT}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <BookSlotsEditApp />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <BookSlotsEditApp />
+                    </ClaimGuard>
+                  }
+                />
+              </Route>
             </Route>
 
           </Route>
