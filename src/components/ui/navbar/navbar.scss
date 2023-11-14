@@ -1,6 +1,6 @@
 .navbar-app {
   height: var(--app-header-height);
-  background: var(--white-color);
+  background: var(--body-bg-color);
   position: fixed;
   overflow: hidden;
   top: 0;
@@ -9,6 +9,8 @@
   z-index: 9;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
   .navbar-content {
     display: flex;
     flex-wrap: wrap;
@@ -17,10 +19,13 @@
     padding: 0 20px 0 20px;
     margin-left: 35px;
     width: 100%;
+
     .nav-right {
       text-align: end;
+      display: flex;
     }
   }
+
   .margin-left {
     margin-left: var(--sidebar-width);
   }

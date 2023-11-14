@@ -4,7 +4,7 @@ const AboutApp = () => {
     return (
         <>
 
-            <div className="about-app">
+            <div className="about-app container">
                 <div className="about-section align-center">
                     <div className="row container">
                         <div className="col-sm-12 lead"><h5 className="lead">About</h5></div>

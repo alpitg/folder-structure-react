@@ -1,21 +1,33 @@
-@import "./theme.scss";
-
 :root {
   // constants
   --app-header-height: 70px;
   --sidebar-width: 265px;
   --sidebar-media-screen-width: 700px;
 
-  --scrollbar-thumb:#323248;
+  --scrollbar-thumb: #323248;
 
   --app-bg-color: #f5f8fa;
   --sidebar-bg-color: #1e1e2d;
   --sidebar-active-color: #2a2a3c;
   --default-font-color: #9d9da6;
   --white-color: #fff;
+  --body-bg-color: #fff;
 
   --anchor-color: #3c4142;
 
   --bg-clr-1: #e7f8f8;
   --card-clr-red: #f03e3e;
+}
+
+[data-theme='dark'] {
+  --app-bg-color: #000000;
+  --sidebar-bg-color: #1e1e2d;
+  --sidebar-active-color: #2a2a3c;
+  --default-font-color: #9d9da6;
+  --white-color: #fff;
+  --body-bg-color: #1e1e2d;
+
+  background-color: #1e1e2d;
+  color: #9d9da6;
+
 }

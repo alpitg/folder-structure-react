@@ -4,12 +4,14 @@ import administrationRootReducer from "../../components/administration/store/red
 import pagesReducer from "./pages.reducer";
 import actionsReducer from "./actions.reducer";
 import { LOGOUT_USER_REQUEST } from "../actions/auth.action";
+import appsettingReducer from "./appsetting.reducer";
 
 const allReducers = combineReducers({
   authenticate: authenticateReducer,
   administration: administrationRootReducer,
   pages: pagesReducer,
   actions: actionsReducer,
+  appsetting: appsettingReducer,
 });
 
 export const rootReducer = (state: any, action: any) => {

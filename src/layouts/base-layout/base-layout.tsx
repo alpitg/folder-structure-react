@@ -1,16 +1,18 @@
 import { useState, Suspense, useEffect } from "react";
 import { Outlet } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SidebarApp from "../../components/ui/sidebar/sidebar";
 import NavbarApp from "../../components/ui/navbar/navbar";
 import AuthResolver from "../../components/auth/auth.resolver";
 import { fetchPagesRequest } from "../../store/actions/pages.action";
 import { fetchActionsRequest } from "../../store/actions/actions.action";
-import { LOADING } from "../../constants/global-contants/global-key.const";
+import { DARK, LIGHT, LOADING, THEME } from "../../constants/global-contants/global-key.const";
+import { AppState } from "../../store/reducers/root.reducer";
 
 const BaseLayoutApp = () => {
   const [isOpenSideBar, setIsOpenSidebar] = useState<boolean>(true);
   const dispatch = useDispatch();
+  const theme = useSelector<AppState>(x => x.appsetting.theme);
 
   const onToggleSidebar = () => {
     setIsOpenSidebar(!isOpenSideBar);
@@ -23,7 +25,7 @@ const BaseLayoutApp = () => {
 
   return (
     <AuthResolver>
-      <div className="base-layout-app">
+      <div className="base-layout-app" data-theme={theme}>
         <span
           className={
             "toggle-button svg-icon svg-icon-2 " +

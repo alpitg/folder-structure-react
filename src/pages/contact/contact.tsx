@@ -3,7 +3,7 @@ const ContactApp = () => {
 
     return (
         <>
-            <div className="contact-app">
+            <div className="contact-app container">
                 <div className="contact-section align-center">
                     <div className="row container">
                         <div className="col-sm-12"><h5 className="lead">Contact</h5></div>
