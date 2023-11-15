@@ -1,3 +1,8 @@
+const FacilityTypeEditApp = () => {
+return <></>
+}
+ export default FacilityTypeEditApp;
+
 // import { useDispatch, useSelector } from "react-redux";
 // import "./facility-type-edit.scss";
 // import { useNavigate, useParams } from "react-router";
