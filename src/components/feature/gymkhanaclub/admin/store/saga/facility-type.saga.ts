@@ -1,6 +1,5 @@
 
-import { call, put, takeLatest } from "redux-saga/effects";
-import { all } from "axios";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 import { IAxiosResponse } from "../../../../../../interfaces/generic.model";
 import FacilityTypeService from "../../facility-type/service/facilityType.service";
 import { FETCH_FACILITY_TYPE_REQUEST, fetchFacilityTypeFailed, fetchFacilityTypeSuccess } from "../actions/facilityType.action";

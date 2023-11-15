@@ -22,7 +22,7 @@ const facilityTypeReducer = (state = initialState, action: FacilityTypeAction) =
         case FETCH_FACILITY_TYPE_FAILED:
             return {
                 ...state,
-                update: {
+                list: {
                     pending: false,
                     error: action.payload.error,
 
