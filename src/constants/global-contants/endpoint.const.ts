@@ -35,6 +35,14 @@ export const ENDPOINT = {
       DELETE_ROLE: "/api/role",
     },
   },
+  FACILITYTYPE: {
+    API: {
+      FETCH_FACILITYTYPE: "/api/facilitesType/getFacilityType",
+      // ADD_ROLE: "/api/role",
+      // UPDATE_ROLE: "/api/role",
+      // DELETE_ROLE: "/api/role",
+    },
+  },
   SOCIAL_MEDIA: {
     API: {
       PYTHON_API: {
