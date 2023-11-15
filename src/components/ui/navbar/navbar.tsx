@@ -1,11 +1,11 @@
 import { Button } from "primereact/button";
-import SelectTenantApp from "../../administration/select-tenant/select-tenant";
 import AuthService from "../../../services/auth.service";
 import { useNavigate } from "react-router";
 import { ROUTE_URL } from "../../auth/constants/routes.const";
 import { useDispatch } from "react-redux";
 import { logoutUserRequest } from "../../../store/actions/auth.action";
 import "./navbar.scss";
+import AppTheme from "../../../app-theme";
 
 const NavbarApp = ({ isOpenSideBar }: any) => {
   const navigate = useNavigate();
@@ -24,23 +24,7 @@ const NavbarApp = ({ isOpenSideBar }: any) => {
         >
           <div className="nav-left"> Techno </div>
           <div className="nav-right">
-            <>
-              <SelectTenantApp />
-            </>
-            <Button
-              icon="pi pi-moon"
-              text
-              title="Dark theme"
-              severity="secondary"
-              aria-label="dark-theme"
-            />
-            <Button
-              icon="pi pi-sun"
-              text
-              title="Light theme"
-              severity="secondary"
-              aria-label="light-theme"
-            />
+            <AppTheme />
             <Button
               icon="pi pi-comment"
               text
