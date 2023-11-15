@@ -16,6 +16,7 @@ import {
   USR_UPDATE_USER,
   USR_VIEW_USERS,
   USR_ASSIGN_USR_PERMISSIONS,
+  FACILITY_TYPE_ADD_ROLE,
 } from "../../constants/global-contants/claims.const";
 import FacilityApp from "../feature/gymkhanaclub/admin/facility/facility";
 import FacilityListApp from "../feature/gymkhanaclub/admin/facility/list/facility-list";
@@ -152,6 +153,14 @@ const RoutesApp = () => {
                   path={ROUTE_URL.ADMIN.ROLE.ADD}
                   element={
                     <ClaimGuard requiredClaims={[ROLES_ADD_ROLE]}>
+                      <RoleDetailEdit />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}
+                  element={
+                    <ClaimGuard requiredClaims={[FACILITY_TYPE_ADD_ROLE]}>
                       <RoleDetailEdit />
                     </ClaimGuard>
                   }
