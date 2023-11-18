@@ -33,6 +33,7 @@ import FacilityCostingEditApp from "../feature/gymkhanaclub/admin/facility-costi
 import OrganizationUnitsListApp from "../administration/organization-units/list/organization-units-list";
 import OrganizationUnitsEditApp from "../administration/organization-units/edit/organization-units-edit";
 import TenantSettingsApp from "../administration/tenant-settings/tenant-settings";
+import TicketingToolApp from "../feature/ticketing-tool/ticketing-tool";
 
 const Dashboard = lazy(() => import("../../pages/dashboard/dashboard"));
 const Contact = lazy(() => import("../../pages/contact/contact"));
@@ -57,6 +58,8 @@ const UserPermissions = lazy(() => import("../../components/administration/user/
 const Signup = lazy(() => import("../../components/feature/gymkhanaclub/user-signup/user-signup"));
 const UI = lazy(() => import("../../pages/ui/ui"));
 const SocialMedia = lazy(() => import("../../pages/social-media/social-media"));
+
+const TicketingTool = lazy(() => import("../feature/ticketing-tool/ticketing-tool"));
 
 const RoutesApp = () => {
   return (
@@ -345,6 +348,15 @@ const RoutesApp = () => {
                     </ClaimGuard>
                   }
                 />
+              </Route>
+            </Route>
+
+            {/* GYMKHANA APP */}
+            <Route>
+              <Route
+                path={ROUTE_URL.TICKETING_TOOL.SOCIAL_LOGINS}
+                element={<TicketingTool />}
+              >
               </Route>
             </Route>
 

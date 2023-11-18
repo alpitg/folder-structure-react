@@ -170,6 +170,20 @@ const SidebarApp = () => {
       ]
     },
     {
+      label: "Ticketing tool",
+      path: ROUTE_URL.TICKETING_TOOL.BASE,
+      icon: "pi pi-fw pi-chart-line",
+      claims: [],
+      route: [
+        {
+          label: "Social Login",
+          path: ROUTE_URL.TICKETING_TOOL.SOCIAL_LOGINS,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+      ]
+    },
+    {
       label: "Settings",
       path: ROUTE_URL.TENANT_SETTINGS,
       icon: "pi pi-fw pi-cog",
@@ -215,7 +229,7 @@ const SidebarApp = () => {
         {routes.map((route: IRoutes) => {
           return route.route ? (
             <li key={route.label}>
-              <div className="accordion" id={route.label}>
+              <div className="accordion" id={route.label?.replaceAll(" ", "")}>
                 <div className="accordion-item">
                   <button
                     className={
@@ -225,9 +239,9 @@ const SidebarApp = () => {
                     }
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target={"#" + route.label + "collapse"}
+                    data-bs-target={"#" + route.label?.replaceAll(" ", "") + "collapse"}
                     aria-expanded="false"
-                    aria-controls={route.label + "collapse"}
+                    aria-controls={route.label?.replaceAll(" ", "") + "collapse"}
                   >
                     <span className="icon">
                       <i className={route.icon}></i>
@@ -235,14 +249,14 @@ const SidebarApp = () => {
                     {route.label}
                   </button>
                   <div
-                    id={route.label + "collapse"}
+                    id={route.label?.replaceAll(" ", "") + "collapse"}
                     className={
                       isActivePath(route.route)
                         ? "accordion-collapse collapse show"
                         : "accordion-collapse collapse"
                     }
-                    aria-labelledby={route.label}
-                    data-bs-parent={"#" + route.label}
+                    aria-labelledby={route.label?.replaceAll(" ", "")}
+                    data-bs-parent={"#" + route.label?.replaceAll(" ", "")}
                   >
                     {route.route.map((child) => {
                       return <SideBarNav route={child} key={child.label} />;

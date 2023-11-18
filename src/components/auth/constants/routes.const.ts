@@ -70,5 +70,11 @@ export const ROUTE_URL = {
       ADD: "add",
     },
     SIGNUP: "signup",
-  }
+  },
+  TICKETING_TOOL: {
+    BASE: "",
+    DASHBOARD: "/ticketing",
+    SOCIAL_LOGINS: "/social-login",
+  },
+
 };
