@@ -112,6 +112,12 @@ const SidebarApp = () => {
           icon: "pi pi-fw pi-sign-in",
         },
         {
+          label: "Register",
+          path: ROUTE_URL.REGISTER,
+          claims: [],
+          icon: "pi pi-fw pi-sign-in",
+        },
+        {
           label: "Social Media",
           path: ROUTE_URL.SOCIAL_MEDIA_MANAGEMENT,
           claims: [],
@@ -126,34 +132,42 @@ const SidebarApp = () => {
       ]
     },
     {
-      label: "Facility Type",
-      path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE,
-      icon: "pi pi-fw pi-ticket",
+      label: "Gymkhana",
+      path: ROUTE_URL.HOME,
+      icon: "pi pi-fw pi-chart-line",
       claims: [],
-    },
-    {
-      label: "Facility Sports",
-      path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE,
-      icon: "pi pi-fw pi-tablet",
-      claims: [],
-    },
-    {
-      label: "Facility Costing",
-      path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.BASE,
-      icon: "pi pi-fw pi-tag",
-      claims: [],
-    },
-    {
-      label: "Book Slots",
-      path: ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.BASE,
-      icon: "pi pi-fw pi-id-card",
-      claims: [],
-    },
-    {
-      label: "Signup",
-      path: ROUTE_URL.GYMKHANACLUB.SIGNUP,
-      icon: "pi pi-fw pi-bolt",
-      claims: [],
+      route: [
+        {
+          label: "Facility Type",
+          path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.BASE,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+        {
+          label: "Facility Sports",
+          path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY.BASE,
+          icon: "pi pi-fw pi-tablet",
+          claims: [],
+        },
+        {
+          label: "Facility Costing",
+          path: ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_COSTING.BASE,
+          icon: "pi pi-fw pi-tag",
+          claims: [],
+        },
+        {
+          label: "Book Slots",
+          path: ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.BASE,
+          icon: "pi pi-fw pi-id-card",
+          claims: [],
+        },
+        {
+          label: "Signup",
+          path: ROUTE_URL.GYMKHANACLUB.SIGNUP,
+          icon: "pi pi-fw pi-bolt",
+          claims: [],
+        },
+      ]
     },
     {
       label: "Settings",

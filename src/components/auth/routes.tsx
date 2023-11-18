@@ -68,15 +68,18 @@ const RoutesApp = () => {
           <Route path={ROUTE_URL.GYMKHANACLUB.SIGNUP} element={<Signup />} />
 
           <Route path={ROUTE_URL.HOME} element={<BaseLayoutApp />}>
-            <Route path={ROUTE_URL.UI} element={<UI />} />
-            <Route path={ROUTE_URL.SOCIAL_MEDIA_MANAGEMENT} element={<SocialMedia />} />
             <Route path={ROUTE_URL.DASHBOARD} element={<Dashboard />} />
             <Route path={ROUTE_URL.ADMIN.SUBSCRIPTION_MANAGEMENT} element={<Subscription />} />
-            <Route path={ROUTE_URL.ABOUT} element={<About />} />
-            <Route path={ROUTE_URL.CONTACT} element={<Contact />} />
             <Route path={ROUTE_URL.NOT_ALLOWED} element={<NotAllowedApp />} />
             <Route path={ROUTE_URL.TENANT_SETTINGS} element={<TenantSettingsApp />} />
 
+            {/* PAGES */}
+            <Route>
+              <Route path={ROUTE_URL.ABOUT} element={<About />} />
+              <Route path={ROUTE_URL.CONTACT} element={<Contact />} />
+              <Route path={ROUTE_URL.SOCIAL_MEDIA_MANAGEMENT} element={<SocialMedia />} />
+              <Route path={ROUTE_URL.UI} element={<UI />} />
+            </Route>
 
             {/* ADMINSTRATION */}
             <Route>
