@@ -18,6 +18,12 @@
 - [ ]  -----
 
 
+### Libraries
+- Bootstrap css
+- Bootstrap icons
+- Prime react
+
+
 ### Init template for tsx
 ```ts
 import "./facility-list.scss";
