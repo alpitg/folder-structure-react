@@ -38,9 +38,16 @@ export const ENDPOINT = {
   FACILITYTYPE: {
     API: {
       FETCH_FACILITYTYPE: "/api/facilitesType/getFacilityType",
-      // ADD_ROLE: "/api/role",
-      // UPDATE_ROLE: "/api/role",
+      ADD_FACILITYTYPE: "/api/facilitesType/addFacilityType",
+      UPDATE_FACILITYTYPE: "/api/facilitesType/facilityType",
       // DELETE_ROLE: "/api/role",
+    },
+  },
+  FACILITY: {
+    API: {
+      FETCH_FACILITY: "/api/facilites/getFacility",
+     
+      DELETE_ROLE: "/api/role",
     },
   },
   SOCIAL_MEDIA: {

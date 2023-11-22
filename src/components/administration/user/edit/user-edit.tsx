@@ -139,7 +139,7 @@ const UserEditApp = () => {
     setIsSubmitted(true);
   };
 
-  const formValid = () => {
+  const formValid = () => { 
     let isValid = false;
     Object.values(userDetail?.isError).forEach((val: string) => {
       if (val.length > 0) {
