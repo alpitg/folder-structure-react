@@ -40,16 +40,26 @@ export const ENDPOINT = {
       FETCH_FACILITYTYPE: "/api/facilitesType/getFacilityType",
       ADD_FACILITYTYPE: "/api/facilitesType/addFacilityType",
       UPDATE_FACILITYTYPE: "/api/facilitesType/facilityType",
-      // DELETE_ROLE: "/api/role",
+      DELETE_FACILITYTYPE: "/api/facilitesType/facilityType",
     },
   },
   FACILITY: {
     API: {
-      FETCH_FACILITY: "/api/facilites/getFacility",
-     
-      DELETE_ROLE: "/api/role",
+      FETCH_FACILITY: "/api/facility/getFacility",
+      ADD_FACILITY: "/api/facility/addFacility",
+      UPDATE_FACILITY: "/api/facility/facility",
+      DELETE_FACILITY: "/api/facility/facility",
     },
   },
+  FACILITYCOURT: {
+    API: {
+      FETCH_FACILITYCOURT: "/api/facilityCourt/getFacilityCourt",
+      ADD_FACILITYCOURT: "/api/facilityCourt/addFacilityCourt",
+      UPDATE_FACILITY_COURT: "/api/facilityCourt/facilityCourt",
+      DELETE_FACILITYCOURT: "/api/facilityCourt/facilityCourt",
+    },
+  },
+    
   SOCIAL_MEDIA: {
     API: {
       PYTHON_API: {

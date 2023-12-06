@@ -1,0 +1,28 @@
+[
+  {
+    "facilities": "cricket",
+    "facilityCourt": "court1"
+  }, 
+        
+  {
+    "selected slote":
+    [
+      {
+        "date": "9/12/2023",
+        "timeSloat":[
+            "9-10",
+            "9-10"
+        ]
+
+      },
+      {
+        "date": "10/12/2023",
+        "timeSloat":[
+            "11-10",
+            "11-10"
+        ]
+      }
+    ]
+             
+  }
+]

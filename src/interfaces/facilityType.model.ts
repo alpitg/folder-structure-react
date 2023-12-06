@@ -2,28 +2,32 @@
 export class FacilityTypeModel {
   id?: string;
   tenantId?: string;
-  firstName: string;
+  name: string;
   
 
   constructor() {
     this.id = undefined;
     this.tenantId = undefined;
-   
-    this.firstName = "";
+    this.name = "";
     
   }
+}
+export interface IFacilityTypeModel {
+  id?: string;
+  tenantId?: string;
+  name: string;
 }
 export class FacilityTypeFormModel extends FacilityTypeModel {
 
   isError: {
     id: string;
     tenantId: string;
-    firstName: string;
+    name: string;
      };
   fieldName: {
     id: string;
     tenantId: string;
-    firstName: string;
+    name: string;
   };
 
   constructor() {
@@ -32,36 +36,16 @@ export class FacilityTypeFormModel extends FacilityTypeModel {
     this.isError = {
       id: "",
       tenantId: "",
-      firstName: "",
+      name: "",
     
     };
     this.fieldName = {
       id: "id",
       tenantId: "tenantId",
-    
-     
-      firstName: "firstName",
-     
+      name: "name",
     };
   }
 }
-
-// export interface IUserRoleFormModel {
-//   inheritedFromOrganizationUnit: boolean;
-//   isAssigned: boolean;
-//   roleDisplayName: string;
-//   roleId: string;
-//   roleName: string;
-// }
-
-// export interface IUserRoleModel {
-//   roleName?: string;
-//   userId: string;
-//   roleId: string;
-//   userName?: string;
-//   firstName?: string;
-//   lastName?: string;
-// }
 
 export interface IFacilityTypeRequestModel {
   tenantId?: string;
@@ -91,11 +75,11 @@ export class FacilityTypeAppStore {
     pending: boolean;
     error: any[];
   };
-  // delete: {
-  //   result: UserModel | null | undefined;
-  //   pending: boolean;
-  //   error: any[];
-  // };
+  delete: {
+    result: FacilityTypeModel | null | undefined;
+    pending: boolean;
+    error: any[];
+  };
 
   constructor() {
     this.list = {
@@ -113,11 +97,11 @@ export class FacilityTypeAppStore {
       pending: false,
       error: [],
     };
-    // this.delete = {
-    //   result: null,
-    //   pending: false,
-    //   error: [],
-    // };
+    this.delete = {
+      result: null,
+      pending: false,
+      error: [],
+    };
   }
 }
 

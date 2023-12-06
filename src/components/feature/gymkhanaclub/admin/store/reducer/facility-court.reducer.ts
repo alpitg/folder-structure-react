@@ -1,20 +1,21 @@
-import { FacilityAppStore } from "../../../../../../interfaces/facility.model";
-import { DELETE_FACILITY_FAILED, DELETE_FACILITY_REQUEST, DELETE_FACILITY_SUCCESS, FETCH_FACILITE_FAILED, FETCH_FACILITE_REQUEST, FETCH_FACILITE_SUCCESS, FETCH_FACILITY_FAILED, FETCH_FACILITY_REQUEST, FETCH_FACILITY_SUCCESS, FacilityAction, RESET_DELETE_FACILITY, RESET_UPDATE_FACILITY, UPDATE_FACILITY_FAILED, UPDATE_FACILITY_REQUEST, UPDATE_FACILITY_SUCCESS } from "../actions/facility.action";
+import { FacilityCourtAppStore } from "../../../../../../interfaces/facility-court.model";
+import FacilityCourtItemApp from "../../facility-costing/list/Item/facility-court.item";
+import { DELETE_FACILITY_COURT_FAILED, DELETE_FACILITY_COURT_REQUEST, DELETE_FACILITY_COURT_SUCCESS, FETCH_FACILITY_COURTS_FAILED, FETCH_FACILITY_COURTS_REQUEST, FETCH_FACILITY_COURTS_SUCCESS, FETCH_FACILITY_COURT_FAILED, FETCH_FACILITY_COURT_REQUEST, FETCH_FACILITY_COURT_SUCCESS, FacilityCourtAction, RESET_DELETE_FACILITY_COURT, RESET_UPDATE_FACILITY_COURT, UPDATE_FACILITY_COURT_FAILED, UPDATE_FACILITY_COURT_REQUEST, UPDATE_FACILITY_COURT_SUCCESS } from "../actions/facilityCourt.action";
 
-const initialState: FacilityAppStore = new FacilityAppStore();
+const initialState: FacilityCourtAppStore = new FacilityCourtAppStore();
 
 
-const facilityReducer = (state = initialState, action: FacilityAction) => {
+const facilityCourtReducer = (state = initialState, action: FacilityCourtAction) => {
     switch (action.type) {
-
-        case FETCH_FACILITY_REQUEST:
+        case FETCH_FACILITY_COURTS_REQUEST:
             return {
                 ...state,
                 list: {
                     pending: true
                 },
             } as typeof initialState;
-        case FETCH_FACILITY_SUCCESS:
+
+        case FETCH_FACILITY_COURTS_SUCCESS:
             return {
                 ...state,
                 list: {
@@ -22,25 +23,23 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     pending: false,
                 },
             } as typeof initialState;
-        case FETCH_FACILITY_FAILED:
+
+        case FETCH_FACILITY_COURTS_FAILED:
             return {
                 ...state,
                 list: {
                     pending: false,
                     error: action.payload.error,
-
                 },
             } as typeof initialState;
-
-        case FETCH_FACILITE_REQUEST:
+        case FETCH_FACILITY_COURT_REQUEST:
             return {
                 ...state,
                 update: {
                     pending: true,
                 },
             } as typeof initialState;
-
-        case FETCH_FACILITE_SUCCESS:
+        case FETCH_FACILITY_COURT_SUCCESS:
             return {
                 ...state,
                 update: {
@@ -48,8 +47,7 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     pending: false,
                 },
             } as typeof initialState;
-
-        case FETCH_FACILITE_FAILED:
+        case FETCH_FACILITY_COURT_FAILED:
             return {
                 ...state,
                 update: {
@@ -58,9 +56,9 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                 },
             } as typeof initialState;
 
-        //UPDATE
+        // UPDATE
 
-        case UPDATE_FACILITY_REQUEST:
+        case UPDATE_FACILITY_COURT_REQUEST:
             return {
                 ...state,
                 update: {
@@ -69,8 +67,7 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     error: [],
                 },
             } as typeof initialState;
-
-        case UPDATE_FACILITY_SUCCESS:
+        case UPDATE_FACILITY_COURT_SUCCESS:
             return {
                 ...state,
                 update: {
@@ -79,8 +76,7 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     error: [],
                 },
             } as typeof initialState;
-
-        case UPDATE_FACILITY_FAILED:
+        case UPDATE_FACILITY_COURT_FAILED:
             return {
                 ...state,
                 update: {
@@ -88,23 +84,23 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     pending: false,
                 },
             } as typeof initialState;
-        case RESET_UPDATE_FACILITY:
-            return {
-                ...state,
-                update: {
-                    error: [],
-                    pending: false,
-                    result: null,
-                },
-            } as typeof initialState;
-        case DELETE_FACILITY_REQUEST:
+            case RESET_UPDATE_FACILITY_COURT:
+                return {
+                    ...state,
+                    update: {
+                        error: [],
+                        pending: false,
+                        result: null,
+                    },
+                } as typeof initialState;
+        case DELETE_FACILITY_COURT_REQUEST:
             return {
                 ...state,
                 delete: {
                     pending: true,
                 },
             } as typeof initialState;
-        case DELETE_FACILITY_SUCCESS:
+        case DELETE_FACILITY_COURT_SUCCESS:
             return {
                 ...state,
                 delete: {
@@ -117,7 +113,7 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     ),
                 },
             } as typeof initialState;
-        case DELETE_FACILITY_FAILED:
+        case DELETE_FACILITY_COURT_FAILED:
             return {
                 ...state,
                 delete: {
@@ -125,7 +121,7 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     pending: false,
                 },
             } as unknown as typeof initialState;
-            case RESET_DELETE_FACILITY:
+            case RESET_DELETE_FACILITY_COURT:
                 return {
                   ...state,
                   delete: {
@@ -134,10 +130,9 @@ const facilityReducer = (state = initialState, action: FacilityAction) => {
                     result: null,
                   },
                 } as typeof initialState;
-                
         default:
             return state;
     }
 }
 
-export default facilityReducer;
+export default facilityCourtReducer;

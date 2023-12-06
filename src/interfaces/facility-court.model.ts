@@ -1,56 +1,65 @@
-
-export interface IFacilityModel {
+export interface IFacilityCourtModel {
     id?: string;
     tenantId?: string;
-    name: string;
-    facilityTypeId: string;
-    isHavingMultipleCourts: boolean;
-  }
+    courtName: string;
+    courtFees: number;
+    facilitiesId?: string;
+    courtNumber?: string;
+}
 
-  export interface IFaciliteFormModel {
+export interface IFacilityCourtFormModel {
     id: string;
     tenantId: string;
-    isHavingMultipleCourts: boolean;
+    courtFees: number;
+    facilitiesId: string;
+    courtNumber: string;
+    courtName: string;
     isError: {
-      name: string;
+      courtName: string;
          };
       fieldName: {
         id: string;
         tenantId: string;
-        name: string;
-        facilityTypeId: string;
-        isHavingMultipleCourts: string;
+        courtFees: string;
+    facilitiesId?: string;
+    courtNumber:string;
+    courtName: string;
       };
   }
 
-export class FacilityModel {
+  export class FacilityCourtModel {
     id?: string;
     tenantId?: string;
-    name: string;
-    facilityTypeId?: string;
-    isHavingMultipleCourts: boolean;
-  
+   courtName: string;
+   courtNumber: string;
+   courtFees: string;
+   facilitiesId?: string;
+
     constructor() {
       this.id = undefined;
       this.tenantId = undefined;
-      this.facilityTypeId = undefined;
-      this.name = "";
-      this.isHavingMultipleCourts=false;
+      this.facilitiesId = undefined;
+      this.courtFees = "";
+      this.courtName = "";
+      this.courtNumber = "";
     }
   }
-  export class FacilityFormModel extends FacilityModel {
+
+  export class FacilityCourtFormModel extends FacilityCourtModel {
     isError: {
       id: string;
       tenantId: string;
-      name: string;
-      facilityTypeId: string;
+      courtName: string;
+      courtNumber: string;
+      facilitiesId?: string;
        };
     fieldName: {
       id: string;
       tenantId: string;
-      name: string;
-      facilityTypeId: string;
-      isHavingMultipleCourts: string;
+      courtName: string;
+      courtNumber: string;
+      courtFees: string;
+      facilitiesId: string;
     };
   
     constructor() {
@@ -59,19 +68,23 @@ export class FacilityModel {
       this.isError = {
         id: "",
         tenantId: "",
-        name: "",
-        facilityTypeId: "",
+        courtName: "",
+        courtNumber: "",
+        facilitiesId: "", 
       };
       this.fieldName = {
         id: "id",
         tenantId: "tenantId",
-        name: "name",
-        isHavingMultipleCourts: "isHavingMultipleCourts",
-        facilityTypeId:"facilityTypeId", 
+        courtName: "courtName",
+        courtNumber: "courtNumber",
+        facilitiesId:"facilitiesId",
+        courtFees: "courtFees",
       };
     }
   }
-   export interface   IFacilityRequestModel {
+
+
+  export interface IFacilityCourtRequestModel {
     tenantId?: string;
     name: string;
     Fields: string;
@@ -80,31 +93,30 @@ export class FacilityModel {
     Skip: number;
     SearchQuery: string;
   }
-  
-  //#region Role model - Reducer
-  
-  export class FacilityAppStore {
+
+
+  export class FacilityCourtAppStore {
     list: {
-      result: FacilityModel[] | null | undefined;
+      result: FacilityCourtModel[] | null | undefined;
       pending: boolean;
       error: any[];
     };
     view: {
-      result: FacilityModel | null | undefined;
+      result: FacilityCourtModel | null | undefined;
       pending: boolean;
       error: any[];
     };
     update: {
-      result: FacilityModel | null | undefined;
+      result: FacilityCourtModel | null | undefined;
       pending: boolean;
       error: any[];
     };
     delete: {
-      result: FacilityModel | null | undefined;
+      result: FacilityCourtModel | null | undefined;
       pending: boolean;
       error: any[];
     };
-  
+    
     constructor() {
       this.list = {
         result: null,
@@ -128,6 +140,4 @@ export class FacilityModel {
       };
     }
   }
-  
-  //#endregion
   

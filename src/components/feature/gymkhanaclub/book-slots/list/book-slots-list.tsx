@@ -3,6 +3,9 @@ import HeaderInlineTextApp from "../../../../ui/header-inline-text/header-inline
 import { BOOK_SLOTS_SUB_TITLE, BOOK_SLOTS_TITLE } from "../book-slots.const";
 import CalendarApp from "../../../../ui/calendar/calendar";
 import CalendarSample1App from "../../../../ui/calendar/calendar-sample1/calendar-sample1";
+import { Link } from "react-router-dom";
+import { ROUTE_URL } from "../../../../auth/constants/routes.const";
+import { Button } from "primereact/button";
 
 const BookSlotsListApp = () => {
     return <>
@@ -14,7 +17,16 @@ const BookSlotsListApp = () => {
                         subTitle={BOOK_SLOTS_SUB_TITLE}
                         children={
                             <>
-                                Coming Next..
+                              {
+                                    <Link to={`${ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.ADD}`}>
+                                        <Button
+                                            className=" float-end"
+                                            label="Create new user"
+                                            icon="pi pi-plus"
+                                            size="small"
+                                        />
+                                    </Link>
+                                }
                             </>
                         }
                     />

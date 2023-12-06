@@ -2,14 +2,29 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { IAxiosResponse } from "../../../../../../interfaces/generic.model";
 import FacilityTypeService from "../../facility-type/service/facilityType.service";
-import { FETCH_FACILITY_TYPE_REQUEST,  IFecthFacilityTypeRequestAction,  IFetchFacilityTypesRequestAction,  IUpdateFacilityTypeRequestAction, UPDATE_FACILITY_TYPE_REQUEST, fetchFacilityTypeFailed, fetchFacilityTypeSuccess, updateFacilityTypeFailed, updateFacilityTypeSuccess } from "../actions/facilityType.action";
+import {  DELETE_FACILITY_TYPE_REQUEST, FETCH_FACILITIES_TYPE_REQUEST, FETCH_FACILITY_TYPE_REQUEST, IDeleteFacilityTypeFailedAction, IDeleteFacilityTypeRequestAction, IFetchFacilityTypeRequestAction, IUpdateFacilityTypeRequestAction, UPDATE_FACILITY_TYPE_REQUEST, deleteFacilityTypeFailed, deleteFacilityTypeSuccess, fetchFacilitiesTypeFailed, fetchFacilitiesTypeSuccess, fetchFacilityTypeFailed, fetchFacilityTypeSuccess, updateFacilityTypeFailed, updateFacilityTypeSuccess } from "../actions/facilityType.action";
 
 
-function* fetchFacilityType(action: IFecthFacilityTypeRequestAction) {
+function* fetchFacilitiesType() {
+  try {
+    const response: IAxiosResponse<any> = yield call(
+      FacilityTypeService.fetchFacilitiesType
+      );
+
+    yield put(
+      fetchFacilitiesTypeSuccess({ result: response.data, error: [], pending: false })
+    );
+  } catch (error) {
+    yield put(fetchFacilitiesTypeFailed({ result: null, error: [], pending: false }));
+  }
+}
+
+function* fetchFacilityType(action: IFetchFacilityTypeRequestAction) {
   try {
     const response: IAxiosResponse<any> = yield call(
       FacilityTypeService.fetchFacilityType,
-      action.payload);
+      action.payload
+    );
 
     yield put(
       fetchFacilityTypeSuccess({ result: response.data, error: [], pending: false })
@@ -18,6 +33,7 @@ function* fetchFacilityType(action: IFecthFacilityTypeRequestAction) {
     yield put(fetchFacilityTypeFailed({ result: null, error: [], pending: false }));
   }
 }
+
 
 function* updateFacilityType(action: IUpdateFacilityTypeRequestAction) {
   const data = action.payload;
@@ -46,10 +62,37 @@ function* updateFacilityType(action: IUpdateFacilityTypeRequestAction) {
   }
 }
 
+function* deleteFacilityType(action: IDeleteFacilityTypeRequestAction) {
+  const id = action.payload;
+  try {
+    const response: IAxiosResponse<any> = yield call(
+      FacilityTypeService.deleteFacilityType,
+      action.payload
+    );
+
+    yield put(
+      deleteFacilityTypeSuccess({
+        result: id,
+        error: [],
+        pending: false,
+      })
+    );
+  } catch (error: any) {
+    yield put(
+      deleteFacilityTypeFailed({
+        result: error?.response?.data,
+        error: [],
+        pending: false,
+      })
+    );
+  }
+}
 
 export default function* fetchFacilityTypeSaga() {
   yield all([
+    takeLatest(FETCH_FACILITIES_TYPE_REQUEST, fetchFacilitiesType),
     takeLatest(FETCH_FACILITY_TYPE_REQUEST, fetchFacilityType),
     takeLatest(UPDATE_FACILITY_TYPE_REQUEST, updateFacilityType),
+    takeLatest(DELETE_FACILITY_TYPE_REQUEST, deleteFacilityType),
   ]);
 }
