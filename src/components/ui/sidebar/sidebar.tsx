@@ -184,6 +184,50 @@ const SidebarApp = () => {
       ]
     },
     {
+      label: "Orm tool",
+      path: ROUTE_URL.ORM.BASE,
+      icon: "pi pi-fw pi-chart-line",
+      claims: [],
+      route: [
+        {
+          label: "Home",
+          path: ROUTE_URL.ORM.BASE,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+        {
+          label: "Dashboard",
+          path: ROUTE_URL.ORM.DASHBOARD,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+        {
+          label: "Reports",
+          path: ROUTE_URL.ORM.REPORTS,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+        {
+          label: "Social Listening",
+          path: ROUTE_URL.ORM.SOCIAL_LISTENING,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+        {
+          label: "Survey",
+          path: ROUTE_URL.ORM.SURVEY,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+        {
+          label: "Settings",
+          path: ROUTE_URL.ORM.SETTINGS,
+          icon: "pi pi-fw pi-ticket",
+          claims: [],
+        },
+      ]
+    },
+    {
       label: "Settings",
       path: ROUTE_URL.TENANT_SETTINGS,
       icon: "pi pi-fw pi-cog",
@@ -192,9 +236,10 @@ const SidebarApp = () => {
   ];
 
   const isActivePath = (routes: IRoutes[]) => {
-    if (location?.pathname?.split("/")[1]) {
+    const path: string[] = location?.pathname?.split("/")?.reverse();
+    if (path?.find(x => x)) {
       return routes.some((x) =>
-        x?.path?.includes(location?.pathname?.split("/")[1])
+        x?.path?.includes(path?.find(x => x) ?? "")
       );
     } else {
       return false;

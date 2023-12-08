@@ -76,5 +76,14 @@ export const ROUTE_URL = {
     DASHBOARD: "/ticketing",
     SOCIAL_LOGINS: "/social-login",
   },
+  ORM: {
+    BASE: "/orm",
+    DASHBOARD: "/orm/dashboard",
+    SOCIAL_LOGINS: "/orm/orm-login",
+    REPORTS: "/orm/reports",
+    SOCIAL_LISTENING: "/orm/social-listening",
+    SURVEY: "/orm/survey",
+    SETTINGS: "/orm/settings",
+  },
 
 };
