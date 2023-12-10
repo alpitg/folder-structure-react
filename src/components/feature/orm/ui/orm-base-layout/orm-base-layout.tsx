@@ -8,6 +8,7 @@ import { fetchActionsRequest } from "../../../../../store/actions/actions.action
 import { LOADING } from "../../../../../constants/global-contants/global-key.const";
 import { AppState } from "../../../../../store/reducers/root.reducer";
 import OrmNavbarApp from "../navbar/orm-navbar";
+import OrmSideBar from "../sidebar-right/orm-sidebar-right";
 
 const OrmBaseLayoutApp = () => {
     const [isOpenSideBar, setIsOpenSidebar] = useState<boolean>(true);
@@ -64,11 +65,22 @@ const OrmBaseLayoutApp = () => {
                     <div className="base-layout-sidebar">
                         {isOpenSideBar && <SidebarApp />}
                     </div>
-                    <div className="container pb-3">
-                        <Suspense fallback={<div>{LOADING}</div>}>
-                            <Outlet />
-                        </Suspense>
+                    <br/>
+
+                    <div className="row">
+                        <div className="col-sm-9">
+
+                            <div className="container pb-3">
+                                <Suspense fallback={<div>{LOADING}</div>}>
+                                    <Outlet />
+                                </Suspense>
+                            </div>
+                        </div>
+                        <div className="col-sm-3">
+                            <OrmSideBar />
+                        </div>
                     </div>
+
                 </div>
             </div>
         </AuthResolver>
