@@ -33,6 +33,7 @@ import FacilityCostingEditApp from "../feature/gymkhanaclub/admin/facility-costi
 import OrganizationUnitsListApp from "../administration/organization-units/list/organization-units-list";
 import OrganizationUnitsEditApp from "../administration/organization-units/edit/organization-units-edit";
 import TenantSettingsApp from "../administration/tenant-settings/tenant-settings";
+import OrmBaseLayoutApp from "../feature/orm/ui/orm-base-layout/orm-base-layout";
 
 const Dashboard = lazy(() => import("../../pages/dashboard/dashboard"));
 const Contact = lazy(() => import("../../pages/contact/contact"));
@@ -62,6 +63,7 @@ const TicketingTool = lazy(() => import("../feature/ticketing-tool/ticketing-too
 
 
 const Orm = lazy(() => import("../feature/orm/orm"));
+const OrmHome = lazy(() => import("../feature/orm/home/orm-home"));
 const OrmDashboard = lazy(() => import("../feature/orm/dashboard/orm-dashboard"));
 const OrmReports = lazy(() => import("../feature/orm/reports/orm-reports"));
 const OrmListening = lazy(() => import("../feature/orm/social-listening/orm-social-listening"));
@@ -367,6 +369,10 @@ const RoutesApp = () => {
               </Route>
             </Route>
 
+          </Route>
+
+          <Route path={ROUTE_URL.HOME} element={<OrmBaseLayoutApp />}>
+
             {/* ORM APP */}
             <Route>
               <Route
@@ -377,7 +383,7 @@ const RoutesApp = () => {
                   path={ROUTE_URL.ORM.HOME}
                   element={
                     <ClaimGuard requiredClaims={[]}>
-                      <OrmDashboard />
+                      <OrmHome />
                     </ClaimGuard>
                   }
                 />
@@ -425,6 +431,7 @@ const RoutesApp = () => {
             </Route>
 
           </Route>
+
         </Routes>
       </BrowserRouter>
     </Suspense >
