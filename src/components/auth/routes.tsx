@@ -374,6 +374,14 @@ const RoutesApp = () => {
                 element={<Orm />}
               >
                 <Route
+                  path={ROUTE_URL.ORM.HOME}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <OrmDashboard />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
                   path={ROUTE_URL.ORM.DASHBOARD}
                   element={
                     <ClaimGuard requiredClaims={[]}>
@@ -381,39 +389,39 @@ const RoutesApp = () => {
                     </ClaimGuard>
                   }
                 />
+                <Route
+                  path={ROUTE_URL.ORM.REPORTS.BASE}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <OrmReports />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ORM.SOCIAL_LISTENING.BASE}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <OrmListening />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ORM.SURVEY.BASE}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <OrmSurvey />
+                    </ClaimGuard>
+                  }
+                />
+                <Route
+                  path={ROUTE_URL.ORM.SETTINGS}
+                  element={
+                    <ClaimGuard requiredClaims={[]}>
+                      <OrmSettings />
+                    </ClaimGuard>
+                  }
+                />
               </Route>
-              <Route
-                path={ROUTE_URL.ORM.REPORTS}
-                element={
-                  <ClaimGuard requiredClaims={[]}>
-                    <OrmReports />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ORM.SOCIAL_LISTENING}
-                element={
-                  <ClaimGuard requiredClaims={[]}>
-                    <OrmListening />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ORM.SURVEY}
-                element={
-                  <ClaimGuard requiredClaims={[]}>
-                    <OrmSurvey />
-                  </ClaimGuard>
-                }
-              />
-              <Route
-                path={ROUTE_URL.ORM.SETTINGS}
-                element={
-                  <ClaimGuard requiredClaims={[]}>
-                    <OrmSettings />
-                  </ClaimGuard>
-                }
-              />
             </Route>
 
           </Route>

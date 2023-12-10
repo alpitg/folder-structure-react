@@ -191,7 +191,7 @@ const SidebarApp = () => {
       route: [
         {
           label: "Home",
-          path: ROUTE_URL.ORM.BASE,
+          path: ROUTE_URL.ORM.HOME,
           icon: "pi pi-fw pi-ticket",
           claims: [],
         },
@@ -203,19 +203,19 @@ const SidebarApp = () => {
         },
         {
           label: "Reports",
-          path: ROUTE_URL.ORM.REPORTS,
+          path: ROUTE_URL.ORM.REPORTS.BASE,
           icon: "pi pi-fw pi-ticket",
           claims: [],
         },
         {
           label: "Social Listening",
-          path: ROUTE_URL.ORM.SOCIAL_LISTENING,
+          path: ROUTE_URL.ORM.SOCIAL_LISTENING.BASE,
           icon: "pi pi-fw pi-ticket",
           claims: [],
         },
         {
           label: "Survey",
-          path: ROUTE_URL.ORM.SURVEY,
+          path: ROUTE_URL.ORM.SURVEY.BASE,
           icon: "pi pi-fw pi-ticket",
           claims: [],
         },

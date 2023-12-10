@@ -1,12 +1,11 @@
+import { Outlet } from "react-router";
 import "./orm.scss"
 
 const OrmApp = () => {
 
     return <>
-        <div className="container wrapper">
-            <br />
-            <br />
-hi
+        <div className="orm-app container wrapper">
+            <Outlet />
         </div>
     </>
 }

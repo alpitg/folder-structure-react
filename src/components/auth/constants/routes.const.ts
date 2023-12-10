@@ -77,13 +77,24 @@ export const ROUTE_URL = {
     SOCIAL_LOGINS: "/social-login",
   },
   ORM: {
-    BASE: "/orm",
-    DASHBOARD: "/orm/dashboard",
-    SOCIAL_LOGINS: "/orm/orm-login",
-    REPORTS: "/orm/reports",
-    SOCIAL_LISTENING: "/orm/social-listening",
-    SURVEY: "/orm/survey",
-    SETTINGS: "/orm/settings",
+    BASE: "",
+    HOME: "/orm-tool",
+    DASHBOARD: "orm/dashboard",
+    SOCIAL_LOGINS: {
+      BAES: "orm/orm-login"
+    },
+    REPORTS: {
+      BASE: "orm/reports",
+      LIST: "",
+      EDIT: "edit/:id"
+    },
+    SOCIAL_LISTENING: {
+      BASE: "orm/social-listening"
+    },
+    SURVEY: {
+      BASE: "orm/survey"
+    },
+    SETTINGS: "orm/settings",
   },
 
 };
