@@ -9,6 +9,7 @@ const OrmChatResponseApp = () => {
     const dataSource = [
         {
             socialMedia: "facebook",
+            image: "/static/media/img/faces/erik-lucatero-2.jpg",
             name: "rohit",
             userName: "@rohit1",
             message: "Please csll me",
@@ -18,8 +19,9 @@ const OrmChatResponseApp = () => {
         },
         {
             socialMedia: "instagram",
-            name: "alpit",
-            userName: "@alpit124",
+            image: "/static/media/img/faces/joe-gardner-2.jpg",
+            name: "amy j",
+            userName: "@amyj12",
             message: "Please csll me if possible",
             time: "12 Jan 2023 5.00 PM",
             sentimentalAnalysis: "neutral",
@@ -27,6 +29,7 @@ const OrmChatResponseApp = () => {
         },
         {
             socialMedia: "twitter",
+            image: "/static/media/img/faces/clem-onojeghuo-3.jpg",
             name: "amit",
             userName: "@amit_lit",
             message: "The product quality is not so great",

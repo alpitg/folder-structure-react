@@ -15,8 +15,8 @@ const OrmChatResponseItemApp = ({ dataSource }: any) => {
 
                     <div className="row">
                         <div className="col-sm-1 text-center">
-                            <AvatarApp src="/static/media/img/faces/kaci-baum-1.jpg" name="jack huge" />
-                            <small><cite>{dataSource?.type}</cite></small>
+                            <AvatarApp src={dataSource?.image} name="jack huge" />
+                            <p><small><cite>{dataSource?.type}</cite></small></p>
                         </div>
                         <div className="col-sm-7">
                             <h5 className="chat-user-name">{dataSource?.name}</h5>
