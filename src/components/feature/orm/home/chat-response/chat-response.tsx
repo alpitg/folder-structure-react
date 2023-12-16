@@ -12,21 +12,24 @@ const OrmChatResponseApp = () => {
             userName: "@rohit1",
             message: "Please csll me",
             time: "1 min ago",
-            sentimentalAnalysis: "positive"
+            sentimentalAnalysis: "positive",
+            type: "dm"
         },
         {
             name: "alpit",
             userName: "@alpit124",
             message: "Please csll me if possible",
             time: "12 Jan 2023 5.00 PM",
-            sentimentalAnalysis: "neutral"
+            sentimentalAnalysis: "neutral",
+            type: "mention"
         },
         {
             name: "amit",
             userName: "@amit_lit",
             message: "The product quality is not so great",
             time: "10 min ago",
-            sentimentalAnalysis: "negative"
+            sentimentalAnalysis: "negative",
+            type: "comment"
         }
     ]
 
