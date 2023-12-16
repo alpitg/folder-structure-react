@@ -62,7 +62,7 @@ const FacilityTypeListApp = () => {
                                     <Link to={`${ROUTE_URL.GYMKHANACLUB.ADMIN.FACILITY_TYPE.ADD}`}>
                                         <Button
                                             className=" float-end"
-                                            label="Create new user"
+                                            label="Create new Facility Type"
                                             icon="pi pi-plus"
                                             size="small"
                                         />

@@ -68,6 +68,7 @@ export const ROUTE_URL = {
       LIST: "",
       EDIT: "edit/:id",
       ADD: "add",
+      // BOOK: "book"
     },
     SIGNUP: "signup",
   },

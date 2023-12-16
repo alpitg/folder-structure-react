@@ -16,9 +16,11 @@ import { FacilityCourtFormModel, FacilityCourtModel, IFacilityCourtRequestModel 
 import { minimumCharValidation } from "../../../../../../utils/validation.util";
 import { InputText } from "primereact/inputtext";
 import SaveLoaderButtonApp from "../../../../../ui/save-loader-button/save-loader-button";
-import { IFacilityRequestModel } from "../../../../../../interfaces/facility.model";
-import { fetchFaciliteRequest, fetchFacilityRequest } from "../../store/actions/facility.action";
+import { fetchFacilityRequest } from "../../store/actions/facility.action";
 import MessagesApp from "../../../../../ui/messages/messages";
+import { IBookSloatRequestModel } from "../../../../../../interfaces/book-facility.model";
+import { AppStore } from "../../../../../../interfaces/generic.model";
+import { toggleCheckbox } from "../../store/actions/book-slots.action";
 
 const FacilityCostingEditApp = () => {
 
@@ -40,7 +42,7 @@ const FacilityCostingEditApp = () => {
     const { globalSelectedTenant } = useSelector(
         (x: AppState) => x.administration.tenants
     );
-    const [filter, setFilter] = useState<IFacilityRequestModel>({
+    const [filter, setFilter] = useState<IFacilityCourtRequestModel>({
         tenantId: globalSelectedTenant,
         name: "",
         Fields: "",
@@ -51,6 +53,10 @@ const FacilityCostingEditApp = () => {
     });
     const { isError, fieldName } = facilityCourtDetail
 
+
+
+
+   
 
     useEffect(() => {
         if (id) {
@@ -216,10 +222,6 @@ const FacilityCostingEditApp = () => {
         }
     };
 
-
-
-
-
     return (
         <>
             <div className="user-list-app">
@@ -240,9 +242,9 @@ const FacilityCostingEditApp = () => {
                     >
                         <>
                             <form onSubmit={onSubmit} noValidate>
-                                
+
                                 {
-                                facilityCourtUpdate?.error &&
+                                    facilityCourtUpdate?.error &&
                                     facilityCourtUpdate?.error?.map((error: string) => (
                                         <MessagesApp
                                             type="alert-danger"
@@ -292,7 +294,7 @@ const FacilityCostingEditApp = () => {
                                                             : ""
                                                     }
                                                 >
-                                                  Facility Court Number *
+                                                    Facility Court Number *
                                                 </label>
                                                 <InputText
                                                     id={fieldName.courtNumber}
@@ -338,7 +340,7 @@ const FacilityCostingEditApp = () => {
                                                 Facility*
                                             </label>
                                             <select className="col-sm-4 pt-4 rounded " onChange={(e: any) => setSelectedDropdown(e.target.value)} value={selectedDropdown}>
-                                              {
+                                                {
                                                     facility?.list?.result?.map((data) => (
                                                         <option className="col-sm-4 rounded facility-option" key={data.id} value={data.id}>
                                                             {data.name}

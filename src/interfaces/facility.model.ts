@@ -38,7 +38,7 @@ export class FacilityModel {
       this.isHavingMultipleCourts=false;
     }
   }
-  export class FacilityFormModel extends FacilityModel {
+  export class  FacilityFormModel extends FacilityModel {
     isError: {
       id: string;
       tenantId: string;

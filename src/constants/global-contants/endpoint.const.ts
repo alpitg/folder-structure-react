@@ -59,6 +59,12 @@ export const ENDPOINT = {
       DELETE_FACILITYCOURT: "/api/facilityCourt/facilityCourt",
     },
   },
+  BOOKSLOTS: {
+    API: {
+      FETCH_BOOKSLOT: "/api/facilityCourt/getFacilityCourt",
+      ADD_BOOKSLOT: "/api/facilityCourt/addFacilityCourt",
+    },
+  },
     
   SOCIAL_MEDIA: {
     API: {
