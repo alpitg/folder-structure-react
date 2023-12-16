@@ -7,6 +7,13 @@
             i {
                 padding: 0 10px;
             }
+
+            button:active {
+                background-color: var(--app-bg-color);
+                transform: scale(1);
+                transition: transform 700ms, opacity 700ms;
+                opacity: 0.2;
+            }
         }
     }
 }
