@@ -23,10 +23,7 @@ function* authenticateUser(action: IAuthenticationRequestAction) {
   } catch (error: any) {
     yield put(
       authenticateFailed({
-        error:
-          typeof error?.response?.data === "string"
-            ? [error?.response?.data]
-            : error?.response?.data,
+        error: ["Some error occured"],
         pending: false,
       })
     );
