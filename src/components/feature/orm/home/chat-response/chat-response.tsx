@@ -8,6 +8,7 @@ const OrmChatResponseApp = () => {
 
     const dataSource = [
         {
+            socialMedia: "facebook",
             name: "rohit",
             userName: "@rohit1",
             message: "Please csll me",
@@ -16,6 +17,7 @@ const OrmChatResponseApp = () => {
             type: "dm"
         },
         {
+            socialMedia: "instagram",
             name: "alpit",
             userName: "@alpit124",
             message: "Please csll me if possible",
@@ -24,6 +26,7 @@ const OrmChatResponseApp = () => {
             type: "mention"
         },
         {
+            socialMedia: "twitter",
             name: "amit",
             userName: "@amit_lit",
             message: "The product quality is not so great",
@@ -31,20 +34,27 @@ const OrmChatResponseApp = () => {
             sentimentalAnalysis: "negative",
             type: "comment"
         }
-    ]
+    ];
 
 
     return (
         <div className="orm-chat-response-app">
+
+            {dataSource?.length === 0 && <div> No messages found, kindly review your filter settings</div>}
             {
-                // TODO: For loop here for below component 
-                dataSource?.map(item => {
-                    return <div className="row" key={item?.userName + item?.time}>
-                        <div className="card gy-3 p-3" >
-                            <OrmChatResponseItemApp dataSource={item} />
-                        </div>
-                    </div>
-                })
+                dataSource?.length > 0 && <>
+                    <span className="badge text-bg-success cursor-pointer">2 New Messages</span>
+                    {
+                        // TODO: For loop here for below component 
+                        dataSource?.map(item => {
+                            return <div className="row" key={item?.userName + item?.time}>
+                                <div className="card gy-3 p-3" >
+                                    <OrmChatResponseItemApp dataSource={item} />
+                                </div>
+                            </div>
+                        })
+                    }
+                </>
             }
         </div>
     )
