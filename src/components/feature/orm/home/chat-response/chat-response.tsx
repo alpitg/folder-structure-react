@@ -54,6 +54,11 @@ const OrmChatResponseApp = () => {
                             </div>
                         })
                     }
+
+                    <div className="text-center cursor-pointer pt-3">
+                        <span className="badge text-bg-secondary">Load more</span>
+                    </div>
+
                 </>
             }
         </div>
