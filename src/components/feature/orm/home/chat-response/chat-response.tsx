@@ -1,6 +1,5 @@
-import { Card } from "primereact/card";
-import { ORM_TITLE } from "../../orm.const";
 import OrmChatResponseItemApp from "./item/chat-response-item";
+import "./chat-response.scss"
 
 const OrmChatResponseApp = () => {
 
@@ -46,7 +45,28 @@ const OrmChatResponseApp = () => {
             {dataSource?.length === 0 && <div> No messages found, kindly review your filter settings</div>}
             {
                 dataSource?.length > 0 && <>
-                    <span className="badge text-bg-success cursor-pointer">2 New Messages</span>
+
+                    <div className="message-summary-top-action">
+
+                        <div className="row">
+                            <div className="col-sm-4">
+                                <span className="badge text-bg-success cursor-pointer">2 New Messages</span>
+
+                            </div>
+                            <div className="col-sm-4 text-center">
+                                <small className="text-body-secondary">Messages 1-30 of 103</small>
+                            </div>
+                            <div className="col-sm-4 text-end">
+                                <div className="page-btn-group">
+                                    <button type="button" className="btn"><i className="bi bi-chevron-left"></i></button>
+                                    <button type="button" className="btn"><i className="bi bi-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     {
                         // TODO: For loop here for below component 
                         dataSource?.map(item => {
