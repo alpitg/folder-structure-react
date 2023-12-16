@@ -1,5 +1,6 @@
 import HeaderInlineTextApp from "../../../ui/header-inline-text/header-inline-text";
 import { ORM_SUB_TITLE, ORM_TITLE } from "../orm.const";
+import OrmSideBar from "../ui/sidebar-right/orm-sidebar-right";
 import OrmChatResponseApp from "./chat-response/chat-response";
 
 const OrmHomeApp = () => {
@@ -12,16 +13,21 @@ const OrmHomeApp = () => {
                         subTitle={ORM_SUB_TITLE}
                         children={
                             <>
-                                Home Coming Next..
+
                             </>
                         }
                     />
                 </div>
             </div>
 
-            {
-                <OrmChatResponseApp />
-            }
+            <div className="row">
+                <div className="col-sm-9">
+                    <OrmChatResponseApp />
+                </div>
+                <div className="col-sm-3 pt-3">
+                    <OrmSideBar />
+                </div>
+            </div>
 
         </div>
     )

@@ -1,3 +1,4 @@
+import { Card } from "primereact/card";
 import { ORM_TITLE } from "../../orm.const";
 import OrmChatResponseItemApp from "./item/chat-response-item";
 
@@ -5,18 +6,42 @@ const OrmChatResponseApp = () => {
 
     // TODO: Create the dummy json array here for chat response
 
+    const dataSource = [
+        {
+            name: "rohit",
+            userName: "@rohit1",
+            message: "Please csll me",
+            time: "1 min ago",
+            sentimentalAnalysis: "positive"
+        },
+        {
+            name: "alpit",
+            userName: "@alpit124",
+            message: "Please csll me if possible",
+            time: "12 Jan 2023 5.00 PM",
+            sentimentalAnalysis: "neutral"
+        },
+        {
+            name: "amit",
+            userName: "@amit_lit",
+            message: "The product quality is not so great",
+            time: "10 min ago",
+            sentimentalAnalysis: "negative"
+        }
+    ]
+
+
     return (
         <div className="orm-chat-response-app">
-            <div className="row">
-                <div className="col-sm-12">
-                    {ORM_TITLE} - OrmChatResponseApp
-                </div>
-            </div>
-            <br />
-            <br />
             {
                 // TODO: For loop here for below component 
-                <OrmChatResponseItemApp />
+                dataSource?.map(item => {
+                    return <div className="row" key={item?.userName + item?.time}>
+                        <div className="card gy-3 p-3" >
+                            <OrmChatResponseItemApp dataSource={item} />
+                        </div>
+                    </div>
+                })
             }
         </div>
     )

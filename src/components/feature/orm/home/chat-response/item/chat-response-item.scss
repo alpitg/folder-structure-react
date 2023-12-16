@@ -1,0 +1,29 @@
+.orm-chat-response-item-app {
+    .chat-user-name {
+        margin-bottom: 0px;
+    }
+
+    .comment-analyse {
+        text-align: end;
+        display: flex;
+        justify-content: end;
+
+        .comment-analyse-items {
+            padding: 0 10px 0 10px;
+
+        }
+    }
+
+    .chat-reply {
+        cursor: pointer;
+    }
+
+    .action-icons {
+        text-align: end;
+
+        i {
+            padding: 0 10px 0 10px;
+            cursor: pointer;
+        }
+    }
+}
