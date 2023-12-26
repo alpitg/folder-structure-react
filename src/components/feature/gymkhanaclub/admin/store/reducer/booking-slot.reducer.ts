@@ -50,21 +50,10 @@ const bookSlotsreducer = (state = initialState, action: BookingAction) => {
                     facility: action?.payload?.facility,
                     facilityCourt: action?.payload?.facilityCourt,
 
-                     shedular: [
+                    shedular: [
                         ...state.bookSlot.shedular,
-                        
-                          {
-                            date: action.payload.shedular,
-                            timeSlots : [],
-                            
-                          },
-
-                     ]
-                     
-                     
-                        
-                        
-                    
+                        action.payload.shedular
+                    ]
                 },
                 result: null,
                 pending: false,

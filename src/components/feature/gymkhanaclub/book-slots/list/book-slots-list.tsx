@@ -14,10 +14,11 @@ import { scheduler } from "timers/promises";
 import { useEffect, useState } from "react";
 import { fetchBookSlotRequest, updateBookingSlots } from "../../admin/store/actions/book-slots.action";
 import { IFacilityCourtRequestModel } from "../../../../../interfaces/facility-court.model";
+import NoRecordApp from "../../../../ui/no-record/no-record";
 
-const BookSlotsListApp = () => {
+const BookSlotsListApp = ({state}: any) => {
 
-    const shedular = useSelector((x: AppState) => x.gymkhana?.shedular.result);
+    const shedular = useSelector((x: AppState) => x.gymkhana?.shedular);
     const facility = useSelector((x: AppState) => x.gymkhana.facility);
     const dispatch = useDispatch();
     const { globalSelectedTenant } = useSelector(
@@ -33,9 +34,18 @@ const BookSlotsListApp = () => {
         Skip: 0,
         SearchQuery: "",
     });
+
+    useEffect(() => {
+        setFilter((prev) => ({
+            ...prev,
+            tenantId: globalSelectedTenant,
+        }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [globalSelectedTenant]);
+
     useEffect(() => {
         dispatch(fetchBookSlotRequest(filter))
-    })
+    },[])
    
 
     return <>
@@ -51,30 +61,55 @@ const BookSlotsListApp = () => {
                                     <Link to={`${ROUTE_URL.GYMKHANACLUB.FACILITY_BOOK_SLOTS.ADD}`}>
                                         <Button
                                             className=" float-end"
-                                            label="Create new user"
+                                            label="Book Slot"
                                             icon="pi pi-plus"
                                             size="small"
                                         />
                                     </Link>
                                 }
+
+
+                                {/* /////////////// */}
+
+                               
+                                
                             </>
                         }
                     />
                 </div>
             </div>
-                <div className="mb-3">
-                    <tbody>
-                   {shedular?.map((bookSlot: IBooking) => {
-                    return<BookSlotsItem bookSlot={bookSlot}/>
-                   })
-                   }
-                    </tbody>
 
-                   
-                </div>
-            
+
+               {
+                  !shedular?.list?.result?.length ? <NoRecordApp /> :
+                 <div className="mb-3">
+                 <tbody>
+                {Array.isArray(shedular?.list?.result) ?
+                shedular?.list?.result?.map((bookSlot: IBooking) => {
+                 return<BookSlotsItem bookSlot={bookSlot}/>
+                }): null
+                }
+                 </tbody>
+
+                
+             </div>
+               }
+            {(shedular?.list?.result) ?
+                shedular?.list?.result?.map((bookSlot: IBooking) => {
+                    return<Main bookSlot={bookSlot}/>
+                }): null
+            }
         </div>
     </>
 }
 
 export default BookSlotsListApp;
+
+
+const Main = (props: {bookSlot: IBooking}) => {
+    return<>
+        <div>
+            {props?.bookSlot?.facility}
+        </div>
+        </>
+}

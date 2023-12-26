@@ -61,8 +61,10 @@ export const ENDPOINT = {
   },
   BOOKSLOTS: {
     API: {
-      FETCH_BOOKSLOT: "/api/facilityCourt/getFacilityCourt",
-      ADD_BOOKSLOT: "/api/facilityCourt/addFacilityCourt",
+      FETCH_BOOKSLOT: "/api/bookSlots/getBookSlots",
+      ADD_BOOKSLOT: "/api/bookSlots/addBookSlots",
+      UPDATE_BOOKSLOT: "/api/bookSlot/updateBookSlot",
+
     },
   },
     

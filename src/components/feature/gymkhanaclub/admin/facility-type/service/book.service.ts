@@ -15,4 +15,11 @@ export default class BookSlotService {
           param
         );
       };
+
+      static updateBookSlot = (param: IBooking) => {
+        return axiosInstance.put(
+          ENDPOINT.API_BASE_URL + ENDPOINT.BOOKSLOTS.API.UPDATE_BOOKSLOT + "/" ,
+          param
+        );
+      };
 }

@@ -1,20 +1,28 @@
-{
-  "facilities": "cricket",
-  "facilityCourt": "court1",
-  "Schedular": [
-    {
-      "date": "01/12/2023",
-      "timeSlots": [
-        "9-10",
-        "11-12"
-      ]
-    },
-    {
-      "date": "11/02/2024",
-      "timeSlots": [
-        "12-01",
-        "11-12"
-      ]
-    }
-  ]
-}
+  {
+    "facilities": "cricket",
+    "facilityCourt": "court1",
+    "Schedular": [
+      {
+        "date": "01/12/2023",
+        "timeSlots": [
+          {
+            "slot": "09-10",
+            "cost": 40
+          },
+          {
+            "slot": "09-10",
+            "cost": 40
+          }
+        ]
+      },
+      {
+        "date": "11/02/2024",
+        "timeSlots": [
+          {
+            "slot": "09-10",
+            "cost": 50
+          }
+        ]
+      }
+    ]
+  }
